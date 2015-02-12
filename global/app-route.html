@@ -1,0 +1,73 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/more-routing/more-routing.html">
+<link rel="import" href="../bower_components/more-routing/more-route.html">
+<link rel="import" href="../bower_components/more-routing/more-route-switch.html">
+
+<link rel="import" href="../pages/page-index.html">
+<link rel="import" href="../pages/page-news.html">
+<link rel="import" href="../pages/page-payments.html">
+<link rel="import" href="../pages/page-account-add.html">
+<link rel="import" href="../pages/page-error.html">
+<link rel="import" href="../pages/page-no-internet.html">
+
+
+<polymer-element name="app-route" noscript>
+    <template>
+
+        <more-routing driver="hash"></more-routing>
+
+        <more-route-switch>
+
+            <template when-route="/news">
+                <page-news baseUrl="news" pageTitle="Новости"><content></content></page-news>
+            </template>
+
+            <template when-route="/payments">
+                <page-payments  pageTitle="Мои платежи"><content></content></page-payments>
+            </template> 
+
+            <template when-route="/account-add/:accountId">
+                <page-account-add  pageTitle="Добавить счет" accountId="{{params.accountId}}"></page-account-add>
+            </template> 
+
+            <template when-route="/error"><page-error></page-error></template>
+            <template when-route="/nointernet"><page-no-internet></page-no-internet></template>
+
+            <template else><page-index></page-index></template>
+
+        </more-route-switch>
+
+    </template>
+</polymer-element>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

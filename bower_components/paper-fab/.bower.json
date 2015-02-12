@@ -1,0 +1,25 @@
+{
+  "name": "paper-fab",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#master",
+    "core-icon": "Polymer/core-icon#master",
+    "core-icons": "Polymer/core-icons#master",
+    "paper-button": "Polymer/paper-button#master",
+    "paper-ripple": "Polymer/paper-ripple#master",
+    "paper-shadow": "Polymer/paper-shadow#master"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^1.1.4"
+  },
+  "homepage": "https://github.com/Polymer/paper-fab",
+  "_release": "5846d4c10f",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "5846d4c10fb3b1ebef72373087d96c760867d302"
+  },
+  "_source": "git://github.com/Polymer/paper-fab.git",
+  "_target": "master",
+  "_originalSource": "Polymer/paper-fab"
+}

@@ -1,0 +1,85 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../global/app-ajax.html">
+
+<polymer-element name="app-loader">
+    <template>      
+        <link rel="stylesheet" href="../css/main.css">        
+        <style>
+            #startLoad { 
+                width: 100%; 
+                height: 100%; 
+                background-color: #fff; 
+                text-align: center; 
+                position: absolute; 
+                z-index: 1000; 
+                padding:0; 
+                margin:0; 
+                top: 0; 
+                left: 0;
+                font-size: 25px;
+                color: #aaaaaa;
+            }
+            paper-progress {
+                display: block;
+                width: 225px;
+                margin: 10px auto;
+            }
+        </style>
+
+        <app-ajax
+            id="ajax"
+            auto
+            op="user/init"
+            params="{}"
+            on-core-error="{{handleError}}"
+            on-core-complete="{{handleComplete}}"
+            on-core-response="{{handleResponse}}"></app-ajax>
+
+        <div id="startLoad" layout vertical>
+            <div flex></div>
+            <div flex>
+                <span>Павшинская пoйма</span>
+                <paper-progress class="default-primary-color" indeterminate></paper-progress>
+            </div>
+            <div flex></div>
+        </div>
+
+    </template>
+    <script>
+
+        Polymer('app-loader', {
+            ready: function () {
+                var r = this;
+                setTimeout(function () {
+                    if (!r.hidden) {
+                        var appLayout = document.createElement('app-layout');
+                        document.body.appendChild(appLayout);
+                        gotoErrorNoInternet();
+                        r.hidden = true;
+                    }
+                }, global.timeout.noInternet);
+            },
+            handleResponse: function (e, detail, sender) {
+                var r = detail.response;
+                this.startApp();
+                if (r.token) {
+                    setToken(r.token);
+                } else gotoError('token_empty');
+
+            },
+            handleError: function (e, detail, sender) {
+                this.startApp();
+            },
+            handleComplete: function (e, detail, sender) {
+                this.startApp();
+            },
+            startApp: function () {
+                var appLayout = document.createElement('app-layout');
+                document.body.appendChild(appLayout);
+                var r = this;
+                setTimeout(function () { r.hidden = true; }, global.timeout.loadStart);
+            }
+        });
+    </script>
+</polymer-element>

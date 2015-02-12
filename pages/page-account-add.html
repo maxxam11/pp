@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../elements/el-account-add.html">
+
+<polymer-element name="page-account-add" attributes="pageTitle accountId">
+    <template>
+        <link rel="stylesheet" href="../css/main.css"> 
+        <style>
+           
+        </style> 
+        
+        <div vertical layout fit>
+            <div>
+                <paper-shadow z="1">
+                    <core-toolbar>
+                        <paper-icon-button id="iconBack" icon="arrow-back" on-click="{{back}}"></paper-icon-button>
+                        <span flex>{{pageTitle}}</span>
+                    </core-toolbar>
+                </paper-shadow>
+            </div>
+            <div flex>
+                <el-account-add accountId="{{accountId}}"></el-account-add>
+            </div>
+        </div>
+
+    </template>
+    <script>
+        Polymer('page-account-add', {
+            back: function () {
+                // @todo сделать событие назад на старнице в истории
+                document.location.href = '#!/payments';
+            }          
+        });
+    </script>
+</polymer-element>

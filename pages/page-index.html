@@ -1,0 +1,35 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+
+<polymer-element name="page-index">
+  <template>
+
+    
+      
+          sessionId: {{sessionId}}
+          <button on-click="{{show}}">ddd</button>
+          <paper-dialog id="dialog" heading="Выберите службу" class="scrolling">
+            
+                <p>13123</p>
+                
+                <p>13123</p>
+                <p>13123</p>
+            
+        </paper-dialog>      
+      
+       
+  
+
+  </template>
+  <script>
+        Polymer('page-index', {            
+            attached: function() {                
+                this.sessionId = localStorage.sid;
+                
+            },
+          show: function() {
+              this.$.dialog.toggle();
+          }
+        });
+    </script>
+</polymer-element>

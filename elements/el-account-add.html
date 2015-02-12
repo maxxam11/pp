@@ -1,0 +1,52 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<polymer-element name="el-account-add" attributes="accountId">
+    <template>        
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+            paper-input { width: 100%; }
+        </style>
+
+        <app-ajax
+            id="ajax"
+            op="account/add"
+            params='{"accountId":"{{accountId}}"}'
+            on-core-response="{{handleResponse}}"></app-ajax>
+
+        <div class="container">
+            <template repeat="{{item in data}}">
+                <template if="{{item.type == 'title'}}">
+                    <h3>{{item.value}}</h3>
+                </template>   
+                <template if="{{item.type == 'descr'}}">
+                    <p>{{item.value}}"</p>
+                </template>   
+                <template if="{{item.type == 'input'}}">
+                    <paper-input floatingLabel label="{{item.label}}" value="{{item.value}}"></paper-input>
+                </template>                
+            </template>            
+        </div>
+        <div class="container" style="text-align: center;">
+            <paper-button raised on-click="{{back}}">Отмена</paper-button>
+            <paper-button raised class="colored">Подключить</paper-button>
+        </div>
+
+
+    </template>
+    <script>
+        Polymer('el-account-add', {
+            attached: function() {
+                this.$.ajax.go();
+            },
+            handleResponse: function (e, detail, sender) {
+                this.data = detail.response;
+            },
+            back: function() {
+                // @todo реализовать ход назад в истории переходов
+                document.location.href = '#!/payments';
+            }
+        });
+    </script>
+</polymer-element>

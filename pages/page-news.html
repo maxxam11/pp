@@ -1,0 +1,154 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../bower_components/core-pages/core-pages.html">
+
+<link rel="import" href="../bower_components/paper-progress/paper-progress.html">
+
+<link rel="import" href="../global/app-ajax.html">
+
+<link rel="import" href="../elements/el-news-item.html">
+<link rel="import" href="../elements/el-news-list-item.html">
+
+<polymer-element name="page-news" attributes="pageTitle">
+    <template>
+        <link rel="stylesheet" href="../css/main.css"> 
+        
+        <app-ajax
+            id="ajaxList"
+            op="news/list"
+            params='{"lastItemId":"{{lastItemId}}"}'
+            on-core-response="{{handleResponseList}}"></app-ajax>
+
+        <app-ajax
+            id="ajaxItem"
+            op="news/item"
+            params='{"alt":"json", "q":"chrome"}'
+            on-core-response="{{handleResponseItem}}"></app-ajax>
+
+
+        <div vertical layout fit>
+            <div>
+                <paper-shadow z="1">
+                    <core-toolbar>
+                        <div id="iconMainMenu"><content id="content"></content></div>
+                        <paper-icon-button id="iconBack" hidden icon="arrow-back" on-click="{{back}}"></paper-icon-button>
+                        <span flex>{{pageTitle}}</span>
+                        <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>
+                    </core-toolbar>
+                    <paper-progress id="progress" indeterminate></paper-progress>
+                </paper-shadow>
+            </div>
+            <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">
+
+                <core-pages id="pages" selected="1">
+                    
+                    <div id="page2">
+                        <el-news-item id="item" hidden item="{{item}}"></el-news-item>         
+                    </div>
+
+                    <div id="page1">
+                        
+                        <div class="wrapper">
+                            <template repeat="{{item in list}}">
+                                <el-news-list-item item="{{item}}" on-click="{{goToItem}}"></el-news-list-item>
+                                <!--<div class="item {{ {selected: selected} | tokenList }}"> {{_.name}} <br /> <p><i>{{_.description}}</i></p> </div>-->
+                            </template>
+                        </div>
+                        
+                        <!--
+                        <div id="divList" style="overflow: auto;  width: 100%; height: 500px;" >                               
+                            <core-list id="list" data="{{list}}" on-scroll="{{scroll}}">
+                                <template>
+                                    <el-news-list-item item="{{model}}" on-click="{{goToItem}}"></el-news-list-item>
+                                </template>  
+                            </core-list>
+                        </div>
+                        -->
+
+                    </div>
+                    
+                    
+                </core-pages>
+            </div>
+        </div>
+        
+        
+
+    </template>
+    <script>
+        Polymer('page-news', {
+            list: [],
+            loadingItems: false,
+            baseUrl: 'news',
+            ready: function () {
+                document.title = this.pageTitle;
+                //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс
+                this.loadNews();
+                
+                
+                
+                // @todo кастыль на jquery для вычисления высоты
+                //var height = $(document).height();
+                //this.$.divList.style.height = height;
+                
+                // @todo здесь нужно провервть url, если он на саму нвоость, то перекидывать туда
+                // отлавилвать событии по кнопки назад в браузере - http://stackoverflow.com/questions/24885887/polymer-core-menu-double-event
+            }, 
+            handleResponseList: function (e, detail, sender) { 
+                this.$.progress.hidden = true;                
+                var responseList = detail.response.list;
+                this.list = this.list.concat(responseList);
+                this.lastItemId = this.list[this.list.length - 1].id;
+                this.loadingItems = false;
+            },
+            scroll: function(e, detail, sender) {
+                if (this.$.pages.selected == 1) {
+                    var delta = $(sender).find('.wrapper').height() - sender.scrollTop;                
+                    if (delta < 1000 && !this.loadingItems) { 
+                        this.loadNews();
+                    }
+                }
+            },
+            handleResponseItem: function (e, detail, sender) {
+                this.$.progress.hidden = true;
+                this.$.item.hidden = false;
+                this.item = detail.response;
+            },
+            refresh: function () {  
+                this.$.ajaxList.abort();
+                this.list = [];
+                this.lastItemId = '';
+                this.loadNews();
+            },
+            loadNews: function() {
+                this.loadingItems = true;
+                this.$.progress.hidden = false;
+                this.$.ajaxList.go();
+            },
+            goToItem: function (e, detail, sender) {
+                this.listScrollTop = this.$.scroller.scrollTop;
+                this.$.page1.hidden = true;
+                this.$.progress.hidden = false;
+                this.$.ajaxItem.go(); 
+                sender.item.isNew = false;
+                document.location.href = '#!/' + this.baseUrl + '/' + sender.item.id + '/';
+                this.$.pages.selected = 0;
+                this.$.iconMainMenu.hidden = true;
+                this.$.iconRefresh.hidden = true;
+                this.$.iconBack.hidden = false;
+            },
+            back: function () {
+                document.location.href = '#!/' + this.baseUrl + '/';
+                this.$.pages.selected = 1;
+                this.$.page1.hidden = false; 
+                this.$.scroller.scrollTop = this.listScrollTop;
+                this.$.item.hidden = true;
+                this.$.iconMainMenu.hidden = false;
+                this.$.iconRefresh.hidden = false;
+                this.$.iconBack.hidden = true;
+            }            
+        });
+        
+    </script>
+</polymer-element>
