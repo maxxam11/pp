@@ -1,12 +1,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-
 <link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
 <link rel="import" href="../bower_components/core-pages/core-pages.html">
 
-<link rel="import" href="../bower_components/paper-progress/paper-progress.html">
-
 <link rel="import" href="../global/app-ajax.html">
 
+<link rel="import" href="../elements/el-spinner.html">
 <link rel="import" href="../elements/el-news-item.html">
 <link rel="import" href="../elements/el-news-list-item.html">
 
@@ -35,12 +33,12 @@
                         <paper-icon-button id="iconBack" hidden icon="arrow-back" on-click="{{back}}"></paper-icon-button>
                         <span flex>{{pageTitle}}</span>
                         <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>
+                        <paper-icon-button id="iconDoneAll" icon="done-all" on-click="{{watchAll}}"></paper-icon-button>
                     </core-toolbar>
-                    <paper-progress id="progress" indeterminate></paper-progress>
                 </paper-shadow>
             </div>
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">
-
+                <el-spinner id="spinner" active></el-spinner>
                 <core-pages id="pages" selected="1">
                     
                     <div id="page2">
@@ -79,7 +77,7 @@
     <script>
         Polymer('page-news', {
             list: [],
-            loadingItems: false,
+            loadingItems: false, //пока грузятся данные, не грузить еще
             baseUrl: 'news',
             ready: function () {
                 document.title = this.pageTitle;
@@ -96,26 +94,43 @@
                 // отлавилвать событии по кнопки назад в браузере - http://stackoverflow.com/questions/24885887/polymer-core-menu-double-event
             }, 
             handleResponseList: function (e, detail, sender) { 
-                this.$.progress.hidden = true;                
+                                
                 var responseList = detail.response.list;
+                
+                // отмечаем просмотренные
+                var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
+                var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
+                for(var i = 0; i < responseList.length; i++) { 
+                    if (newsWatchedAll >= responseList[i].id) { 
+                        responseList[i].isNew = false;
+                    }
+                    if (newsWatched.length && newsWatchedAll < responseList[i].id) { 
+                        responseList[i].isNew = newsWatched.indexOf(responseList[i].id) === -1 ? true : false;
+                    }
+                }
+                
                 this.list = this.list.concat(responseList);
                 this.lastItemId = this.list[this.list.length - 1].id;
                 this.loadingItems = false;
+                
+                this.$.spinner.hide();
+                
             },
             scroll: function(e, detail, sender) {
                 if (this.$.pages.selected == 1) {
                     var delta = $(sender).find('.wrapper').height() - sender.scrollTop;                
-                    if (delta < 1000 && !this.loadingItems) { 
+                    if (delta < 1000 && !this.loadingItems) {  //пока грузятся данные, не грузить еще
                         this.loadNews();
                     }
                 }
             },
             handleResponseItem: function (e, detail, sender) {
-                this.$.progress.hidden = true;
+                this.$.spinner.hide();
                 this.$.item.hidden = false;
                 this.item = detail.response;
+                
             },
-            refresh: function () {  
+            refresh: function () { 
                 this.$.ajaxList.abort();
                 this.list = [];
                 this.lastItemId = '';
@@ -123,20 +138,29 @@
             },
             loadNews: function() {
                 this.loadingItems = true;
-                this.$.progress.hidden = false;
+                this.$.spinner.show();
                 this.$.ajaxList.go();
             },
             goToItem: function (e, detail, sender) {
                 this.listScrollTop = this.$.scroller.scrollTop;
                 this.$.page1.hidden = true;
-                this.$.progress.hidden = false;
+                this.$.spinner.show();
                 this.$.ajaxItem.go(); 
                 sender.item.isNew = false;
-                document.location.href = '#!/' + this.baseUrl + '/' + sender.item.id + '/';
+                var newsId = sender.item.id;
+                document.location.href = '#!/' + this.baseUrl + '/' + newsId + '/';
                 this.$.pages.selected = 0;
                 this.$.iconMainMenu.hidden = true;
                 this.$.iconRefresh.hidden = true;
-                this.$.iconBack.hidden = false;
+                this.$.iconDoneAll.hidden = true;
+                this.$.iconBack.hidden = false;    
+                
+                var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
+                if (newsWatched.indexOf(newsId) === -1) {
+                    newsWatched.push(newsId);
+                }
+                localStorage.newsWatched = JSON.stringify(newsWatched);
+                
             },
             back: function () {
                 document.location.href = '#!/' + this.baseUrl + '/';
@@ -146,8 +170,16 @@
                 this.$.item.hidden = true;
                 this.$.iconMainMenu.hidden = false;
                 this.$.iconRefresh.hidden = false;
+                this.$.iconDoneAll.hidden = false;
                 this.$.iconBack.hidden = true;
-            }            
+            },    
+            watchAll: function() {                
+                for (var i = 0; i < this.list.length; i++) {
+                    this.list[i].isNew = false;
+                }
+                localStorage.newsWatchedAll = this.list[0].id;
+                localStorage.newsWatched = [];
+            }
         });
         
     </script>

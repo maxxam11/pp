@@ -1,0 +1,35 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="el-spinner" attributes="active">
+    <template>
+        
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+            :host { position: absolute; top: 20%; left: 45%; }
+            paper-shadow { width:34px; height:34px; border-radius: 17px; z-index: 10; background-color: #fff;}
+            paper-spinner { margin: 3px;}
+        </style>       
+                   
+        <paper-shadow z="2" id="shadow">
+            <paper-spinner id="spinner" active="{{active}}"></paper-spinner>
+        </paper-shadow>
+        
+    </template>
+    <script>
+        Polymer('el-spinner',{
+            active: true,            
+            toggle: function() {
+                this.active = !this.active;
+                this.$.shadow.hidden = !this.$.shadow.hidden;
+            },
+            show: function() {
+                this.active = true;
+                this.$.shadow.hidden = false;
+            },
+            hide: function() {
+                this.active = false;
+                this.$.shadow.hidden = true;
+            }
+        });
+    </script>
+</polymer-element>

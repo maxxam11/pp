@@ -10,6 +10,12 @@
            
         </style> 
         
+        <app-ajax
+            id="ajax"
+            op="account/add"
+            params='{"accountId":"{{accountId}}"}'
+            on-core-response="{{handleResponse}}"></app-ajax>
+        
         <div vertical layout fit>
             <div>
                 <paper-shadow z="1">
@@ -19,8 +25,9 @@
                     </core-toolbar>
                 </paper-shadow>
             </div>
-            <div flex>
-                <el-account-add accountId="{{accountId}}"></el-account-add>
+            <div flex>  
+                <el-spinner id="spinner" active></el-spinner>
+                <el-account-add data="{{data}}" hidden id="account"></el-account-add>
             </div>
         </div>
 
@@ -30,7 +37,15 @@
             back: function () {
                 // @todo сделать событие назад на старнице в истории
                 document.location.href = '#!/payments';
-            }          
+            },
+            attached: function() {
+                this.$.ajax.go();
+            },
+            handleResponse: function (e, detail, sender) {
+                this.data = detail.response;
+                this.$.account.hidden = false;
+                this.$.spinner.hide();
+            },
         });
     </script>
 </polymer-element>

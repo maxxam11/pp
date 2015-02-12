@@ -1,35 +1,44 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../elements/el-spinner.html">
 
 <polymer-element name="page-index">
-  <template>
+    <template>
+        <link rel="stylesheet" href="../css/main.css"> 
 
-    
-      
-          sessionId: {{sessionId}}
-          <button on-click="{{show}}">ddd</button>
-          <paper-dialog id="dialog" heading="Выберите службу" class="scrolling">
-            
-                <p>13123</p>
-                
-                <p>13123</p>
-                <p>13123</p>
-            
+
+        sessionId: {{sessionId}}
+        <button on-click="{{show}}">ddd</button>
+<!--
+        <paper-shadow z="2" style="width:30px;height:30px;">
+            <paper-spinner id="progress" active></paper-spinner>
+        </paper-shadow>
+-->
+        <el-spinner id="spinner"></el-spinner>
+        <paper-dialog id="dialog" heading="Выберите службу" class="scrolling">
+
+            <p>13123</p>
+
+            <p>13123</p>
+            <p>13123</p>
+
         </paper-dialog>      
-      
-       
-  
 
-  </template>
-  <script>
-        Polymer('page-index', {            
-            attached: function() {                
+
+
+
+    </template>
+    <script>
+        Polymer('page-index', {
+            attached: function () {
                 this.sessionId = localStorage.sid;
-                
+
             },
-          show: function() {
-              this.$.dialog.toggle();
-          }
+            show: function () {
+                this.$.spinner.toggle();
+            }
         });
     </script>
 </polymer-element>

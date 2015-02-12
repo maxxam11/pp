@@ -15,10 +15,7 @@ paper-button.colored { background-color: #00BCD4; }
 
 paper-progress { display: block; width: 100%; margin: 0; padding:0; }
 paper-progress::shadow #activeProgress { background-color: #00BCD4; }
-/*
-paper-progress::shadow #progressContainer { background-color: #00BCD4; }
-paper-progress::shadow #activeProgress { background-color: #FFEB3B; }
-*/
+paper-spinner::shadow .circle { border-color: #FFEB3B; }
 
 html paper-input-decorator /deep/ .focused-underline,
 html /deep/ paper-input-decorator /deep/ .focused-underline {

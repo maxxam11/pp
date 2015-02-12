@@ -2,18 +2,12 @@
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 
-<polymer-element name="el-account-add" attributes="accountId">
+<polymer-element name="el-account-add" attributes="data" noscript>
     <template>        
         <link rel="stylesheet" href="../css/main.css">
         <style>
             paper-input { width: 100%; }
         </style>
-
-        <app-ajax
-            id="ajax"
-            op="account/add"
-            params='{"accountId":"{{accountId}}"}'
-            on-core-response="{{handleResponse}}"></app-ajax>
 
         <div class="container">
             <template repeat="{{item in data}}">
@@ -35,18 +29,4 @@
 
 
     </template>
-    <script>
-        Polymer('el-account-add', {
-            attached: function() {
-                this.$.ajax.go();
-            },
-            handleResponse: function (e, detail, sender) {
-                this.data = detail.response;
-            },
-            back: function() {
-                // @todo реализовать ход назад в истории переходов
-                document.location.href = '#!/payments';
-            }
-        });
-    </script>
 </polymer-element>
