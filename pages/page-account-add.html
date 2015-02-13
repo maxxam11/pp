@@ -35,8 +35,7 @@
     <script>
         Polymer('page-account-add', {
             back: function () {
-                // @todo сделать событие назад на старнице в истории
-                document.location.href = '#!/payments';
+                history.back();
             },
             attached: function() {
                 this.$.ajax.go();
