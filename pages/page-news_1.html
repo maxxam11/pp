@@ -18,12 +18,19 @@
             params='{"lastItemId":"{{lastItemId}}"}'
             on-core-response="{{handleResponseList}}"></app-ajax>
 
+        <app-ajax
+            id="ajaxItem"
+            op="news/item"
+            params='{"alt":"json", "q":"chrome"}'
+            on-core-response="{{handleResponseItem}}"></app-ajax>
+
 
         <div vertical layout fit>
             <div>
                 <paper-shadow z="1">
                     <core-toolbar>
                         <div id="iconMainMenu"><content id="content"></content></div>
+                        <paper-icon-button id="iconBack" hidden icon="arrow-back" on-click="{{back}}"></paper-icon-button>
                         <span flex>{{pageTitle}}</span>
                         <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>
                         <paper-icon-button id="iconDoneAll" icon="done-all" on-click="{{watchAll}}"></paper-icon-button>
@@ -31,15 +38,36 @@
                 </paper-shadow>
             </div>
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">
-                <el-spinner id="spinner" active></el-spinner>                
+                <el-spinner id="spinner" active></el-spinner>
+                <core-pages id="pages" selected="1">
+                    
+                    <div id="page2">
+                        <el-news-item id="item" hidden item="{{item}}"></el-news-item>         
+                    </div>
+
+                    <div id="page1">
                         
-                    <div class="wrapper">
-                        <template repeat="{{item in list}}">
-                            <el-news-list-item item="{{item}}" on-click="{{goToItem}}"></el-news-list-item>
-                            <!--<div class="item {{ {selected: selected} | tokenList }}"> {{_.name}} <br /> <p><i>{{_.description}}</i></p> </div>-->
-                        </template>
-                    </div>                        
-                      
+                        <div class="wrapper">
+                            <template repeat="{{item in list}}">
+                                <el-news-list-item item="{{item}}" on-click="{{goToItem}}"></el-news-list-item>
+                                <!--<div class="item {{ {selected: selected} | tokenList }}"> {{_.name}} <br /> <p><i>{{_.description}}</i></p> </div>-->
+                            </template>
+                        </div>
+                        
+                        <!--
+                        <div id="divList" style="overflow: auto;  width: 100%; height: 500px;" >                               
+                            <core-list id="list" data="{{list}}" on-scroll="{{scroll}}">
+                                <template>
+                                    <el-news-list-item item="{{model}}" on-click="{{goToItem}}"></el-news-list-item>
+                                </template>  
+                            </core-list>
+                        </div>
+                        -->
+
+                    </div>
+                    
+                    
+                </core-pages>
             </div>
         </div>
         
@@ -54,13 +82,7 @@
             ready: function () {
                 document.title = this.pageTitle;
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс
-                if (global.news.list.length) {
-                    this.initSnipperShadow();
-                    this.list = global.news.list; console.log(global.news.scrollTop);
-                    this.$.scroller.scrollTop = global.news.scrollTop; //@todo прокуртка не работает
-                } else {
-                    this.loadNews();
-                }
+                this.loadNews();
                 
                 
                 
@@ -87,20 +109,29 @@
                     }
                 }
                 
-                global.news.list = this.list.concat(responseList);
-                this.list = global.news.list;
+                this.list = this.list.concat(responseList);
                 this.lastItemId = this.list[this.list.length - 1].id;
                 this.loadingItems = false;
                 
-                this.initSnipperShadow();
+                this.$.spinner.hide();
+                this.$.spinner.shadow = true;
                 
             },
             scroll: function(e, detail, sender) {
-                global.news.scrollTop = sender.scrollTop;
-                var delta = $(sender).find('.wrapper').height() - sender.scrollTop;                
-                if (delta < 1000 && !this.loadingItems) {  //пока грузятся данные, не грузить еще
-                    this.loadNews();
+                if (this.$.pages.selected == 1) {
+                    var delta = $(sender).find('.wrapper').height() - sender.scrollTop;                
+                    if (delta < 1000 && !this.loadingItems) {  //пока грузятся данные, не грузить еще
+                        this.loadNews();
+                    }
                 }
+            },
+            handleResponseItem: function (e, detail, sender) {
+                this.$.spinner.hide();
+                this.$.spinner.shadow = true;
+                
+                this.$.item.hidden = false;
+                this.item = detail.response;
+                
             },
             refresh: function () { 
                 this.$.spinner.shadow = false;
@@ -114,6 +145,37 @@
                 this.$.spinner.show();
                 this.$.ajaxList.go();
             },
+            goToItem: function (e, detail, sender) {
+                this.listScrollTop = this.$.scroller.scrollTop;
+                this.$.page1.hidden = true;
+                
+                this.$.spinner.shadow = false;
+                this.$.spinner.show();
+                
+                this.$.ajaxItem.go(); 
+                sender.item.isNew = false;
+                var newsId = sender.item.id;
+                document.location.href = '#!/' + this.baseUrl + '/' + newsId + '/';
+                this.$.pages.selected = 0;
+                this.$.iconMainMenu.hidden = true;
+                this.$.iconRefresh.hidden = true;
+                this.$.iconDoneAll.hidden = true;
+                this.$.iconBack.hidden = false;  
+                
+                this.watchItem(newsId);
+                
+            },
+            back: function () {
+                document.location.href = '#!/' + this.baseUrl + '/';
+                this.$.pages.selected = 1;
+                this.$.page1.hidden = false; 
+                this.$.scroller.scrollTop = this.listScrollTop;
+                this.$.item.hidden = true;
+                this.$.iconMainMenu.hidden = false;
+                this.$.iconRefresh.hidden = false;
+                this.$.iconDoneAll.hidden = false;
+                this.$.iconBack.hidden = true;
+            },    
             watchAll: function() {                
                 for (var i = 0; i < this.list.length; i++) {
                     this.list[i].isNew = false;
@@ -121,13 +183,13 @@
                 localStorage.newsWatchedAll = this.list[0].id;
                 localStorage.newsWatched = [];
             },
-            goToItem: function(e, detail, sender) { 
-                sender.item.isNew = false;
-                document.location.href = '#!/news/' + sender.item.id; 
-            },
-            initSnipperShadow: function() {
-                this.$.spinner.hide();
-                this.$.spinner.shadow = true;
+            watchItem: function(newsId) {
+                var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
+                var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
+                if (newsWatched.indexOf(newsId) === -1 && newsId > newsWatchedAll) {
+                    newsWatched.push(newsId);
+                }
+                localStorage.newsWatched = JSON.stringify(newsWatched);
             }
         });
         

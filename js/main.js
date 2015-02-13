@@ -4,6 +4,10 @@ var global = {
         noInternet: 10000,
         loadStart: 0,
     },
+    news: {
+        scrollTop: 0,
+        list: [],
+    }
 };
 
 function goToIndex() {
