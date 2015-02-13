@@ -114,6 +114,7 @@
                 this.loadingItems = false;
                 
                 this.$.spinner.hide();
+                this.$.spinner.shadow = true;
                 
             },
             scroll: function(e, detail, sender) {
@@ -126,11 +127,14 @@
             },
             handleResponseItem: function (e, detail, sender) {
                 this.$.spinner.hide();
+                this.$.spinner.shadow = true;
+                
                 this.$.item.hidden = false;
                 this.item = detail.response;
                 
             },
             refresh: function () { 
+                this.$.spinner.shadow = false;
                 this.$.ajaxList.abort();
                 this.list = [];
                 this.lastItemId = '';
@@ -144,7 +148,10 @@
             goToItem: function (e, detail, sender) {
                 this.listScrollTop = this.$.scroller.scrollTop;
                 this.$.page1.hidden = true;
+                
+                this.$.spinner.shadow = false;
                 this.$.spinner.show();
+                
                 this.$.ajaxItem.go(); 
                 sender.item.isNew = false;
                 var newsId = sender.item.id;
@@ -153,13 +160,9 @@
                 this.$.iconMainMenu.hidden = true;
                 this.$.iconRefresh.hidden = true;
                 this.$.iconDoneAll.hidden = true;
-                this.$.iconBack.hidden = false;    
+                this.$.iconBack.hidden = false;  
                 
-                var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
-                if (newsWatched.indexOf(newsId) === -1) {
-                    newsWatched.push(newsId);
-                }
-                localStorage.newsWatched = JSON.stringify(newsWatched);
+                this.watchItem(newsId);
                 
             },
             back: function () {
@@ -179,6 +182,14 @@
                 }
                 localStorage.newsWatchedAll = this.list[0].id;
                 localStorage.newsWatched = [];
+            },
+            watchItem: function(newsId) {
+                var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
+                var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
+                if (newsWatched.indexOf(newsId) === -1 && newsId > newsWatchedAll) {
+                    newsWatched.push(newsId);
+                }
+                localStorage.newsWatched = JSON.stringify(newsWatched);
             }
         });
         
