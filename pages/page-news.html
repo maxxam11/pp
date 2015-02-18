@@ -73,7 +73,7 @@
             }, 
             handleResponseList: function (e, detail, sender) { 
                                 
-                var responseList = detail.response.list;
+                var responseList = detail.response.data.list;
                 
                 // отмечаем просмотренные
                 var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
@@ -89,7 +89,7 @@
                 
                 global.news.list = this.list.concat(responseList);
                 this.list = global.news.list;
-                this.lastItemId = this.list[this.list.length - 1].id;
+                this.lastItemId = responseList.length ? this.list[this.list.length - 1].id : 0;
                 this.loadingItems = false;
                 
                 this.initSnipperShadow();

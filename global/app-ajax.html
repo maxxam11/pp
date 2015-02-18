@@ -24,9 +24,9 @@
                 } else {
                     if (global.debug) {
                         //@todo здесь выводим дебаг куда надо (через сигнал может быть)
-                        if (this.response.error.length) {
+                        if (this.response.error.msg) {
                             var error = this.response.error;
-                            alert(error.msg + '\r\n' + error.traceString);
+                            alert(this.op + '\r\n' + error.msg + '\r\n' + error.traceString);
                         }
                         
                     }
