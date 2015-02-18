@@ -61,10 +61,10 @@
                 }, global.timeout.noInternet);
             },
             handleResponse: function (e, detail, sender) {
-                var r = detail.response;
+                var data = detail.response.data;
                 this.startApp();
-                if (r.token) {
-                    setToken(r.token);
+                if (data.token) {
+                    setToken(data.token);
                 } else gotoError('token_empty');
 
             },
