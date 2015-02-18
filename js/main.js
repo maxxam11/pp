@@ -14,7 +14,8 @@ var global = {
     news: {
         scrollTop: 0,
         list: [],
-    }
+    },
+    debug: true,
 };
 
 function goToIndex() {

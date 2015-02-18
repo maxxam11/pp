@@ -3,12 +3,13 @@
 
 <polymer-element name="app-ajax" extends="core-ajax" attributes="op">   
     <script>
-        Polymer('app-ajax', {            
+        Polymer('app-ajax', {
             ready: function() {
                 this.super();
                 this.url = global.api.url;
                 this.handleAs = "json"; 
                 this.method = 'POST';
+                
             }, 
             getParams: function() {  
                 var data = this.super();               
@@ -16,11 +17,21 @@
                 data.token = getToken();
                 data.op = this.op;                
                 return data;
-            },
+            },            
             complete: function() {
                 if (this.error) { 
                     gotoError(this.error);
+                } else {
+                    if (global.debug) {
+                        //@todo здесь выводим дебаг куда надо (через сигнал может быть)
+                        if (this.response.error) {
+                            var error = this.response.error;
+                            alert(error.msg + '\r\n' + error.traceString);
+                        }
+                        
+                    }
                 }
+                
             },
             go: function() {
                 //перед тем как вызвать нужно проверять соединение с интернетом 
