@@ -22,11 +22,12 @@
                 if (this.error) { 
                     gotoError(this.error);
                 } else {
-                    if (global.debug) {
+                    if (global.debug && this.response.debug) {
+                        var debug = this.response.debug;
                         //@todo здесь выводим дебаг куда надо (через сигнал может быть)
-                        if (this.response.error.msg) {
-                            var error = this.response.error;
-                            alert(this.op + '\r\n' + error.msg + '\r\n' + error.traceString);
+                        var error = debug.error && debug.error.length ? debug.error : false;
+                        if (error) {
+                            alert(this.op + '\r\n' + error.msg + ': ' + error.msg + '\r\n' + error.traceString);
                         }
                         
                     }
