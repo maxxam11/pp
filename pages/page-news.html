@@ -96,11 +96,12 @@
                 
             },
             scroll: function(e, detail, sender) {
+                
                 global.news.scrollTop = sender.scrollTop;
                 var delta = $(sender).find('.wrapper').height() - sender.scrollTop;                
                 if (delta < 1000 && !this.loadingItems) {  //пока грузятся данные, не грузить еще
                     this.loadNews();
-                }
+                } 
             },
             refresh: function () { 
                 this.$.spinner.shadow = false;
