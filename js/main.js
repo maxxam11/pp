@@ -4,8 +4,8 @@ var global = {
         version: '1.0',
     },    
     api: {
-        //url: 'http://pp.maxxam.ru',
-        url: 'http://pp2/index.php',       
+        url: 'http://pp.maxxam.ru',
+        //url: 'http://pp2/index.php',       
     },
     timeout: {
         noInternet: 10000,
@@ -18,10 +18,20 @@ var global = {
     debug: true,
 };
 
+function debuger() {
+    for(var i = 0, l = arguments.length; i < l; i++) {
+        console.log(arguments[i]);
+    }
+    //console.log(arguments);    
+}
+
+function alertForUser(txt) {
+    alert(txt);
+}
 function goToIndex() {
     document.location.href = '/';
 }
-function gotoError(text) {
+function gotoError(text) {    
     document.location.href = '#!/error/' + text + '/';
 }
 function gotoErrorNoInternet() {

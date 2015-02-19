@@ -1,0 +1,89 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="app-ajax" extends="core-ajax" attributes="op">   
+    <script>
+        Polymer('app-ajax', {
+            ready: function() {
+                this.super();
+                this.url = global.api.url;
+                this.handleAs = "json"; 
+                this.method = 'POST';
+                
+            }, 
+            getParams: function() {  
+                var data = this.super();               
+                data.app = JSON.stringify(global.app);
+                data.token = getToken();
+                data.op = this.op;                
+                return data;
+            }, 
+            
+            complete: function() {
+                if (this.error) { 
+                    gotoErrorNoInternet();
+                } else {
+                    if (this.response.msg) {
+                        alert(this.response.msg);
+                    }
+                    if (global.debug && this.response.debug) {
+                        var debug = this.response.debug;
+                        
+                        if (debug.error) {
+                            console.log('ERROR: ' + debug.error.code + ' ' + debug.error.msg, debug.error);
+                        }
+                        if (debug.trace && debug.trace.length) {
+                            for (var i = 0, l = debug.trace.length; i < l; i++) {
+                                console.log('DEBUG ' + i + ':', debug.trace[i]);
+                            }
+                        }
+                        
+                    }
+                }
+            },
+            go: function() {
+                //перед тем как вызвать нужно проверять соединение с интернетом 
+                // как проверить интернет - https://github.com/apache/cordova-plugin-network-information/blob/master/doc/ru/index.md
+                var internet = true;
+                if(internet) {                   
+                    this.super();
+                } else {
+                    gotoErrorNoInternet();
+                    this.fire('core-complete', {response: 0, xhr: null});
+                }
+                
+            }
+        });
+    </script>
+</polymer-element>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

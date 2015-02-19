@@ -62,14 +62,17 @@
             },
             handleResponse: function (e, detail, sender) {
                 var data = detail.response.data;
-                this.startApp();
-                if (data.token) {
+                
+                if (data.token) { 
                     setToken(data.token);
-                } else gotoError('token_empty');
+                } else {
+                    // @todo предусмотреть обработку этой ошибкит - сказать, что то не так на сервере.
+                    gotoError('token_empty');
+                }
 
             },
             handleError: function (e, detail, sender) {
-                this.startApp();
+                
             },
             handleComplete: function (e, detail, sender) {
                 this.startApp();

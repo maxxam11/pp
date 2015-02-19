@@ -261,20 +261,20 @@ element.
             }
         }
         
-        if (response.alert) {
+        if (response.msg) {
             //alert(response.msg);
-            alertForUser(response.alert);
+            gotoError(response.msg);
         }
       
       if (xhr === this.activeRequest) {
         this.response = response;
       }
-      this.fire('core-response', {response: response, xhr: xhr});
+      //this.fire('core-response', {response: response, xhr: xhr});
         
         // @mine ovveride
-        //if (!response.alert) {
-        //    this.fire('core-response', {response: response, xhr: xhr});
-        //}
+        if (!response.msg) {
+            this.fire('core-response', {response: response, xhr: xhr});
+        }
     },
 
     processError: function(xhr) {
