@@ -13,7 +13,7 @@ function debuger() {
     }
     if (arguments[0] && arguments[0] == 'error' && arguments[1]) {
         var error = arguments[1];
-        txt = '%cERROR: ' 
+        txt = '%cERROR ' + global.debugIndex + ': ' 
             + error.code + ' ' 
             + error.msg + ' ';        
         console.log(txt, 'color:red;', error);
