@@ -13,10 +13,10 @@ function debuger() {
     }
     if (arguments[0] && arguments[0] == 'error' && arguments[1]) {
         var error = arguments[1];
-        txt = '%cERROR ' + global.debugIndex + ': ' 
+        txt = '%cERROR ' + global.debugIndex + ': ' + '%c' +  
             + error.code + ' ' 
             + error.msg + ' ';        
-        console.log(txt, 'color:red;', error);
+        console.log(txt, 'color:grey;', 'color:red;', error);
         return;
     }
     for(var i = 0, l = arguments.length; i < l; i++) {        

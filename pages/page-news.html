@@ -56,7 +56,7 @@
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс
                 if (global.news.list.length) {
                     this.initSnipperShadow();
-                    this.list = global.news.list; console.log(global.news.scrollTop);
+                    this.list = global.news.list; 
                     this.$.scroller.scrollTop = global.news.scrollTop; //@todo прокуртка не работает
                 } else {
                     this.loadNews();
