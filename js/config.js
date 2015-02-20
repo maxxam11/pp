@@ -16,6 +16,7 @@ var global = {
         list: [],
     },
     debug: true,
+    debugIndex: 0,
 };
 
 

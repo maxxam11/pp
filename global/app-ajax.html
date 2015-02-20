@@ -249,16 +249,16 @@ element.
       
         // @mine ovveride        
         if (global.debug && response.debug) {
-            var debug = response.debug;  
-            //@todo здесь выводим дебаг куда надо (через сигнал может быть)
-            if (debug.error) {
-                debuger('ERROR: ' + debug.error.code + ' ' + debug.error.msg, debug.error);
-            }
+            var debug = response.debug; 
+            global.debugIndex++;
             if (debug.trace && debug.trace.length) {
                 for (var i = 0, l = debug.trace.length; i < l; i++) {
-                    debuger('DEBUG ' + i + ':', debug.trace[i]);
+                    debuger('trace', debug.trace[i]);
                 }
             }
+            if (debug.error) {
+                debuger('error', debug.error);
+            }            
         }
         
         if (response.alert) {
