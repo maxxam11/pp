@@ -1,22 +1,3 @@
-var global = {
-    app: {
-        spaceId: 1,
-        version: '1.0',
-    },    
-    api: {
-        url: 'http://pp.maxxam.ru',
-        //url: 'http://pp2/index.php',       
-    },
-    timeout: {
-        noInternet: 10000,
-        loadStart: 0,
-    },
-    news: {
-        scrollTop: 0,
-        list: [],
-    },
-    debug: true,
-};
 
 function debuger() {
     for(var i = 0, l = arguments.length; i < l; i++) {

@@ -225,7 +225,7 @@ element.
       this.xhr = document.createElement('core-xhr');
         
         // @mine ovveride
-        this.url = global.api.url;
+        this.url = global.api.url + this.op;
         this.handleAs = "json"; 
         this.method = 'POST';
     },
@@ -386,7 +386,7 @@ element.
         // @mine ovveride
         params.app = JSON.stringify(global.app);
         params.token = getToken();
-        params.op = this.op;      
+        //params.op = this.op;      
       
       return params;
     },
