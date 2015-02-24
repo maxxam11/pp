@@ -5,10 +5,10 @@ function debuger() {
         var trace = arguments[1];
         txt = '%cDEBUG ' + global.debugIndex + ': ' 
             + trace.time + ' ' 
-            + '%c' + trace.source + ' ' 
+            + '%c' + trace.type + ' ' 
             + '%c' + trace.msg + ' '
-            + '%c' + trace.method;        
-        console.log(txt, 'color:grey;', trace.source == 'DB' ? 'color: red' : 'color: green', 'color: blue', 'color: orange');
+            + '%c' + trace.source;        
+        console.log(txt, 'color:grey;', trace.type == 'DB' ? 'color: red' : 'color: green', 'color: blue', 'color: orange');
         return;
     }
     if (arguments[0] && arguments[0] == 'error' && arguments[1]) {
