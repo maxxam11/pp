@@ -38,7 +38,7 @@ function gotoErrorNoInternet() {
     document.location.href = '#!/nointernet';
 }
 function getToken() {
-    return localStorage.token ? localStorage.token : '';
+    return localStorage.token ? localStorage.token : global.api.token;
 }
 function setToken(token) {
     localStorage.setItem('token', token);
