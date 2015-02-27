@@ -5,7 +5,8 @@ var global = {
     },    
     api: {
         //url: 'http://pp.maxxam.ru/api/',
-        url: 'http://127.0.0.1:8000/api/',       
+        url: 'http://127.0.0.1:8000/api/', 
+        version: 1,
     },
     timeout: {
         noInternet: 10000,

@@ -227,7 +227,10 @@ element.
         // @mine ovveride
         this.url = global.api.url + this.op;
         this.handleAs = "json"; 
-        this.method = 'POST';
+        this.method = 'GET';
+        this.headers = {
+            "Accept": "application/vnd.pp.v" + global.api.version + "+json"
+        };
     },
 
     receive: function(response, xhr) {
