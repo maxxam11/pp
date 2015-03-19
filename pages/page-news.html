@@ -51,6 +51,7 @@
             list: [],
             loadingItems: false, //пока грузятся данные, не грузить еще
             baseUrl: 'news',
+            notLoad: false, //когда новости закончились, больше не запрашивать
             ready: function () {
                 document.title = this.pageTitle;
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс
@@ -75,21 +76,26 @@
                                
                 var responseList = detail.response.data.list; 
                 
-                // отмечаем просмотренные
-                var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
-                var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
-                for(var i = 0; i < responseList.length; i++) { 
-                    if (newsWatchedAll >= responseList[i].id) { 
-                        responseList[i].isNew = false;
+                if (responseList.length) {
+                    // отмечаем просмотренные
+                    var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
+                    var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
+                    for(var i = 0; i < responseList.length; i++) { 
+                        if (newsWatchedAll >= responseList[i].id) { 
+                            responseList[i].isNew = false;
+                        }
+                        if (newsWatched.length && newsWatchedAll < responseList[i].id) { 
+                            responseList[i].isNew = newsWatched.indexOf(responseList[i].id) === -1 ? true : false;
+                        }
                     }
-                    if (newsWatched.length && newsWatchedAll < responseList[i].id) { 
-                        responseList[i].isNew = newsWatched.indexOf(responseList[i].id) === -1 ? true : false;
-                    }
+
+                    global.news.list = this.list.concat(responseList);
+                    this.list = global.news.list;
+                    this.lastItemId = responseList.length ? this.list[this.list.length - 1].publicDate : ''; console.log(this.lastItemId);
+                } else {
+                    this.notLoad = true;
                 }
                 
-                global.news.list = this.list.concat(responseList);
-                this.list = global.news.list;
-                this.lastItemId = responseList.length ? this.list[this.list.length - 1].id : 0;
                 this.loadingItems = false;
                 
                 this.initSnipperShadow();
@@ -106,14 +112,17 @@
             refresh: function () { 
                 this.$.spinner.shadow = false;
                 this.$.ajaxList.abort();
+                this.notLoad = false;
                 this.list = [];
                 this.lastItemId = '';
                 this.loadNews();
             },
             loadNews: function() {
-                this.loadingItems = true;
-                this.$.spinner.show();
-                this.$.ajaxList.go();
+                if(!this.notLoad) {
+                    this.loadingItems = true;
+                    this.$.spinner.show();
+                    this.$.ajaxList.go();
+                }
             },
             watchAll: function() {                
                 for (var i = 0; i < this.list.length; i++) {
