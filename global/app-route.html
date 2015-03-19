@@ -18,22 +18,15 @@
 
         <more-routing driver="hash"></more-routing>
         
-        <more-route name="news" path="/news">
-            <more-route name="news-item" path="/:newsId"></more-route>
-        </more-route>
-        
         <more-route-switch routeContext>
             
             <template when-route="/news">
-                <template if="{{ !route('news-item').active }}">
-                    <page-news baseUrl="news" pageTitle="Новости"><content></content></page-news>                    
-                </template>
-                
-                <template if="{{ route('news-item').active }}">
-                    <page-news-item baseUrl="news" pageTitle="Новости" newsId="{{params.newsId}}"></page-news-item>                     
-                </template>
-                
-            </template>
+                <page-news baseUrl="news" pageTitle="Новости"><content></content></page-news>
+            </template> 
+            
+            <template when-route="/news-item/:newsId">
+                <page-news-item baseUrl="news" pageTitle="Новости" newsId="{{params.newsId}}"></page-news-item>
+            </template> 
 
             <template when-route="/payments">
                 <page-payments  pageTitle="Мои платежи"><content></content></page-payments>

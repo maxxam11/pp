@@ -13,7 +13,7 @@
             .item .date { padding: 10px 0; color: grey; }
         </style>       
            
-        <div class="item-img {{ item.img_url ? '' : 'empty'}}" style="background-image: url('{{item.img_url}}');"></div>
+        <div class="item-img {{ item.imgUrl ? '' : 'empty'}}" style="background-image: url('{{item.imgUrl}}');"></div>
         
         <div class="item">
             <h1 class="title">{{item.title}}</h1>
@@ -23,7 +23,7 @@
                 </template>
                 
             </div>
-            <div class="date">{{item.date}} {{item.source_site}}</div>
+            <div class="date">{{item.publicDate}} {{item.sourceSite}}</div>
         </div>
         
         

@@ -40,11 +40,11 @@
     <script>
         Polymer('page-news-item', {
             
-            ready: function () {
+            ready: function () { 
                 document.title = this.pageTitle;
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс
                 
-                //this.$.spinner.show();
+                this.$.spinner.show();
                 
                 this.$.ajaxItem.go();
                 
@@ -57,18 +57,23 @@
             },            
             handleResponseItem: function (e, detail, sender) {
                 this.$.spinner.hide();
-                this.item = detail.response;
-                this.watchItem(this.item.id);
-                
+                this.item = detail.response.data.news; 
+                if (this.item) {
+                    this.watchItem(this.item);
+                } else {
+                    //@todo здесь пишем ошибку пользователю
+                }
+                this.$.spinner.hide();
+                this.$.item.hidden = false;
             },            
             back: function () {
                history.back();
             },  
-            watchItem: function(newsId) {
+            watchItem: function(news) {   
                 var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
-                var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
-                if (newsWatched.indexOf(newsId) === -1 && newsId > newsWatchedAll) {
-                    newsWatched.push(newsId);
+                var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];                                
+                if (newsWatched.indexOf(news._id) === -1 && Date.parse(newsWatchedAll) < Date.parse(news.publicDate)) {
+                    newsWatched.push(news._id);
                 }
                 localStorage.newsWatched = JSON.stringify(newsWatched);
             }

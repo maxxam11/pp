@@ -18,8 +18,8 @@
            
             <div class="wrapper {{item.isNew ? 'new' : ''}}" layout horizontal>
                 <div flex layout vertical>
-                    <div id="title" class="title" self-start flex>{{item.id}} {{item.title}}</div>
-                    <div class="date">{{item.publicDate}}  {{item.sourceSite}}</div>                
+                    <div id="title" class="title" self-start flex>{{item._id}} {{item.title}}</div>
+                    <div class="date">{{item.publicDate}}  {{item.sourceDomain}}</div>                
                 </div>
                 <div class="img {{ item.imgUrl ? '' : 'empty'}}" style="background-image: url('{{item.imgUrl}}');"></div>               
             </div>    

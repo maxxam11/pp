@@ -77,21 +77,23 @@
                 var responseList = detail.response.data.list; 
                 
                 if (responseList.length) {
+                    
                     // отмечаем просмотренные
                     var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
                     var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
-                    for(var i = 0; i < responseList.length; i++) { 
-                        if (newsWatchedAll >= responseList[i].id) { 
+                    for(var i = 0; i < responseList.length; i++) {
+                        responseList[i].isNew = true;
+                        if (Date.parse(newsWatchedAll) >= Date.parse(responseList[i].publicDate)) { 
                             responseList[i].isNew = false;
                         }
-                        if (newsWatched.length && newsWatchedAll < responseList[i].id) { 
-                            responseList[i].isNew = newsWatched.indexOf(responseList[i].id) === -1 ? true : false;
+                        if (newsWatched.length && Date.parse(newsWatchedAll) < Date.parse(responseList[i].publicDate)) { 
+                            responseList[i].isNew = newsWatched.indexOf(responseList[i]._id) === -1 ? true : false;
                         }
                     }
 
                     global.news.list = this.list.concat(responseList);
                     this.list = global.news.list;
-                    this.lastItemId = responseList.length ? this.list[this.list.length - 1].publicDate : ''; console.log(this.lastItemId);
+                    this.lastItemId = responseList.length ? this.list[this.list.length - 1].publicDate : ''; 
                 } else {
                     this.notLoad = true;
                 }
@@ -128,12 +130,12 @@
                 for (var i = 0; i < this.list.length; i++) {
                     this.list[i].isNew = false;
                 }
-                localStorage.newsWatchedAll = this.list[0].id;
+                localStorage.newsWatchedAll = this.list[0].publicDate;
                 localStorage.newsWatched = [];
             },
             goToItem: function(e, detail, sender) { 
                 sender.item.isNew = false;
-                document.location.href = '#!/news/' + sender.item.id; 
+                document.location.href = '#!/news-item/' + sender.item._id; 
             },
             initSnipperShadow: function() {
                 this.$.spinner.hide();
