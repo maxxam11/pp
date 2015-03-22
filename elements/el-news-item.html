@@ -1,19 +1,19 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="el-news-item" attributes="item" noscript>
+<polymer-element name="el-news-item" attributes="item">
     <template>
         
         <link rel="stylesheet" href="../css/main.css">
         <style>
-            .item-img { width: 100%; height: 200px; background-size: cover; background-position: 50% 50%; margin-top:0;}
-            .img.empty { height: 0px; }
+            .item-img { width: 100%; height: 300px; background-size: cover; background-position: 50% 50%; margin-top:0;}
+            .img.empty { height: 0; }
             
             .item { padding: 10px;  word-wrap: break-word; }
             .item h1 { font-size: 120%; }
             .item .date { padding: 10px 0; color: grey; }
         </style>       
            
-        <div class="item-img {{ item.imgUrl ? '' : 'empty'}}" style="background-image: url('{{item.imgUrl}}');"></div>
+        <div class="item-img" style="{{ item.imgUrl ? '' : 'height: 0;'}}background-image: url('{{item.imgUrl}}');"></div>
         
         <div class="item">
             <h1 class="title">{{item.title}}</h1>
@@ -23,9 +23,14 @@
                 </template>
                 
             </div>
-            <div class="date">{{item.publicDate}} {{item.sourceSite}}</div>
+            <div class="date">{{item.publicDate}} {{item.sourceName ? item.sourceName : item.sourceSite}}</div>
         </div>
         
         
     </template>
+    <script>
+        Polymer('el-news-item', {
+            
+        });
+    </script>
 </polymer-element>

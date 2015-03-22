@@ -1,7 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 
-<polymer-element name="el-news-list-item" attributes="item" noscript>
+<polymer-element name="el-news-list-item" attributes="item">
     <template>
         <link rel="stylesheet" href="../css/main.css">
         <style>
@@ -18,7 +18,7 @@
            
             <div class="wrapper {{item.isNew ? 'new' : ''}}" layout horizontal>
                 <div flex layout vertical>
-                    <div id="title" class="title" self-start flex>{{item._id}} {{item.title}}</div>
+                    <div id="title" class="title" self-start flex>{{item.title}}</div>
                     <div class="date">{{item.publicDate}}  {{item.sourceDomain}}</div>                
                 </div>
                 <div class="img {{ item.imgUrl ? '' : 'empty'}}" style="background-image: url('{{item.imgUrl}}');"></div>               
@@ -27,4 +27,11 @@
         </paper-item>
         
     </template>
+    <script>
+        Polymer('el-news-list-item', {
+            ready: function(){
+                //this.date = this.item.publicDate;
+            }
+        });
+    </script>
 </polymer-element>

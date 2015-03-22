@@ -83,6 +83,8 @@
                     var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
                     for(var i = 0; i < responseList.length; i++) {
                         responseList[i].isNew = true;
+                        var date = new Date(responseList[i].publicDate);
+                        responseList[i].publicDate = responseList[i].publicDate == responseList[i].createDate ? '' : date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
                         if (Date.parse(newsWatchedAll) >= Date.parse(responseList[i].publicDate)) { 
                             responseList[i].isNew = false;
                         }
