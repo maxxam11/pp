@@ -84,6 +84,7 @@
                     for(var i = 0; i < responseList.length; i++) {
                         responseList[i].isNew = true;
                         var date = new Date(responseList[i].publicDate);
+                        responseList[i].publicDateTS = responseList[i].publicDate;
                         responseList[i].publicDate = responseList[i].publicDate == responseList[i].createDate ? '' : date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
                         if (Date.parse(newsWatchedAll) >= Date.parse(responseList[i].publicDate)) { 
                             responseList[i].isNew = false;
@@ -95,7 +96,7 @@
 
                     global.news.list = this.list.concat(responseList);
                     this.list = global.news.list;
-                    this.lastItemId = responseList.length ? this.list[this.list.length - 1].publicDate : ''; 
+                    this.lastItemId = responseList.length ? this.list[this.list.length - 1].publicDateTS : ''; 
                 } else {
                     this.notLoad = true;
                 }
