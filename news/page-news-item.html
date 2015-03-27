@@ -73,7 +73,7 @@
             watchItem: function(news) {   
                 var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
                 var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];                                
-                if (newsWatched.indexOf(news._id) === -1 && Date.parse(newsWatchedAll) < Date.parse(news.publicDate)) {
+                if (newsWatched.indexOf(news._id) === -1 && Date.parse(newsWatchedAll) < Date.parse(news.createDate)) {
                     newsWatched.push(news._id);
                 }
                 localStorage.setItem('newsWatched', JSON.stringify(newsWatched));

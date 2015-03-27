@@ -85,12 +85,10 @@
                     for(var i = 0; i < responseList.length; i++) {
                         responseList[i].isNew = true;
                         var date = new Date(responseList[i].publicDate);
-                        responseList[i].publicDateTS = responseList[i].publicDate;
-                        responseList[i].publicDate = responseList[i].publicDate == responseList[i].createDate ? '' : date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
-                        if (Date.parse(newsWatchedAll) >= Date.parse(responseList[i].publicDate)) { 
+                        responseList[i].sortParam = responseList[i].createDate; 
+                        if (Date.parse(newsWatchedAll) >= Date.parse(responseList[i].sortParam)) { 
                             responseList[i].isNew = false;
-                        }
-                        if (newsWatched.length && Date.parse(newsWatchedAll) < Date.parse(responseList[i].publicDate)) { 
+                        } else {                            
                             responseList[i].isNew = newsWatched.indexOf(responseList[i]._id) === -1 ? true : false;
                         }
                     }
@@ -135,7 +133,7 @@
                 for (var i = 0; i < this.list.length; i++) {
                     this.list[i].isNew = false;
                 }
-                localStorage.setItem('newsWatchedAll', this.list[0].publicDate);
+                localStorage.setItem('newsWatchedAll', this.list[0].createDate);
                 localStorage.setItem('newsWatched', JSON.stringify([]));
             },
             goToItem: function(e, detail, sender) { 
