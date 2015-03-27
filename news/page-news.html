@@ -1,0 +1,152 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../bower_components/core-pages/core-pages.html">
+
+<link rel="import" href="../global/app-ajax.html">
+<link rel="import" href="../global/el-spinner.html">
+
+<link rel="import" href="el-list-item.html">
+
+<polymer-element name="page-news" attributes="pageTitle">
+    <template>
+        <link rel="stylesheet" href="../css/main.css"> 
+        
+        <app-ajax
+            id="ajaxList"
+            op="news/list"
+            params='{"lastItemId":"{{lastItemId}}"}'
+            on-core-response="{{handleResponseList}}"></app-ajax>
+
+
+        <div vertical layout fit>
+            <div>
+                <paper-shadow z="1">
+                    <core-toolbar>
+                        <div id="iconMainMenu"><content id="content"></content></div>
+                        <span flex>{{pageTitle}}</span>
+                        <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>
+                        <paper-icon-button id="iconDoneAll" icon="done-all" on-click="{{watchAll}}"></paper-icon-button>
+                    </core-toolbar>
+                </paper-shadow>
+            </div>
+            <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">
+                <el-spinner id="spinner" active></el-spinner>                
+                        
+                    <div class="wrapper">
+                        <template repeat="{{item in list}}">
+                            <el-list-item item="{{item}}" on-click="{{goToItem}}"></el-list-item>
+                            <!--<div class="item {{ {selected: selected} | tokenList }}"> {{_.name}} <br /> <p><i>{{_.description}}</i></p> </div>-->
+                        </template>
+                    </div>                        
+                      
+            </div>
+        </div>
+        
+        
+
+    </template>
+    <script>
+        Polymer('page-news', {
+            list: [],
+            loadingItems: false, //пока грузятся данные, не грузить еще
+            baseUrl: 'news',
+            ready: function () {
+                document.title = this.pageTitle;
+                //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс                
+                if (global.news.list.length) {
+                    this.initSnipperShadow(); 
+                    this.list = global.news.list;                     
+                } else {
+                    this.loadNews();
+                }
+                
+                // @todo кастыль на jquery для вычисления высоты
+                //var height = $(document).height();
+                //this.$.divList.style.height = height;
+                
+                // @todo здесь нужно провервть url, если он на саму нвоость, то перекидывать туда
+                // отлавилвать событии по кнопки назад в браузере - http://stackoverflow.com/questions/24885887/polymer-core-menu-double-event
+            }, 
+            domReady: function(){
+                this.$.scroller.scrollTop = global.news.scrollTop; 
+            },
+            handleResponseList: function (e, detail, sender) { 
+                               
+                var responseList = detail.response.data.list; 
+                
+                if (global.news.countNewsOnPage === null)
+                    global.news.countNewsOnPage = responseList.length;
+                
+                if (responseList.length) {
+                    
+                    // отмечаем просмотренные
+                    var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
+                    var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
+                    for(var i = 0; i < responseList.length; i++) {
+                        responseList[i].isNew = true;
+                        var date = new Date(responseList[i].publicDate);
+                        responseList[i].publicDateTS = responseList[i].publicDate;
+                        responseList[i].publicDate = responseList[i].publicDate == responseList[i].createDate ? '' : date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+                        if (Date.parse(newsWatchedAll) >= Date.parse(responseList[i].publicDate)) { 
+                            responseList[i].isNew = false;
+                        }
+                        if (newsWatched.length && Date.parse(newsWatchedAll) < Date.parse(responseList[i].publicDate)) { 
+                            responseList[i].isNew = newsWatched.indexOf(responseList[i]._id) === -1 ? true : false;
+                        }
+                    }
+
+                    global.news.list = this.list.concat(responseList);
+                    this.list = global.news.list;
+                    this.lastItemId = responseList.length ? this.list[this.list.length - 1].publicDateTS : ''; 
+                } 
+                
+                if (responseList.length < global.news.countNewsOnPage) {
+                    global.news.notLoadScroll = true;
+                }                
+                
+                this.loadingItems = false;                
+                this.initSnipperShadow();
+                
+            },
+            scroll: function(e, detail, sender) {
+                
+                global.news.scrollTop = sender.scrollTop;
+                var delta = $(sender).find('.wrapper').height() - sender.scrollTop;                
+                if (delta < 1000 && !this.loadingItems) {  //пока грузятся данные, не грузить еще
+                    this.loadNews();
+                } 
+            },
+            refresh: function () { 
+                this.$.spinner.shadow = false;
+                this.$.ajaxList.abort();
+                this.notLoad = false;
+                this.list = [];
+                this.lastItemId = '';
+                this.loadNews();
+            },
+            loadNews: function() {
+                if(!global.news.notLoadScroll) {
+                    this.loadingItems = true;
+                    this.$.spinner.show();
+                    this.$.ajaxList.go();
+                }
+            },
+            watchAll: function() {                
+                for (var i = 0; i < this.list.length; i++) {
+                    this.list[i].isNew = false;
+                }
+                localStorage.setItem('newsWatchedAll', this.list[0].publicDate);
+                localStorage.setItem('newsWatched', JSON.stringify([]));
+            },
+            goToItem: function(e, detail, sender) { 
+                sender.item.isNew = false;
+                document.location.href = '#!/news-item/' + sender.item._id; 
+            },
+            initSnipperShadow: function() {
+                this.$.spinner.hide();
+                this.$.spinner.shadow = true;
+            }
+        });
+        
+    </script>
+</polymer-element>

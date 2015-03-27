@@ -2,7 +2,7 @@
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
-<link rel="import" href="../elements/el-spinner.html">
+<link rel="import" href="../global/el-spinner.html">
 
 <polymer-element name="page-index">
     <template>
@@ -32,7 +32,7 @@
     </template>
     <script>
         Polymer('page-index', {
-            attached: function () {
+            attached: function () { 
                 this.sessionId = localStorage.sid;
 
             },

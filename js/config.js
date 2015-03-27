@@ -16,6 +16,8 @@ var global = {
     news: {
         scrollTop: 0,
         list: [],
+        countNewsOnPage: null,
+        notLoadScroll: false, //когда новости закончились, больше не запрашивать при скролле
     },
     debug: true,
     debugIndex: 0,
