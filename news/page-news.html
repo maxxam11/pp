@@ -83,8 +83,7 @@
                     var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;
                     var newsWatched = localStorage.newsWatched ? JSON.parse(localStorage.newsWatched) : [];
                     for(var i = 0; i < responseList.length; i++) {
-                        responseList[i].isNew = true;
-                        var date = new Date(responseList[i].publicDate);
+                        responseList[i].isNew = true;                        
                         responseList[i].sortParam = responseList[i].createDate; 
                         if (Date.parse(newsWatchedAll) >= Date.parse(responseList[i].sortParam)) { 
                             responseList[i].isNew = false;
@@ -95,7 +94,7 @@
 
                     global.news.list = this.list.concat(responseList);
                     this.list = global.news.list;
-                    this.lastItemId = responseList.length ? this.list[this.list.length - 1].publicDateTS : ''; 
+                    this.lastItemId = responseList.length ? this.list[this.list.length - 1].createDate : ''; 
                 } 
                 
                 if (responseList.length < global.news.countNewsOnPage) {
