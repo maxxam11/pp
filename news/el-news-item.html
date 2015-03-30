@@ -42,6 +42,9 @@
                     //убираем картинку из тела, если она такая же как и главная
                     p = p.replace('[img ' + this.news.imgUrl + ']','');
                     p = p.replace(reLink, '<a href="$1" onclick="window.open(\'$1\', \'_system\');return false;">$2</a>');
+                    
+                    //@todo обрабатывать ссылки на картинку (по расширению), пример - http://app2top.ru/money/rentabel-nost-free-to-play-igr-padaet-53629.html
+                    
                     p = p.replace(reImg, '</p><img class="img-line" src="$1"><p>');
                     body += '<p>' + p + '</p>';
                 }                
