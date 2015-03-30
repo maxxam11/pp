@@ -15,7 +15,8 @@
             id="ajaxList"
             op="news/list"
             params='{"lastItemId":"{{lastItemId}}"}'
-            on-core-response="{{handleResponseList}}"></app-ajax>
+            on-core-response="{{handleResponseList}}"
+            on-core-error="{{handleResponseError}}"></app-ajax>
 
 
         <div vertical layout fit>
@@ -51,7 +52,8 @@
             loadingItems: false, //пока грузятся данные, не грузить еще
             baseUrl: 'news',
             ready: function () {
-                document.title = this.pageTitle;
+                document.title = this.pageTitle;                
+                
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс                
                 if (global.news.list.length) {
                     this.initSnipperShadow(); 
@@ -116,7 +118,7 @@
             refresh: function () { 
                 this.$.spinner.shadow = false;
                 this.$.ajaxList.abort();
-                this.notLoad = false;
+                global.news.notLoadScroll = false;
                 this.list = [];
                 this.lastItemId = '';
                 this.loadNews();
@@ -142,6 +144,10 @@
             initSnipperShadow: function() {
                 this.$.spinner.hide();
                 this.$.spinner.shadow = true;
+            },
+            handleResponseError: function(){
+                //this.$.spinner.hide();
+                //@todo здесь нужно показать кнопку о том что нет подключения и попробовать еще раз
             }
         });
         

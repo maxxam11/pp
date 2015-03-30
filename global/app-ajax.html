@@ -284,9 +284,10 @@ element.
       var response = xhr.status + ': ' + xhr.responseText;
       if (xhr === this.activeRequest) {
         this.error = response;
-      } 
-      //@mine здесь можно перехватывать ощибку и например редирект делать на странцу "нет подключения"
+      }       
       this.fire('core-error', {response: response, xhr: xhr});
+      //@mine здесь можно перехватывать ощибку и например редирект делать на странцу "нет подключения"
+      gotoErrorNoInternet();
     },
 
     processProgress: function(progress, xhr) {

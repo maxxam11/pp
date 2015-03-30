@@ -41,3 +41,5 @@ html /deep/ paper-input-decorator[focused] /deep/ .floated-label .label-text {
 .primary-text-color    { color: #212121; } /*текст черный */
 .secondary-text-color  { color: #727272; } /* текст серый */
 .divider-color         { border-color: #B6B6B6; } /* светло-серый бордер*/
+
+a { color: #00BCD4; }

@@ -9,17 +9,18 @@
             .wrapper { width: 100%; margin:0; margin-top: -5px; margin-left: -5px;}
             .title { font-size: 15px; text-overflow: clip; overflow: hidden; }
             .date { color: #999; font-size: 12px; margin-top: 10px;}
+            .date .domain { font-size: 105%; }
             .img { width: 80px; height: 80px; background-size: cover; background-position: 50% 50%; margin-right: -10px; margin-left: 5px;}
             .img.empty { width: 1px; }
             .watched { background-color: #eaeaea; }
             .new .title { font-weight: bold; }
-        </style>
+        </style> 
         <paper-item class="main separator">
            
             <div class="wrapper {{item.isNew ? 'new' : ''}}" layout horizontal>
                 <div flex layout vertical>
-                    <div id="title" class="title" self-start flex>{{item.title}}</div>
-                    <div class="date">{{item.publicDate}}  {{item.sourceDomain}}</div>                
+                    <div id="title" class="title" self-start flex></div> 
+                    <div class="date"><span id="date"></span> на <span class="domain">{{item.sourceDomain}}</span></div>                
                 </div>
                 <div class="img {{ item.imgUrl ? '' : 'empty'}}" style="background-image: url('{{item.imgUrl}}');"></div>               
             </div>    
@@ -29,8 +30,9 @@
     </template>
     <script>
         Polymer('el-list-item', {
-            ready: function(){
-                //this.date = this.item.publicDate;
+            ready: function(){ 
+                this.$.title.innerHTML = this.item.title;
+                this.$.date.innerHTML = convertDateToRel(this.item.createDate); 
             }
         });
     </script>

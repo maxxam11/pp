@@ -1,12 +1,21 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="page-no-internet" noscript>
-  <template>
+<polymer-element name="page-no-internet">
+    <template>
+        <link rel="stylesheet" href="../css/main.css">
 
-    
 
-       нет интернета
-  
+        нет интернета<br>
+        <a href="#" onclick="history.back();return false;">вернуться и попробовать еще раз</a>
+        
 
-  </template>
+
+    </template>
+    <script>
+        Polymer('page-no-internet',{
+            ready: function(){
+
+            }
+        });
+    </script>
 </polymer-element>

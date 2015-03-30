@@ -10,27 +10,27 @@
             
             .title, .body p, .date, .link { padding: 0 10px;  word-wrap: break-word; }            
             .title { font-size: 120%; }            
-            .body {color: #111; margin: 0; padding: 0;}
-            a {color: #00BCD4;}
-            .date { color: grey; padding-bottom: 15px; }
+            .body {color: #111; margin: 0; padding: 0;}            
+            .date { color: grey; padding: 15px 10px; font-size: 80%; background-color: black;}
         </style>       
           
         <div class="img-base" style="{{ news.imgUrl ? '' : 'height: 0;'}}background-image: url('{{news.imgUrl}}');"></div>
         
-        <h1 id="title" class="title">{{news.title}}</h1>
-        <div class="body" id="body">{{news.body}}</div>
+        <h1 id="title" class="title"></h1>
+        <div class="body" id="body"></div>
         <div class="date">
-            <a id="link" href="{{news.sourceLink}}" onclick="window.open('$1', '_system');return false;">{{news.sourceName ? news.sourceName : news.sourceDomain}}</a> 
-            <span id="date">{{news.createDate}}</span>
+            опубликовано <span id="date"></span>,
+            источник <a id="link" href="{{news.sourceLink}}" onclick="window.open('{{news.sourceLink}}', '_system');return false;">{{news.sourceDomain}}</a> 
+            
         </div>
         
         
     </template>
     <script>
         Polymer('el-news-item', {
-            attributeChanged: function(){
+            attributeChanged: function(){                        
                 this.$.title.innerHTML = this.news.title;
-                document.title = this.news.title;
+                document.title = this.$.title.innerText;
         
                 var body = '';
                 var p;
@@ -39,17 +39,19 @@
                 for (var i = 0, l = this.news.body.length; i < l; i++) {
                     p = this.news.body[i]; 
                     //p = p.replace(/\n/g, '<br>'); //убрал, т.к. ломает текст
+                    //убираем картинку из тела, если она такая же как и главная
+                    p = p.replace('[img ' + this.news.imgUrl + ']','');
                     p = p.replace(reLink, '<a href="$1" onclick="window.open(\'$1\', \'_system\');return false;">$2</a>');
                     p = p.replace(reImg, '</p><img class="img-line" src="$1"><p>');
                     body += '<p>' + p + '</p>';
                 }                
                 this.$.body.innerHTML = body;
                 
-                var link = this.news.sourceName ? this.news.sourceName : this.news.sourceDomain;
-                this.$.link.innerHTML = link.toUpperCase();
+                //var link = this.news.sourceDomain;
+                //this.$.link.innerHTML = link.toUpperCase(); 
                         
                 var date = this.news.createDate;
-                this.$.date.innerHTML = date;
+                this.$.date.innerHTML = convertDateToRel(date);
             },       
         });
     </script>
