@@ -38,7 +38,8 @@
                 var reImg = /\[img\s(.*?)\]/g;
                 for (var i = 0, l = this.news.body.length; i < l; i++) {
                     p = this.news.body[i]; 
-                    //p = p.replace(/\n/g, '<br>'); //убрал, т.к. ломает текст
+                    p = p.replace(/\n/g, '<br>'); //убрал, т.к. ломает текст
+                    //p = p.replace(/\x20\x20/g, '<br>'); 
                     //убираем картинку из тела, если она такая же как и главная
                     p = p.replace('[img ' + this.news.imgUrl + ']','');
                     p = p.replace(reLink, '<a href="$1" onclick="window.open(\'$1\', \'_system\');return false;">$2</a>');
@@ -52,9 +53,8 @@
                 
                 //var link = this.news.sourceDomain;
                 //this.$.link.innerHTML = link.toUpperCase(); 
-                        
-                var date = this.news.createDate;
-                this.$.date.innerHTML = convertDateToRel(date);
+                
+                this.$.date.innerHTML = this.news.dateago;
             },       
         });
     </script>

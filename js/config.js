@@ -1,6 +1,6 @@
 var global = {
     app: {
-        spaceId: 1001,
+        spaceId: 1,
         version: '1.0',
     },    
     api: {
