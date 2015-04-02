@@ -10,7 +10,7 @@
             .title { font-size: 15px; text-overflow: clip; overflow: hidden; }
             .date { color: #999; font-size: 12px; margin-top: 10px;}
             .date .domain { font-size: 105%; }
-            .img { width: 80px; height: 80px; background-size: cover; background-position: 50% 50%; margin-right: -10px; margin-left: 5px;}
+            .img { width: 30%; height: 80px; background-size: cover; background-position: 50% 50%; margin-right: -10px; margin-left: 5px;}
             .img.empty { width: 1px; }
             .watched { background-color: #eaeaea; }
             .new .title { font-weight: bold; }
@@ -20,7 +20,7 @@
             <div class="wrapper {{item.isNew ? 'new' : ''}}" layout horizontal>
                 <div flex layout vertical>
                     <div id="title" class="title" self-start flex></div> 
-                    <div class="date"><span id="date" class="{{item.dateago == 'сегодня' ? 'primary-color' : ''}}"></span> на <span class="domain">{{item.sourceDomain}}</span></div>                
+                    <div class="date"><span id="date" class="{{item.dateago == 'сегодня' ? 'primary-color' : ''}}"></span></div>                
                 </div>
                 <div class="img {{ item.imgUrl ? '' : 'empty'}}" style="background-image: url('{{item.imgUrl}}');"></div>               
             </div>    
