@@ -25,7 +25,8 @@ html /deep/ paper-input-decorator /deep/ .focused-underline {
 html paper-input-decorator[focused] .floated-label .label-text,
 html /deep/ paper-input-decorator[focused] .floated-label .label-text,
 html paper-input-decorator[focused] /deep/ .floated-label .label-text,
-html /deep/ paper-input-decorator[focused] /deep/ .floated-label .label-text {
+html /deep/ paper-input-decorator[focused] /deep/ .floated-label .label-text,
+a, .primary-color {
 /* floating label color when the input is focused */
   color: #00BCD4;
 }
@@ -41,5 +42,3 @@ html /deep/ paper-input-decorator[focused] /deep/ .floated-label .label-text {
 .primary-text-color    { color: #212121; } /*текст черный */
 .secondary-text-color  { color: #727272; } /* текст серый */
 .divider-color         { border-color: #B6B6B6; } /* светло-серый бордер*/
-
-a, .primary-color { color: #00BCD4; }

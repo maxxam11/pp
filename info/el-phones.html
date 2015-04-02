@@ -1,0 +1,26 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="el-phones" attributes="phones">
+    <template>        
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+           
+        </style>
+        
+        <app-ajax
+            id="ajaxList"
+            op="info/list"
+            errorNoHandle="true"
+            params='{}'
+            on-core-response="{{handleResponseList}}"
+            on-core-error=""></app-ajax>
+        
+        qweqweqeqwe
+        
+    </template>
+    <script>
+        Polymer('el-phones', {
+            
+        });
+    </script>
+</polymer-element>

@@ -7,7 +7,7 @@
 
 <link rel="import" href="el-news-item.html">
 
-<polymer-element name="page-news-item" attributes="pageTitle newsId">
+<polymer-element name="page-news-item" attributes="newsId">
     <template>
         <link rel="stylesheet" href="../css/main.css"> 
         
@@ -16,7 +16,6 @@
             op="news/item"
             params='{"newsId":"{{newsId}}"}'
             on-core-response="{{handleResponseItem}}"></app-ajax>
-
 
         <div vertical layout fit>
             <div>
@@ -27,13 +26,11 @@
                     </core-toolbar>
                 </paper-shadow>
             </div>
-            <div id="scroller" flex style="overflow: auto;">
+            <div flex style="overflow: auto;">
                 <el-spinner id="spinner" active></el-spinner>               
                 <el-news-item id="item" hidden news="{{item}}"></el-news-item>  
             </div>
         </div>
-        
-        
 
     </template>
     <script>
@@ -43,26 +40,17 @@
                 document.title = this.pageTitle;
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс
                 
-                
                 for (var i = 0, l = global.news.list.length; i < l; i++) {
                     if (global.news.list[i]._id == this.newsId) {
                         this.showNews(global.news.list[i]);                        
                         break;
                     }                    
-                }
-                
+                }                
                 //если в глобальном списке нет новотси, то тянем с сервера
                 if (!this.item) {                   
                     this.$.spinner.show();                
                     this.$.ajaxItem.go();                    
                 } 
-                
-                // @todo кастыль на jquery для вычисления высоты
-                //var height = $(document).height();
-                //this.$.divList.style.height = height;
-                
-                // @todo здесь нужно провервть url, если он на саму нвоость, то перекидывать туда
-                // отлавилвать событии по кнопки назад в браузере - http://stackoverflow.com/questions/24885887/polymer-core-menu-double-event
             },            
             handleResponseItem: function (e, detail, sender) {                
                 this.showNews(detail.response.data.news);                

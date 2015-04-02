@@ -1,0 +1,35 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../bower_components/core-pages/core-pages.html">
+
+<link rel="import" href="el-phones.html">
+
+<polymer-element name="page-info">
+    <template>
+        <link rel="stylesheet" href="../css/main.css">
+        
+        <div vertical layout fit>
+            <div>
+                <paper-shadow z="1">
+                    <core-toolbar>
+                        <div id="iconMainMenu"><content id="content"></content></div>
+                        <span flex>{{pageTitle}}</span>
+                    </core-toolbar>
+                </paper-shadow>
+            </div>
+            <div flex style="overflow: auto;">                               
+                <el-phones></el-phones>  
+            </div>
+        </div> 
+
+    </template>
+    <script>
+        Polymer('page-info', {
+            pageTitle: 'Информация',
+            ready: function(){
+                document.title = this.pageTitle;
+            },
+        });
+        
+    </script>
+</polymer-element>

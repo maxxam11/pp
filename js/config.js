@@ -19,6 +19,9 @@ var global = {
         countNewsOnPage: null,
         notLoadScroll: false, //когда новости закончились, больше не запрашивать при скролле
     },
+    info: {
+        scrollTop: 0,
+    },
     debug: true,
     debugIndex: 0,
 };
