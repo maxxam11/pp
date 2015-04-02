@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-field/core-field.html">
 
 <polymer-element name="el-phones" attributes="phones">
     <template>        
@@ -15,29 +16,46 @@
             on-core-response="{{handleResponseList}}"
             on-core-error=""></app-ajax>
         
-        
+        <template repeat="{{contact in contacts}}">
+            <div>
+                
+                {{contact.name}}
+            </div>
+        </template>
         
     </template>
     <script>
         Polymer('el-phones', {
-            phones: [
+            contacts: [
                 {
-                    title: 'Служба спасения, пожарная охрана',
-                    contacts: [
-                        {
-                            title: 'Дежурный Красногорского УВД',
-                            numbers: ['02', '+7 495 562-22-20', '+7 495 562-41-85'], 
-                        },
-                    ],
+                    name: 'Единая диспетчерская служба',
+                    descr: 'Можно обращаться по любым экстренным вопросам',
+                    numbers: ['+7 495 563-79-32'],
                 },{
-                    title: 'Полиция',
-                    contacts: [
-                        {
-                            title: 'Дежурный Красногорского УВД',
-                            numbers: ['02', '+7 495 562-22-20', '+7 495 562-41-85'], 
-                        },
-                    ],
-                },
+                    name: 'Служба спасения, пожарная охрана',
+                    numbers: ['+7 495 562-01-10', '+7 495 562-10-38'],
+                },{
+                    name: 'Полиция',
+                    numbers: ['+7 495 562-22-20', '+7 495 562-41-85'],
+                },{
+                    name: 'Участковый',
+                    numbers: '+7 495 562-10-38',
+                },{
+                    name: 'Скорая медицинская помощь',
+                    numbers: ['+7 495 562-35-35'],
+                },{
+                    name: 'ГИБДД',
+                    numbers: ['+7 495 563-02-67'],
+                },{
+                    name: 'Роспотребнадзор',
+                    numbers: ['+7 495 562-35-23'],
+                },{
+                    name: 'Телефон доверия',
+                    numbers: ['+7 495 562-96-76'],
+                },{
+                    name: 'Справочная служба',
+                    numbers: ['+7 495 562-02-80'],
+                }
             ], 
             
         });
