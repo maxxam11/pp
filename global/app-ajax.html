@@ -32,7 +32,7 @@ element.
 @homepage github.io
 -->
 <link rel="import" href="../bower_components/core-ajax/core-xhr.html">
-<polymer-element name="app-ajax" hidden attributes="url handleAs auto params response error method headers body contentType withCredentials progress loading op">
+<polymer-element name="app-ajax" hidden attributes="url handleAs auto params response error method headers body contentType withCredentials progress loading op errorNoHandle">
 <script>
 
   Polymer('app-ajax', {
@@ -286,9 +286,8 @@ element.
         this.error = response;
       }       
       this.fire('core-error', {response: response, xhr: xhr});
-        //@mine здесь можно перехватывать ощибку и например редирект делать на странцу "нет подключения"
-        // но не стал делать, т.к. внекоторых разделах не надо делать редиреект (в случае с данными из localStorage)
-        //gotoErrorNoInternet();
+        //если не отключен режим "делать редирект на страницу 'нет соединения', если ошибка", то делаем редирект
+        if (!this.errorNoHandle) gotoErrorNoInternet();
     },
 
     processProgress: function(progress, xhr) {
