@@ -286,8 +286,9 @@ element.
         this.error = response;
       }       
       this.fire('core-error', {response: response, xhr: xhr});
-      //@mine здесь можно перехватывать ощибку и например редирект делать на странцу "нет подключения"
-      gotoErrorNoInternet();
+        //@mine здесь можно перехватывать ощибку и например редирект делать на странцу "нет подключения"
+        // но не стал делать, т.к. внекоторых разделах не надо делать редиреект (в случае с данными из localStorage)
+        //gotoErrorNoInternet();
     },
 
     processProgress: function(progress, xhr) {
