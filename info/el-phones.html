@@ -15,11 +15,30 @@
             on-core-response="{{handleResponseList}}"
             on-core-error=""></app-ajax>
         
-        qweqweqeqwe
+        
         
     </template>
     <script>
         Polymer('el-phones', {
+            phones: [
+                {
+                    title: 'Служба спасения, пожарная охрана',
+                    contacts: [
+                        {
+                            title: 'Дежурный Красногорского УВД',
+                            numbers: ['02', '+7 495 562-22-20', '+7 495 562-41-85'], 
+                        },
+                    ],
+                },{
+                    title: 'Полиция',
+                    contacts: [
+                        {
+                            title: 'Дежурный Красногорского УВД',
+                            numbers: ['02', '+7 495 562-22-20', '+7 495 562-41-85'], 
+                        },
+                    ],
+                },
+            ], 
             
         });
     </script>

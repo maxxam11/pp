@@ -12,18 +12,16 @@
             .title { font-size: 120%; }            
             .body {color: #111; margin: 0; padding: 0;}            
             .date { color: grey; padding: 15px 10px; font-size: 80%; background-color: black;}
-        </style>       
-          
+        </style> 
+        
         <div class="img-base" style="{{ news.imgUrl ? '' : 'height: 0;'}}background-image: url('{{news.imgUrl}}');"></div>
         
         <h1 id="title" class="title"></h1>
         <div class="body" id="body"></div>
         <div class="date">
             опубликовано <span id="date"></span>,
-            источник <a id="link" href="{{news.sourceLink}}" onclick="window.open('{{news.sourceLink}}', '_system');return false;">{{news.sourceDomain}}</a> 
-            
+            источник <a id="link" href="{{news.sourceLink}}" onclick="window.open('{{news.sourceLink}}', '_system');return false;">{{news.sourceDomain}}</a>            
         </div>
-        
         
     </template>
     <script>
