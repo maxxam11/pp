@@ -11,6 +11,11 @@
     <template>
         <link rel="stylesheet" href="../css/main.css"> 
         
+        <style>
+            #loading { height: 60px; }
+            #loading paper-spinner { position: relative; left: 45%; top: 20px; }
+        </style>
+        
         <app-ajax
             id="ajaxList"
             op="news/list"
@@ -31,14 +36,18 @@
                 </paper-shadow>
             </div>
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">
-                <el-spinner id="spinner" active></el-spinner>                
                         
-                    <div class="wrapper">
-                        <template repeat="{{item in list}}">
-                            <el-list-item item="{{item}}" on-click="{{goToItem}}"></el-list-item>
-                            <!--<div class="item {{ {selected: selected} | tokenList }}"> {{_.name}} <br /> <p><i>{{_.description}}</i></p> </div>-->
-                        </template>
-                    </div>                        
+                <div class="wrapper">
+                    <template repeat="{{item in list}}">
+                        <el-list-item item="{{item}}" on-click="{{goToItem}}"></el-list-item>
+                        <!--<div class="item {{ {selected: selected} | tokenList }}"> {{_.name}} <br /> <p><i>{{_.description}}</i></p> </div>-->
+                    </template>
+                    <div id="loading" style="display:{{loading}};">
+                        <paper-spinner id="spinner" active="true"></paper-spinner>
+                    </div>
+                </div> 
+                
+                
                       
             </div>
         </div>
@@ -51,12 +60,13 @@
             list: [],
             loadingItems: false, //пока грузятся данные, не грузить еще
             baseUrl: 'news',
+            pageTitle: 'Новости',
+            loading: 'none',
             ready: function () {
                 document.title = this.pageTitle;                
                 
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс                
                 if (global.news.list.length) {
-                    this.initSnipperShadow(); 
                     this.list = global.news.list;                     
                 } else {
                     this.loadNews();
@@ -100,11 +110,11 @@
                 } 
                 
                 if (responseList.length < global.news.countNewsOnPage) {
-                    global.news.notLoadScroll = true;
+                    global.news.notLoadScroll = true;                    
                 }                
                 
-                this.loadingItems = false;                
-                this.initSnipperShadow();
+                this.loadingItems = false;
+                this.loading = 'none';
                 
             },
             scroll: function(e, detail, sender) {
@@ -115,18 +125,17 @@
                     this.loadNews();
                 } 
             },
-            refresh: function () { 
-                this.$.spinner.shadow = false;
+            refresh: function () {
                 this.$.ajaxList.abort();
                 global.news.notLoadScroll = false;
                 this.list = [];
                 this.lastItemId = '';
                 this.loadNews();
             },
-            loadNews: function() {
+            loadNews: function() { 
                 if(!global.news.notLoadScroll) {
                     this.loadingItems = true;
-                    this.$.spinner.show();
+                    this.loading = 'block'; 
                     this.$.ajaxList.go();
                 }
             },
@@ -140,10 +149,6 @@
             goToItem: function(e, detail, sender) { 
                 sender.item.isNew = false;
                 document.location.href = '#!/news-item/' + sender.item._id; 
-            },
-            initSnipperShadow: function() {
-                this.$.spinner.hide();
-                this.$.spinner.shadow = true;
             },
             handleResponseError: function(){
                 //this.$.spinner.hide();
