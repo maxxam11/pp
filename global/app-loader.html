@@ -67,7 +67,8 @@
                     setToken(data.token);
                 } else {
                     // @todo предусмотреть обработку этой ошибкит - сказать, что то не так на сервере.
-                    gotoError('token_empty');
+                    //gotoError('token_empty');
+                    gotoErrorNoInternet();
                 }
 
             },
