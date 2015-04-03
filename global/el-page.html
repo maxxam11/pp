@@ -1,0 +1,30 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+
+<polymer-element name="el-page" attributes="pageTitle">
+    <template>        
+        <link rel="stylesheet" href="../css/main.css"> 
+        
+        <div vertical layout fit>
+            <div>
+                <paper-shadow z="1">                   
+                    <core-toolbar>
+                        <div id="iconMainMenu"><content id="content"></content></div>
+                        <span flex>{{pageTitle}}</span>
+                        <content id="leftIcons"></content>
+                    </core-toolbar>
+                </paper-shadow>
+            </div>
+            <div flex style="overflow: auto;"><content id="body1"></content></div>
+        </div>
+        
+    </template>
+    
+    <script>
+        Polymer('el-page', {
+            ready: function(){
+                document.title = this.pageTitle;
+            }
+        });
+    </script>
+</polymer-element>

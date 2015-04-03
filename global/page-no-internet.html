@@ -1,12 +1,29 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
 <polymer-element name="page-no-internet">
     <template>
         <link rel="stylesheet" href="../css/main.css">
+        <style>
+            div.container { padding-top: 50px;}
+            div { text-align: center; padding: 10px 10px; color: grey;}
+        </style>
 
-
-        нет интернета<br>
-        <a href="#" onclick="history.back();return false;">вернуться и попробовать еще раз</a>
+        
+        
+        
+            
+            <div class="container">
+                Потеряна связь с сервером.<br> 
+                Возможно нет интернета.
+                
+                <div><a href="#" onclick="history.back();return false;"><paper-button raised>попробовать еще раз</paper-button></a></div>
+               
+            </div>
+        
+            
+        
+        
         
 
 
