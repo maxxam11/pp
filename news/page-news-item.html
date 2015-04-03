@@ -66,6 +66,9 @@
                 localStorage.setItem('newsWatched', JSON.stringify(newsWatched));
             },
             showNews: function(news) { 
+                if (!news) {
+                    return document.location.href = '#!/news';
+                }
                 this.$.spinner.hide();
                 this.item = news; 
                 if (this.item) {
