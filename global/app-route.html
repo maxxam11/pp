@@ -6,7 +6,7 @@
 <link rel="import" href="../global/page-index.html">
 <link rel="import" href="../news/page-news.html">
 <link rel="import" href="../news/page-news-item.html">
-<link rel="import" href="../info/page-info.html">
+<link rel="import" href="../info/page-phones.html">
 <link rel="import" href="../payment/page-payments.html">
 <link rel="import" href="../payment/page-account-add.html">
 <link rel="import" href="../global/page-error.html">
@@ -31,8 +31,7 @@
                 <page-account-add  pageTitle="Добавить счет" accountId="{{params.accountId}}"></page-account-add>
             </template> 
             
-            <template when-route="/info"><page-info><content></content></page-info></template>            
-            <template when-route="/info/:id"><page-news-item infoId="{{params.id}}"></page-news-item></template>
+            <template when-route="/info"><page-phones><content></content></page-phones></template>
 
             <template when-route="/error"><page-error></page-error></template>
             <template when-route="/nointernet"><page-no-internet></page-no-internet></template>

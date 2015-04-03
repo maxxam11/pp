@@ -1,0 +1,106 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<polymer-element name="page-phones" attributes="phones">
+    <template>        
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+            .contact { padding: 10px; }
+            .title { font-size: 80%; color: grey; border-bottom: solid 1px grey; text-transform: uppercase; }
+            .descr { font-size: 80%; color: grey; padding: 5px 0;  }
+        </style>
+        
+        <app-ajax
+            id="ajaxList"
+            op="info/list"
+            errorNoHandle="true"
+            params='{}'
+            on-core-response="{{handleResponseList}}"
+            on-core-error=""></app-ajax>
+        
+        <div vertical layout fit>
+            <div>
+                <paper-shadow z="1">                   
+                    <core-toolbar>
+                        <div id="iconMainMenu"><content id="content"></content></div>
+                        <span flex>{{pageTitle}}</span>
+                        <paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button>
+                    </core-toolbar>
+                </paper-shadow>
+            </div>
+            <div flex style="overflow: auto; padding-top: 10px; ">                               
+                
+                <template repeat="{{contact in contacts}}">
+                    <div class="contact">                
+                        <div class='title'>{{contact.name}}</div>  
+                        <div class="descr">{{contact.descr}}</div>
+                        <template repeat="{{phone in contact.phones}}">
+                            <paper-button raised class="primary-color" on-click="{{buttonClick}}">{{phone}}</paper-button>
+                        </template>
+                    </div>
+                </template>
+                
+            </div>
+        </div>
+        
+    </template>
+    
+    
+    
+    <script>
+        Polymer('page-phones', {
+            contacts: [
+                {
+                    name: 'Единая диспетчерская служба',
+                    descr: 'Можно обращаться по любым экстренным вопросам',
+                    phones: ['+7 495 563-79-32'],
+                },{
+                    name: 'Служба спасения, пожарная охрана',
+                    phones: ['+7 495 562-01-10', '+7 495 562-10-38'],
+                },{
+                    name: 'Полиция',
+                    phones: ['+7 495 562-22-20', '+7 495 562-41-85'],
+                },{
+                    name: 'Участковый',
+                    phones: ['+7 495 562-10-38'],
+                },{
+                    name: 'Скорая медицинская помощь',
+                    phones: ['+7 495 562-35-35'],
+                },{
+                    name: 'ГИБДД',
+                    descr: 'Вызвать инспектора в случае ДТП или если вы стали свидетелем нарушения дорожных правил',
+                    phones: ['+7 495 563-02-67'],
+                },{
+                    name: 'Роспотребнадзор',
+                    descr: 'Обращаться в случае, если возникли претензии к продавцу или поставщику услуг',
+                    phones: ['+7 495 562-35-23'],
+                },{
+                    name: 'Телефон доверия',
+                    descr: 'Можно анонимно обратится, чтобы обсудить трудную жизненную ситуацию и получить ответ на любой свой вопрос',
+                    phones: ['+7 495 562-96-76'],
+                },{
+                    name: 'Справочная служба',
+                    descr: 'Здесь можно узнать остальные вас интересующие телефоны',
+                    phones: ['+7 495 562-02-80'],
+                }
+            ],
+            pageTitle: 'Экстренные службы',
+            ready: function(){
+                document.title = this.pageTitle;
+            },
+            buttonClick: function(event, detail, sender) { 
+                document.location.href = 'tel:' + sender.innerText;
+                //@todo для iphone надо плагин подключть http://rickluna.com/wp/2012/02/making-a-phone-call-from-within-phonegap-in-android-and-ios/
+                
+            },
+            addPhone: function(event, detail, sender) { 
+                //@todo давать возможность предлагать добавлять телефон
+                // открываем модальное окно и в нем размещаем компонент обратной связи с заголовокм и текстом:
+                // "Новый телефон в экстренные службы", "Предлагаю добвать еще один телефон экстренной службы: "
+            }
+            
+        });
+    </script>
+</polymer-element>

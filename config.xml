@@ -20,5 +20,11 @@
 
     <content src="index.html" />
     
+    <!-- чтобы можно было номер набирать для звонка -->
+    <!--<access origin="tel:*" launch-external="yes" />-->    
+    <!-- чтобы можно было письмо отправить -->
+    <!--<access origin="mailto:*" launch-external="yes" />-->
+    
+    
     <gap:plugin name="org.apache.cordova.device" version="0.2.12" />
 </widget>
