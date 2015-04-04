@@ -1,9 +1,4 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
-<link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-
-<polymer-element name="page-phones" attributes="phones">
+<polymer-element name="page-phones">
     <template>        
         <link rel="stylesheet" href="../css/main.css">
         <style>
@@ -20,16 +15,10 @@
             on-core-response="{{handleResponseList}}"
             on-core-error=""></app-ajax>
         
-        <div vertical layout fit>
-            <div>
-                <paper-shadow z="1">                   
-                    <core-toolbar>
-                        <div id="iconMainMenu"><content id="content"></content></div>
-                        <span flex>{{pageTitle}}</span>
-                        <paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button>
-                    </core-toolbar>
-                </paper-shadow>
-            </div>
+        <el-page pageTitle="Экстренные службы">
+            <div id="toolbarMainIcon"><content></content></div>
+            <div id="toolbarIcons"><paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button></div>
+            
             <div flex style="overflow: auto; padding-top: 10px; ">                               
                 
                 <template repeat="{{contact in contacts}}">
@@ -43,7 +32,7 @@
                 </template>
                 
             </div>
-        </div>
+        </el-page>
         
     </template>
     

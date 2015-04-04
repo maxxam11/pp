@@ -1,7 +1,4 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-
-<polymer-element name="page-no-internet">
+<polymer-element name="page-nointernet">
     <template>
         <link rel="stylesheet" href="../css/main.css">
         <style>
@@ -12,7 +9,8 @@
         
         
         
-            
+        <el-page pageTitle="упс...">
+            <div id="toolbarMainIcon"><content></content></div>
             <div class="container">
                 Потеряна связь с сервером.<br> 
                 Возможно нет интернета.
@@ -20,7 +18,7 @@
                 <div><a href="#" onclick="history.back();return false;"><paper-button raised>попробовать еще раз</paper-button></a></div>
                
             </div>
-        
+        </el-page>
             
         
         
@@ -29,7 +27,7 @@
 
     </template>
     <script>
-        Polymer('page-no-internet',{
+        Polymer('page-nointernet',{
             ready: function(){
 
             }

@@ -1,18 +1,3 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-
-<link rel="import" href="../bower_components/more-routing/more-routing.html">
-<link rel="import" href="../bower_components/more-routing/more-route-switch.html">
-
-<link rel="import" href="../global/page-index.html">
-<link rel="import" href="../news/page-news.html">
-<link rel="import" href="../news/page-news-item.html">
-<link rel="import" href="../info/page-phones.html">
-<link rel="import" href="../payment/page-payments.html">
-<link rel="import" href="../payment/page-account-add.html">
-<link rel="import" href="../global/page-error.html">
-<link rel="import" href="../global/page-no-internet.html">
-
-
 <polymer-element name="app-route" noscript>
     <template>
 
@@ -21,22 +6,13 @@
         <more-route-switch routeContext>
             
             <template when-route="/news"><page-news><content></content></page-news></template>            
-            <template when-route="/news-item/:id"><page-news-item newsId="{{params.id}}"></page-news-item></template> 
-
-            <template when-route="/payments">
-                <page-payments  pageTitle="Мои платежи"><content></content></page-payments>
-            </template> 
-
-            <template when-route="/account-add/:accountId">
-                <page-account-add  pageTitle="Добавить счет" accountId="{{params.accountId}}"></page-account-add>
-            </template> 
+            <template when-route="/news-item/:id"><page-news-item newsId="{{params.id}}"></page-news-item></template>
             
             <template when-route="/info"><page-phones><content></content></page-phones></template>
+            
+            <template when-route="/nointernet"><page-nointernet><content></content></page-nointernet></template>
 
-            <template when-route="/error"><page-error></page-error></template>
-            <template when-route="/nointernet"><page-no-internet></page-no-internet></template>
-
-            <template else><page-index></page-index></template>
+            <template else><page-index><content></content></page-index></template>
 
         </more-route-switch>
 
