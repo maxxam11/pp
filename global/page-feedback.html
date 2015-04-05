@@ -1,4 +1,4 @@
-<polymer-element name="page-nointernet">
+<polymer-element name="page-feedback">
     <template>
         <link rel="stylesheet" href="../css/main.css">
         <style>
@@ -9,15 +9,9 @@
         
         
         
-        <el-page pageTitle="">
+        <el-page pageTitle="Обратная связь">
             <div id="toolbarMainIcon"><content></content></div>
-            <div class="container">
-                Потеряна связь с сервером.<br> 
-                Возможно нет интернета.
-                
-                <div><a href="#" onclick="history.back();return false;"><paper-button raised>попробовать еще раз</paper-button></a></div>
-               
-            </div>
+            <el-feedback></el-feedback>
         </el-page>
             
         
@@ -27,7 +21,7 @@
 
     </template>
     <script>
-        Polymer('page-nointernet',{
+        Polymer('page-feedback',{
             ready: function(){
 
             }

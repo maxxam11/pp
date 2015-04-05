@@ -2,8 +2,8 @@
     <template>        
         <link rel="stylesheet" href="../css/main.css">
         <style>
-            .contact { padding: 10px; }
-            .title { font-size: 80%; color: grey; border-bottom: solid 1px grey; text-transform: uppercase; }
+            .contact { padding: 10px; border-bottom: solid 1px #ddd; }
+            .title { font-size: 80%; text-transform: uppercase; }
             .descr { font-size: 80%; color: grey; padding: 5px 0;  }
         </style>
         
@@ -23,8 +23,8 @@
                 
                 <template repeat="{{contact in contacts}}">
                     <div class="contact">                
-                        <div class='title'>{{contact.name}}</div>  
-                        <div class="descr">{{contact.descr}}</div>
+                        <div class='title primary-text-color'>{{contact.name}}</div>  
+                        <div class="descr secondary-text-color">{{contact.descr}}</div>
                         <template repeat="{{phone in contact.phones}}">
                             <paper-button raised class="primary-color" on-click="{{buttonClick}}">{{phone}}</paper-button>
                         </template>
