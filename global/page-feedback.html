@@ -1,29 +1,18 @@
 <polymer-element name="page-feedback">
     <template>
         <link rel="stylesheet" href="../css/main.css">
-        <style>
-            div.container { text-align: center; padding: 50px 10px; color: grey; }
-            div.container div { padding-top: 10px; }
-        </style>
-
-        
-        
         
         <el-page pageTitle="Обратная связь">
             <div id="toolbarMainIcon"><content></content></div>
-            <el-feedback></el-feedback>
+            <div id="toolbarIcons"><core-icon alt="Отправить" onclick="send" icon="send"></core-icon></div>
+            <el-feedback id="feedback"></el-feedback>
         </el-page>
-            
-        
-        
-        
-
 
     </template>
     <script>
         Polymer('page-feedback',{
-            ready: function(){
-
+            send: function(){
+                this.$.feedback.send();
             }
         });
     </script>

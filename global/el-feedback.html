@@ -3,26 +3,29 @@
         
         <link rel="stylesheet" href="../css/main.css">
         <style>
-           .wrapper { width: 100%; height: 100%; padding: 10px; }
-           paper-input { }
+           .wrapper { padding: 25px 10px; }
+           paper-input, paper-input-decorator { width: 100%; }
         </style>      
         
         
         <div class="wrapper">
-            <div class="title">Здесь вы можете написать разработчику ксвои пожелания по поводу работы приложения.</div>
-            <paper-input label="Email (не обязательно)" floatingLabel></paper-input>            
-            <paper-input-decorator label="Сообщение" floatingLabel>
-                <paper-autogrow-textarea>
-                    <textarea></textarea>
-                </paper-autogrow-textarea>
-            </paper-input-decorator>
-            <paper-button raised class="colored" on-click="{{buttonClick}}">Отправить</paper-button>
+            <div class="title">Отправьте разработчику свои пожелания по мобильному приложения и с очередным обновлением они появятся.</div>
+            <form>
+                <paper-input label="Email (не обязательно)" floatingLabel></paper-input>            
+                <paper-input-decorator label="Сообщение" floatingLabel>
+                    <paper-autogrow-textarea>
+                        <textarea></textarea>
+                    </paper-autogrow-textarea>
+                </paper-input-decorator>
+            </form>            
         </div>   
         
     </template>
     <script>
         Polymer('el-feedback',{
-            
+            send: function(){
+                console.log($('form').serialize());
+            }
         });
     </script>
 </polymer-element>
