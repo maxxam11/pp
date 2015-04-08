@@ -4,14 +4,14 @@
         
         <el-page pageTitle="Обратная связь">
             <div id="toolbarMainIcon"><content></content></div>
-            <div id="toolbarIcons"><core-icon alt="Отправить" onclick="send" icon="send"></core-icon></div>
+            <div id="toolbarIcons"><core-icon alt="Отправить" on-click="{{send}}" icon="send"></core-icon></div>
             <el-feedback id="feedback"></el-feedback>
         </el-page>
 
     </template>
     <script>
         Polymer('page-feedback',{
-            send: function(){
+            send: function(event, detail, sender){               
                 this.$.feedback.send();
             }
         });
