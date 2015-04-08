@@ -37,7 +37,7 @@
                 this.$.d_msg.isInvalid = !this.$.msg.value.trim();
                 if (this.$.d_msg.isInvalid) return;
                 this.msg = this.msg.replace(/\s/g, ' ').replace(/"/g, "''");
-                this.email = this.email.replace(/\s/g, ' ').replace(/"/g, "''");
+                if (this.email) this.email = this.email.replace(/\s/g, ' ').replace(/"/g, "''");
                 this.$.ajax.go();
             },
             handleResponse: function(e, detail, sender){
