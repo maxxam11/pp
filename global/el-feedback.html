@@ -25,8 +25,8 @@
                         <textarea id="msg" value="{{msg}}"></textarea>
                     </paper-autogrow-textarea>
                 </paper-input-decorator>
-                <paper-toast id="toast" text="Сообщение отправлено"></paper-toast>
-                <paper-toast id="toast_error" text="Извините, произошла ошибка" style="color: red;"></paper-toast>
+                <paper-toast id="toast" text="Спасибо. Сообщение отправлено"></paper-toast>
+                <paper-toast id="toast_error" text="Извините. Произошла ошибка" style="color: red;"></paper-toast>
             </form>            
         </div>   
         
@@ -36,11 +36,16 @@
             send: function(){  
                 this.$.d_msg.isInvalid = !this.$.msg.value.trim();
                 if (this.$.d_msg.isInvalid) return;
+                this.msg = this.msg.replace(/\s/g, ' ').replace(/"/g, ' ');
                 this.$.ajax.go();
             },
-            handleResponse: function(){
+            handleResponse: function(e, detail, sender){
+                if (!detail.response.ret) {
+                    this.$.toast_error.show();
+                }
                 this.$.email.value = '';  
                 this.$.msg.value = '';
+                this.$.msg.innerHTML = '';
                 this.$.d_email.updateLabelVisibility();
                 this.$.d_msg.updateLabelVisibility();
                 this.$.toast.show();
