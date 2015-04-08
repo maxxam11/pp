@@ -391,7 +391,7 @@ element.
         // @mine ovveride
         params.app = JSON.stringify(global.app);
         params.token = getToken();
-        //params.op = this.op;      
+        params.date = Date.now();      
       
       return params;
     },
