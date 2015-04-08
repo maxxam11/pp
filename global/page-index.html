@@ -2,12 +2,12 @@
     <template>
         <link rel="stylesheet" href="../css/main.css"> 
         
-        <div style="text-align: center;" >
+        <div style="text-align: center;" on-touchmove="{{move}}">
             <template repeat="{{i in [0,1,2,3,4,5,6,7,8,9,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5]}}">
                     <br>
                     <template repeat="{{j in [0,1,2,3,4,5,6,7,8,9,1,1,1,1,1,5,5,4]}}">
                         
-                        <paper-shadow on-mousemove='{{onHovered}}' style="width:20px;height:20px;display:inline-block;padding:0;margin:0;text-align:center;border-radius:10px;" z="0" animated layout center-center></paper-shadow>
+                        <paper-shadow on-click="{{onHovered}}" style="width:20px;height:20px;display:inline-block;padding:0;margin:0;text-align:center;border-radius:10px;" z="0" animated layout center-center></paper-shadow>
                     </template>
             </template>
         </div>
@@ -18,9 +18,15 @@
     <script>
         console.log(document.querySelector('paper-shadow'));
         Polymer('page-index', {
-            onHovered: function (e) { 
-                var target = e.target;
-                target.setZ(target.z + 1); 
+            onHovered: function (el) { 
+                var target = el;
+                if (target.z < 5) target.setZ(target.z + 1); 
+            },
+            move: function (e) { 
+                var x = e.changedTouches[0].pageX;
+                var y = e.changedTouches[0].pageX;
+                var el = document.elementsFromPoint(x, y);
+                this.onHovered(el);
             }
         });
     </script>
