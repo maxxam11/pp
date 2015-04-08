@@ -4,7 +4,11 @@
         
         <el-page pageTitle="Обратная связь">
             <div id="toolbarMainIcon"><content></content></div>
-            <div id="toolbarIcons"><core-icon alt="Отправить" on-click="{{send}}" icon="send"></core-icon></div>
+            <div id="toolbarIcons">
+                <core-tooltip label="Отправить сообщение" position="left">
+                    <paper-icon-button alt="Отправить" on-click="{{send}}" icon="send"></paper-icon-button>
+                </core-tooltip>                
+            </div>
             <el-feedback id="feedback"></el-feedback>
         </el-page>
 
