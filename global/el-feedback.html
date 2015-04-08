@@ -26,13 +26,14 @@
                     </paper-autogrow-textarea>
                 </paper-input-decorator>
                 <paper-toast id="toast" text="Сообщение отправлено"></paper-toast>
+                <paper-toast id="toast_error" text="Извините, произошла ошибка" style="color: red;"></paper-toast>
             </form>            
         </div>   
         
     </template>
     <script>        
         Polymer('el-feedback',{
-            send: function(){
+            send: function(){  
                 this.$.d_msg.isInvalid = !this.$.msg.value.trim();
                 if (this.$.d_msg.isInvalid) return;
                 this.$.ajax.go();
@@ -45,7 +46,7 @@
                 this.$.toast.show();
             },
             handleResponseError: function(){
-                
+                this.$.toast_error.show();
             }
         });        
     </script>
