@@ -29,7 +29,7 @@
                 var j = Math.ceil(x / 20);
                 //console.log('x:y=' + x + ':' + y + ' j:i=' + j + ':' + i);
                 var el = this.shadowRoot.querySelector('#el_' + i + '_' + j);                
-                this.onHovered(el);
+                if (el) this.onHovered(el);
             }
         });
     </script>
