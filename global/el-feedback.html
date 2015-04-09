@@ -4,28 +4,56 @@
         <link rel="stylesheet" href="../css/main.css">
         <style>
            .wrapper { padding: 25px 10px; }
-           paper-input, paper-input-decorator { width: 100%; }
+           paper-input-decorator { width: 100%; }
         </style>      
         
+        <app-ajax
+            id="ajax"
+            op="feedback"
+            params='{"email":"{{email}}","msg":"{{msg}}"}'
+            on-core-response="{{handleResponse}}"
+            on-core-error="{{handleResponseError}}"></app-ajax>
         
         <div class="wrapper">
             <div class="title">Отправьте разработчику свои пожелания по мобильному приложения и с очередным обновлением они появятся.</div>
-            <form>
-                <paper-input label="Email (не обязательно)" floatingLabel></paper-input>            
-                <paper-input-decorator label="Сообщение" floatingLabel>
+            <form>                   
+                <paper-input-decorator id="d_email" label="Укажите свой email (не обязательно)" error="Неправильный email" floatingLabel>
+                    <input id="email" is="core-input" value="{{email}}" pattern="">
+                </paper-input-decorator>
+                <paper-input-decorator id="d_msg" label="Введите сообщение" error="Сообщение не может быть пустым" floatingLabel>
                     <paper-autogrow-textarea>
-                        <textarea></textarea>
+                        <textarea id="msg" value="{{msg}}"></textarea>
                     </paper-autogrow-textarea>
                 </paper-input-decorator>
+                <paper-toast id="toast" text="Спасибо. Сообщение отправлено"></paper-toast>
+                <paper-toast id="toast_error" text="Извините. Произошла ошибка" style="color: red;"></paper-toast>
             </form>            
         </div>   
         
     </template>
-    <script>
+    <script>        
         Polymer('el-feedback',{
-            send: function(){
-                console.log($('form').serialize());
+            send: function(){  
+                this.$.d_msg.isInvalid = !this.$.msg.value.trim();
+                if (this.$.d_msg.isInvalid) return;
+                this.msg = this.msg.replace(/\s/g, ' ').replace(/"/g, "''");
+                if (this.email) this.email = this.email.replace(/\s/g, ' ').replace(/"/g, "''");
+                this.$.ajax.go();
+            },
+            handleResponse: function(e, detail, sender){
+                if (!detail.response.ret) {
+                    this.$.toast_error.show();
+                }
+                this.$.email.value = '';  
+                this.$.msg.value = '';
+                this.$.msg.innerHTML = '';
+                this.$.d_email.updateLabelVisibility();
+                this.$.d_msg.updateLabelVisibility();
+                this.$.toast.show();
+            },
+            handleResponseError: function(){
+                this.$.toast_error.show();
             }
-        });
+        });        
     </script>
 </polymer-element>

@@ -41,7 +41,7 @@
                 this.showNews(detail.response.data.news);                
             },            
             back: function () {
-               history.back();
+               document.location.href = '#!/news';
             },  
             watchItem: function(news) {   
                 var newsWatchedAll = localStorage.newsWatchedAll ? localStorage.newsWatchedAll : 0;

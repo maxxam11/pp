@@ -1,37 +1,35 @@
 <polymer-element name="page-index">
     <template>
         <link rel="stylesheet" href="../css/main.css"> 
-
-
-        sessionId: {{sessionId}}
-        <button on-click="{{show}}">ddd</button>
-<!--
-        <paper-shadow z="2" style="width:30px;height:30px;">
-            <paper-spinner id="progress" active></paper-spinner>
-        </paper-shadow>
--->
-        <el-spinner id="spinner"></el-spinner>
-        <paper-dialog id="dialog" heading="Выберите службу" class="scrolling">
-
-            <p>13123</p>
-
-            <p>13123</p>
-            <p>13123</p>
-
-        </paper-dialog>      
-
-
+        
+        <div style="text-align: center;" on-touchmove="{{move}}">
+            <template repeat="{{i in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]}}">
+                    <br>
+                    <template repeat="{{j in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]}}">
+                        
+                        <paper-shadow id="el_{{i}}_{{j}}" on-click="{{onHovered}}" style="width:20px;height:20px;display:inline-block;padding:0;margin:0;text-align:center;border-radius:10px;" z="0" animated layout center-center></paper-shadow>
+                    </template>
+            </template>
+        </div>
+        
 
 
     </template>
     <script>
+        console.log(document.querySelector('paper-shadow'));
         Polymer('page-index', {
-            attached: function () { 
-                this.sessionId = localStorage.sid;
-
+            onHovered: function (el) { 
+                var target = el;
+                if (target.z < 5) target.setZ(target.z + 1); 
             },
-            show: function () {
-                this.$.spinner.toggle();
+            move: function (e) { 
+                var x = e.changedTouches[0].pageX - 35;
+                var y = e.changedTouches[0].pageY - 80;
+                var i = Math.ceil(y / 20);
+                var j = Math.ceil(x / 20);
+                //console.log('x:y=' + x + ':' + y + ' j:i=' + j + ':' + i);
+                var el = this.shadowRoot.querySelector('#el_' + i + '_' + j);                
+                if (el) this.onHovered(el);
             }
         });
     </script>
