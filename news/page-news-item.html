@@ -1,4 +1,4 @@
-<link rel="import" href="el-news-item.html">
+<link rel="import" href="el-item-news.html">
 
 <polymer-element name="page-news-item" attributes="newsId">
     <template>
@@ -14,7 +14,7 @@
             <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
             <div flex style="overflow: auto;">
                 <el-spinner id="spinner" active></el-spinner>
-                <el-news-item id="item" hidden news="{{item}}"></el-news-item> 
+                <el-item-news id="item" hidden news="{{item}}"></el-item-news> 
             </div>
         </el-page>
 

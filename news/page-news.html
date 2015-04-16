@@ -1,4 +1,4 @@
-<link rel="import" href="el-list-item.html">
+<link rel="import" href="el-item-list.html">
 
 <polymer-element name="page-news" attributes="pageTitle">
     <template>
@@ -28,7 +28,7 @@
                         
                 <div class="wrapper">
                     <template repeat="{{item in list}}">
-                        <el-list-item item="{{item}}" on-click="{{goToItem}}"></el-list-item>
+                        <el-item-list item="{{item}}" on-click="{{goToItem}}"></el-item-list>
                         <!--<div class="item {{ {selected: selected} | tokenList }}"> {{_.name}} <br /> <p><i>{{_.description}}</i></p> </div>-->
                     </template>
                     <div id="loading" style="display:{{loading}};">
@@ -103,7 +103,7 @@
             scroll: function(e, detail, sender) {
                 
                 global.news.scrollTop = sender.scrollTop;
-                var delta = $(sender).find('.wrapper').height() - sender.scrollTop;                
+                var delta = $(sender).find('.wrapper').height() - sender.scrollTop;  //console.log($(sender).find('.wrapper').height() + ' - ' + sender.scrollTop);              
                 if (delta < 1000 && !this.loadingItems) {  //пока грузятся данные, не грузить еще
                     this.loadNews();
                 } 

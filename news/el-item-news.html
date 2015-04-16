@@ -1,4 +1,4 @@
-<polymer-element name="el-news-item" attributes="news">
+<polymer-element name="el-item-news" attributes="news">
     <template>
         
         <link rel="stylesheet" href="../css/main.css">
@@ -23,7 +23,7 @@
         
     </template>
     <script>
-        Polymer('el-news-item', {
+        Polymer('el-item-news', {
             attributeChanged: function(){                        
                 this.$.title.innerHTML = this.news.title;
                 document.title = this.$.title.innerText;

@@ -1,4 +1,4 @@
-<polymer-element name="el-list-item" attributes="item">
+<polymer-element name="el-item-list" attributes="item">
     <template>
         <link rel="stylesheet" href="../css/main.css">
         <style>
@@ -26,7 +26,7 @@
         
     </template>
     <script>
-        Polymer('el-list-item', {
+        Polymer('el-item-list', {
             ready: function(){ 
                 this.$.title.innerHTML = this.item.title;
                 this.$.date.innerHTML = this.item.dateago; 
