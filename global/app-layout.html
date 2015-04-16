@@ -10,12 +10,13 @@
     [drawer] core-toolbar div.up .city { color: #hhh; font-size: 12px; margin-left: 15px; padding-top: 8px;  font-weight: normal; }
 
     [drawer] core-menu { margin: 0; }
-    [drawer] core-menu paper-item.margin-up { margin-top: 8px; }
-    [drawer] core-menu paper-item.margin-down { margin-bottom: 8px; }
+    [drawer] core-menu core-item.margin-up { margin-top: 8px; }
+    [drawer] core-menu core-item.margin-down { margin-bottom: 8px; }
 
-    [drawer] core-menu paper-item { font-size: 80%; font-weight: bold; }
-    [drawer] core-menu paper-item a { color: #000; text-decoration: none; }
-    [drawer] core-menu paper-item core-icon { margin-right: 30px; color: grey; }
+    [drawer] core-menu core-item { font-size: 80%; font-weight: bold; padding-left: 10px; height: 45px; }
+    [drawer] core-menu core-item a { color: #000; text-decoration: none; }
+    [drawer] core-menu core-item::shadow core-icon { color: grey; }
+    [drawer] core-menu core-item[active] { background-color: #eaeaea; }
 
     [main] { height: 100%; background-color: #fff; position: relative; } 
     
@@ -39,16 +40,15 @@
 
         <core-menu on-core-select="{{menuItemSelected}}" selected="0">
           <core-selector>
-            <div></div> <!-- чтобы меню работало с превого клика на page_index -->
-            <paper-item class="margin-up"><a href="#!/news"><core-icon icon="speaker-notes"></core-icon>Новости</a></paper-item>
-            <!--<paper-item><a href="#!/payments"><core-icon icon="payment"></core-icon>Мои платежи</a></paper-item>-->
-            <paper-item class="margin-down"><a href="#!/info"><core-icon icon="info-outline"></core-icon>Экстренные службы</a></paper-item>
-
-            <paper-item class="separator" style="height: 1px;" disabled></paper-item>
-
-            <!--<paper-item class="margin-up"><a href="#!/settings"><core-icon icon="settings"></core-icon>Наcтройки</a></paper-item>-->
-            <paper-item class="margin-down margin-up"><a href="#!/feedback"><core-icon icon="mail"></core-icon>Написать разработчку</a></paper-item>
-
+              
+            <div></div> <!-- чтобы ничего не было выбрано при загрузке, selectedIndex = 0 -->
+            <core-item class="margin-up" icon="speaker-notes" label="Новости"><a href="#!/news"></a></core-item>
+            <core-item class="margin-down" icon="info-outline" label="Экстренные службы"><a href="#!/info"></a></core-item>
+            
+            <div class="separator" disabled></div>
+            
+            <core-item class="margin-up" icon="mail" label="Написать разработчку"><a href="#!/feedback"></a></core-item>
+            
           </core-selector>
         </core-menu> 
 
