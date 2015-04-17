@@ -24,12 +24,11 @@
                 <paper-icon-button id="iconDoneAll" icon="done-all" on-click="{{watchAll}}"></paper-icon-button>
             </div>            
             
-            <div id="scroller" flex style="overflow: auto;" >
+            <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">
                         
-                <div id="wrapper" class="wrapper" on-scroll="{{scroll}}">
+                <div id="wrapper" class="wrapper">
                     <template repeat="{{item in list}}">
-                        <el-item-list item="{{item}}" on-click="{{goToItem}}"></el-item-list>
-                        
+                        <el-item-list item="{{item}}" on-click="{{goToItem}}"></el-item-list>                        
                     </template>
                     <div id="loading" style="display:{{loading}};">
                         <paper-spinner id="spinner" active="true"></paper-spinner>
