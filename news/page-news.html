@@ -22,20 +22,22 @@
             <div id="toolbarIcons">
                 <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>
                 <paper-icon-button id="iconDoneAll" icon="done-all" on-click="{{watchAll}}"></paper-icon-button>
-            </div>
+            </div>            
             
-            <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">
+            <div id="scroller" flex style="overflow: auto;" >
                         
-                <div class="wrapper">
+                <div id="wrapper" class="wrapper" on-scroll="{{scroll}}">
                     <template repeat="{{item in list}}">
                         <el-item-list item="{{item}}" on-click="{{goToItem}}"></el-item-list>
-                        <!--<div class="item {{ {selected: selected} | tokenList }}"> {{_.name}} <br /> <p><i>{{_.description}}</i></p> </div>-->
+                        
                     </template>
                     <div id="loading" style="display:{{loading}};">
                         <paper-spinner id="spinner" active="true"></paper-spinner>
                     </div>
-                </div>                      
+                </div> 
+                
             </div>
+            
         </el-page>
         
         
@@ -48,22 +50,16 @@
             baseUrl: 'news',
             loading: 'none',
             ready: function () {
+                window.list = this.$.list;
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс                
                 if (global.news.list.length) {
                     this.list = global.news.list;                     
                 } else {
                     this.loadNews();
                 }
-                
-                // @todo кастыль на jquery для вычисления высоты
-                //var height = $(document).height();
-                //this.$.divList.style.height = height;
-                
-                // @todo здесь нужно провервть url, если он на саму нвоость, то перекидывать туда
-                // отлавилвать событии по кнопки назад в браузере - http://stackoverflow.com/questions/24885887/polymer-core-menu-double-event
             }, 
             domReady: function(){
-                this.$.scroller.scrollTop = global.news.scrollTop; 
+                //this.$.scroller.scrollTop = global.news.scrollTop; 
             },
             handleResponseList: function (e, detail, sender) { 
                                
@@ -102,8 +98,12 @@
             },
             scroll: function(e, detail, sender) {
                 
+                var wrapperHeight = $(this.$.wrapper).height();
+                var scrollTop = this.$.scroller.scrollTop;
+                console.log(wrapperHeight + ' - ' + scrollTop);
+                
                 global.news.scrollTop = sender.scrollTop;
-                var delta = $(sender).find('.wrapper').height() - sender.scrollTop;  //console.log($(sender).find('.wrapper').height() + ' - ' + sender.scrollTop);              
+                var delta = $(sender).find('.wrapper').height() - $(sender).scrollTop();               
                 if (delta < 1000 && !this.loadingItems) {  //пока грузятся данные, не грузить еще
                     this.loadNews();
                 } 

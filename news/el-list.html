@@ -1,0 +1,88 @@
+<polymer-element name="el-list" attributes="item">
+    <template>
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+    .item {
+      box-sizing: border-box;
+      height: 80px;
+      border-bottom: 1px solid #ddd;
+      padding: 4px;
+      cursor: default;
+      background-color: white;
+      overflow: hidden;
+    }
+
+    .selected {
+      background: silver;
+    }
+
+    .message {
+      padding-left: 77px;
+      line-height: 167%;
+      background-repeat: no-repeat;
+      background-position: 10px 10px;
+      background-size: 60px;
+    }
+    
+    .from {
+      display: inline;
+      font-weight: bold;
+    }
+    
+    .timestamp {
+      margin-left: 10px;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    .body {
+      font-size: 12px;
+    }
+
+    .spaced {
+      margin: 10px;
+    }
+
+    .selection-display {
+      background: lightgray;
+      padding: 0 5px;
+      margin: 0 5px;
+    }
+
+    .narrow {
+      width: 40px;
+    }
+
+  </style>
+  
+    <core-list id="list" data="{{data}}" selectionEnabled="{{selectionEnabled}}"
+    selection="{{selection}}" height="80" flex multi?={{multi}}>
+    <template>
+      <div class="item {{ {selected: selected} | tokenList }}">
+        <div class="message" style="background-image: url(images/{{model.image}}.png);">
+          <span class="from">{{model.name}}</span>
+          <div class="subject">Row: {{index}}, Record ID: {{model.id}}</div>
+          <input type="checkbox" checked="{{model.checked}}">
+          <input type="number" value="{{model.value}}" class="narrow">
+          <select selectedIndex="{{model.type}}"><option>a</option><option>b</option><option>c</option></select>
+          <span class="body">{{model.details}}</span>
+        </div>
+      </div>
+    </template>
+  </core-list>
+        
+    </template>
+    <script>
+        Polymer('el-list', {
+            data: [{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'}
+            ,{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'}
+        ,{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'}
+    ,{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'}
+,{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'}
+,{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'},{name:'qweqwewqe'}],
+            ready: function(){ 
+                
+            }
+        });
+    </script>
+</polymer-element>
