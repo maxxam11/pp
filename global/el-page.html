@@ -3,7 +3,7 @@
 pageTitle - заголовок страницы, бцудет отображаться в toolbar
 handleScroll - сюда можно передать обработчик скроллинга страницы
 -->
-<polymer-element name="el-page" attributes="pageTitle handleScroll">
+<polymer-element name="el-page" attributes="pageTitle">
     <template>        
         <link rel="stylesheet" href="../css/main.css"> 
         
@@ -17,7 +17,7 @@ handleScroll - сюда можно передать обработчик скр�
                     </core-toolbar>
                 </paper-shadow>
             </div>
-            <div flex style="overflow: auto;" on-scroll="{{handleScroll}}"><content></content></div>
+            <content></content>
         </div>
         
     </template>
