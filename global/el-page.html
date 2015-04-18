@@ -1,4 +1,9 @@
-<polymer-element name="el-page" attributes="pageTitle">
+<!--
+Элемент модильной страницы
+pageTitle - заголовок страницы, бцудет отображаться в toolbar
+handleScroll - сюда можно передать обработчик скроллинга страницы
+-->
+<polymer-element name="el-page" attributes="pageTitle handleScroll">
     <template>        
         <link rel="stylesheet" href="../css/main.css"> 
         
@@ -12,7 +17,7 @@
                     </core-toolbar>
                 </paper-shadow>
             </div>
-            <div flex style="overflow: auto;"><content></content></div>
+            <div flex style="overflow: auto;" on-scroll="{{handleScroll}}"><content></content></div>
         </div>
         
     </template>
@@ -21,7 +26,7 @@
         Polymer('el-page', {
             ready: function(){
                 document.title = this.pageTitle;
-            }
+            }            
         });
     </script>
 </polymer-element>
