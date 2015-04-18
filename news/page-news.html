@@ -15,17 +15,14 @@
             params='{"lastItemId":"{{lastItemId}}"}'
             on-core-response="{{handleResponseList}}"
             on-core-error="{{handleResponseError}}"></app-ajax>
-
-
+        
         <el-page pagetitle="Новости">
             <div id="toolbarMainIcon"><content></content></div>
             <div id="toolbarIcons">
                 <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>
                 <paper-icon-button id="iconDoneAll" icon="done-all" on-click="{{watchAll}}"></paper-icon-button>
-            </div>            
-            
-            <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">
-                        
+            </div>
+            <div flex style="overflow: auto;" on-scroll="{{scroll}}">            
                 <div id="wrapper" class="wrapper">
                     <template repeat="{{item in list}}">
                         <el-item-list item="{{item}}" on-click="{{goToItem}}"></el-item-list>                        
@@ -34,7 +31,6 @@
                         <paper-spinner id="spinner" active="true"></paper-spinner>
                     </div>
                 </div> 
-                
             </div>
             
         </el-page>
@@ -48,8 +44,8 @@
             loadingItems: false, //пока грузятся данные, не грузить еще
             baseUrl: 'news',
             loading: 'none',
-            ready: function () {
-                window.list = this.$.list;
+            wrapper: null,
+            ready: function () {                               
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс                
                 if (global.news.list.length) {
                     this.list = global.news.list;                     
@@ -95,14 +91,13 @@
                 this.loading = 'none';
                 
             },
+            
             scroll: function(e, detail, sender) {
                 
                 var wrapperHeight = $(this.$.wrapper).height();
-                var scrollTop = this.$.scroller.scrollTop;
-                console.log(wrapperHeight + ' - ' + scrollTop);
-                
-                global.news.scrollTop = sender.scrollTop;
-                var delta = $(sender).find('.wrapper').height() - $(sender).scrollTop();               
+                var scrollTop = sender.scrollTop;                
+                global.news.scrollTop = scrollTop;
+                var delta = wrapperHeight - scrollTop;               
                 if (delta < 1000 && !this.loadingItems) {  //пока грузятся данные, не грузить еще
                     this.loadNews();
                 } 
