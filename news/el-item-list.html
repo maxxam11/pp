@@ -2,31 +2,48 @@
     <template>
         <link rel="stylesheet" href="../css/main.css">
         <style>
+            /*
             .main { height: 100px; }
-            .wrapper { width: 100%; margin:0; padding: 0 0 0 10px; }
-            .title { font-size: 15px; }
-            .date { color: #999; font-size: 12px; margin-top: 10px;}
-            .date .domain { font-size: 105%; }
+            .body { width: 70%; margin:0; padding: 0; position: relative; float: left; }
+            .body .title { font-size: 15px; }
+            .body.new .title { font-weight: bold; }
+            .body .date { color: #999; font-size: 12px; margin-top: 10px;}
+            
             core-image { width: 30%; height: 100px; float: right; }
-            .img.empty { width: 1px; }
-            .watched { background-color: #eaeaea; }
+            core-image.empty { width: 0px; }
+            */
+            .main { height: 100px;}
+            .wrapper { width: 100%; margin:0;}
+            
+            .body { padding: 5px 10px; }
+            .body .title { font-size: 15px; text-overflow: clip; overflow: hidden; }
             .new .title { font-weight: bold; }
+            .body .date { color: #999; font-size: 12px; margin-top: 10px;}
+            .body .date .domain { font-size: 105%; }
+            
+            .img { width: 100px; height: 100px; background-size: cover; background-position: 50% 50%; margin-left: 5px;}
+            .img.empty { width: 1px; }            
+            
+            
         </style> 
-        <core-item class="main separator">
-           
-            <div class="wrapper {{item.isNew ? 'new' : ''}}" layout horizontal>                
-                
-                <div layout flex vertical style="z-index: 1000;">
-                    <div id="title" class="title"></div> 
-                    <div class="date"><span id="date" class="{{item.dateago == 'сегодня' ? 'primary-color' : ''}}"></span></div>
-                    
+        <div class="main separator">           
+            <!--
+            <div class="body {{item.isNew ? 'new' : ''}}">                 
+                <div id="title" class="title"></div> 
+                <div class="date"><span id="date" class="{{item.dateago == 'сегодня' ? 'primary-color' : ''}}"></span></div>                
+            </div>    
+            <core-image class="empty?={{!item.imgUrl}} hidden?={{!item.imgUrl}} sizing="cover" src="{{item.imgUrl}}"></core-image>
+            -->
+            
+            <div class="wrapper {{item.isNew ? 'new' : ''}}" layout horizontal>
+                <div class="body" flex layout vertical>
+                    <div id="title" class="title" self-start flex></div> 
+                    <div class="date"><span id="date" class="{{item.dateago == 'сегодня' ? 'primary-color' : ''}}"></span></div>                
                 </div>
-                
-                <core-image hidden?={{!item.imgUrl}} sizing="cover" src="{{item.imgUrl}}"></core-image>
-                
+                <div class="img {{ item.imgUrl ? '' : 'empty'}}" style="background-image: url('{{item.imgUrl}}');"></div>               
             </div>    
             
-        </core-item>
+        </div>
         
     </template>
     <script>
