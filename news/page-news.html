@@ -1,4 +1,4 @@
-<link rel="import" href="el-item-list.html">
+<link rel="import" href="el-card-list.html">
 
 <polymer-element name="page-news" attributes="pageTitle">
     <template>
@@ -25,7 +25,7 @@
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
                 <div id="wrapper" class="wrapper">
                     <template repeat="{{item in list}}">
-                        <el-item-list item="{{item}}" on-click="{{goToItem}}"></el-item-list>                        
+                        <el-card-list item="{{item}}" on-click="{{goToItem}}"></el-card-list>                        
                     </template>
                     <div id="loading" style="display:{{loading}};">
                         <paper-spinner id="spinner" active="true"></paper-spinner>

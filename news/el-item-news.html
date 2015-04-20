@@ -30,19 +30,19 @@
         
                 var body = '';
                 var p;
-                var reLink = /\[a\s(.*?)\]([\s\S]*?)\[\/a\]/g;
-                var reImg = /\[img\s(.*?)\]/g;
+                var regLink = /\[a\s(.*?)\]([\s\S]*?)\[\/a\]/g;
+                var regImg = /\[img\s(.*?)\]/g;
                 for (var i = 0, l = this.news.body.length; i < l; i++) {
                     p = this.news.body[i]; 
                     p = p.replace(/\n/g, '<br>'); //убрал, т.к. ломает текст
                     //p = p.replace(/\x20\x20/g, '<br>'); 
                     //убираем картинку из тела, если она такая же как и главная
                     p = p.replace('[img ' + this.news.imgUrl + ']','');
-                    p = p.replace(reLink, '<a href="$1" onclick="window.open(\'$1\', \'_system\');return false;">$2</a>');
+                    p = p.replace(regLink, '<a href="$1" onclick="window.open(\'$1\', \'_system\');return false;">$2</a>');
                     
                     //@todo обрабатывать ссылки на картинку (по расширению), пример - http://app2top.ru/money/rentabel-nost-free-to-play-igr-padaet-53629.html
                     
-                    p = p.replace(reImg, '</p><img class="img-line" src="$1"><p>');
+                    p = p.replace(regImg, '</p><img class="img-line" src="$1"><p>');
                     body += '<p>' + p + '</p>';
                 }                
                 this.$.body.innerHTML = body;

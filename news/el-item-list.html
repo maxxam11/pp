@@ -1,17 +1,7 @@
 <polymer-element name="el-item-list" attributes="item">
     <template>
         <link rel="stylesheet" href="../css/main.css">
-        <style>
-            /*
-            .main { height: 100px; }
-            .body { width: 70%; margin:0; padding: 0; position: relative; float: left; }
-            .body .title { font-size: 15px; }
-            .body.new .title { font-weight: bold; }
-            .body .date { color: #999; font-size: 12px; margin-top: 10px;}
-            
-            core-image { width: 30%; height: 100px; float: right; }
-            core-image.empty { width: 0px; }
-            */
+        <style>            
             .main { height: 100px;}
             .wrapper { width: 100%; margin:0;}
             
@@ -28,14 +18,7 @@
             
             
         </style> 
-        <div class="main separator">           
-            <!--
-            <div class="body {{item.isNew ? 'new' : ''}}">                 
-                <div id="title" class="title"></div> 
-                <div class="date"><span id="date" class="{{item.dateago == 'сегодня' ? 'primary-color' : ''}}"></span></div>                
-            </div>    
-            <core-image class="empty?={{!item.imgUrl}} hidden?={{!item.imgUrl}} sizing="cover" src="{{item.imgUrl}}"></core-image>
-            -->
+        <div class="main separator"> 
             
             <div class="wrapper {{item.isNew ? 'new' : ''}}" layout horizontal>
                 <div class="body" flex layout vertical>
