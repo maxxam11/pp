@@ -15,12 +15,12 @@
             on-core-error="{{handleResponseError}}"></app-ajax>
         
         <div class="wrapper">
-            <div class="title">Отправьте разработчику свои пожелания по мобильному приложения и с очередным обновлением они появятся.</div>
+            <div class="title">Здесь вы всегда можете отправить свои пожелания по работе мобильного приложения.</div>
             <form>                   
                 <paper-input-decorator id="d_email" label="Укажите свой email (не обязательно)" error="Неправильный email" floatingLabel>
                     <input id="email" is="core-input" value="{{email}}" pattern="">
                 </paper-input-decorator>
-                <paper-input-decorator id="d_msg" label="Введите сообщение" error="Сообщение не может быть пустым" floatingLabel>
+                <paper-input-decorator id="d_msg" label="Введите текст сообщения" error="Сообщение не может быть пустым" floatingLabel>
                     <paper-autogrow-textarea>
                         <textarea id="msg" value="{{msg}}"></textarea>
                     </paper-autogrow-textarea>
