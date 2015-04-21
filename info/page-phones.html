@@ -2,10 +2,11 @@
     <template>        
         <link rel="stylesheet" href="../css/main.css">
         <style>
-            .contact { padding: 10px; border-bottom: solid 1px #ddd; }
+            .contact { padding: 10px 16px; }            
             .title { font-size: 80%; text-transform: uppercase; }
             .descr { font-size: 80%; color: grey; padding: 5px 0;  }
-            paper-button { margin-bottom: 8px; }
+            paper-button { margin: 3px 4px 8px 0; }
+            core-icon { margin-right: 4px; }
         </style>
         
         <app-ajax
@@ -18,16 +19,19 @@
         
         <el-page pageTitle="Экстренные службы">
             <div id="toolbarMainIcon"><content></content></div>
-            <div id="toolbarIcons"><paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button></div>
+            <!--<div id="toolbarIcons"><paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button></div>-->
             
             <div flex style="overflow: auto; padding-top: 10px; ">                               
                 
                 <template repeat="{{contact in contacts}}">
-                    <div class="contact">                
+                    <div class="contact separator">                
                         <div class='title primary-text-color'>{{contact.name}}</div>  
                         <div class="descr secondary-text-color">{{contact.descr}}</div>
                         <template repeat="{{phone in contact.phones}}">
-                            <paper-button raised class="primary-color" on-click="{{buttonClick}}">{{phone}}</paper-button>
+                            <paper-button raised class="primary-color" on-click="{{buttonClick}}">
+                                <!--<core-icon icon="communication:phone"></core-icon>-->
+                                {{phone}}
+                            </paper-button>
                         </template>
                     </div>
                 </template>
@@ -60,7 +64,7 @@
                     phones: ['+7 495 562-35-35'],
                 },{
                     name: 'ГИБДД',
-                    descr: 'Вызвать инспектора в случае ДТП или если вы стали свидетелем нарушения дорожных правил',
+                    descr: 'Вызвать инспектора в случае ДТП или если вы стали свидетелем нарушения правил дорожного движения',
                     phones: ['+7 495 563-02-67'],
                 },{
                     name: 'Роспотребнадзор',
@@ -88,7 +92,7 @@
             addPhone: function(event, detail, sender) { 
                 //@todo давать возможность предлагать добавлять телефон
                 // открываем модальное окно и в нем размещаем компонент обратной связи с заголовокм и текстом:
-                // "Новый телефон в экстренные службы", "Предлагаю добвать еще один телефон экстренной службы: "
+                // "Новый телефон в экстренные службы", "Предлагаю добвать телефон экстренной службы: "
             }
             
         });
