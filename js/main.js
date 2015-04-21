@@ -1,3 +1,5 @@
+// чтобы ссылки в браузере открывались
+//window.open = cordova.InAppBrowser.open;
 
 function debuger() {
     var txt;
