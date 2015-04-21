@@ -2,17 +2,19 @@
     <template>
         <link rel="stylesheet" href="../css/main.css">
         <style>            
-            .card { height: 73px; padding: 16px 10px; color: #111; font-family: RobotoDraft; position: relative; }
+            .card { height: 73px; padding: 16px 10px; color: #000;  position: relative; }
             
-            #title { overflow: hidden; margin-bottom: 10px; height: 34px; font-size: 15px; line-height: 17px; }
-            #body { text-overflow: clip; overflow: hidden; height: 15px; font-size: 13px; line-height: 15px; }
-            #date { color: #999; font-size: 12px; margin-top: 5px; height: 12px; }
+            #title { overflow: hidden; margin-bottom: 10px; height: 51px; font-size: 15px; line-height: 17px; }
+            #body { text-overflow: ellipsis; overflow: hidden; height: 15px; font-size: 13px; line-height: 15px; }
+            #date { font-size: 12px; margin-top: 5px; height: 14px; }
+            #date.grey { color: #999; }
             
             .img { width: 96px; height: 73px;  background-size: cover; background-position: 50% 50%; margin-left: 10px; }
             .img.empty { width: 0px; }            
             
-            .mask { background-color: rgba(255,255,255,0.4); z-index: 100; position: absolute; height: 100%; width: 100%; top: 0; left: 0; }
+            .mask { background-color: rgba(255,255,255,0.6); z-index: 100; position: absolute; height: 100%; width: 100%; top: 0; left: 0; }
         </style> 
+        
         <div class="card separator" layout horizontal> 
             
             <template if="{{!item.isNew}}">
@@ -23,8 +25,8 @@
             <div flex>
                 <div  style="text-overflow: clip; overflow: hidden;">
                     <div id="title"></div>   
-                    <div id="body"></div>
-                    <div id="date" class="{{item.dateago == 'сегодня' ? 'primary-color' : ''}}"></div>
+                    <!--<div id="body"></div>-->
+                    <div id="date" class="{{item.dateago == 'сегодня' ? 'primary-color' : 'grey'}}"></div>
                 </div>
 
                                 
@@ -42,12 +44,12 @@
                 this.$.date.innerHTML = this.item.dateago;
                 
                 //очищаем от ссылок  и картинок тело новости
-                var body = this.item.body[0];                
-                var regLink = /\[a\s(.*?)\]([\s\S]*?)\[\/a\]/g;
-                var regImg = /\[img\s(.*?)\]/g;
-                body = body.replace(regLink, '$2');
-                body = body.replace(regImg, '');
-                this.$.body.innerHTML = body;
+//                var body = this.item.body[0];                
+//                var regLink = /\[a\s(.*?)\]([\s\S]*?)\[\/a\]/g;
+//                var regImg = /\[img\s(.*?)\]/g;
+//                body = body.replace(regLink, '$2');
+//                body = body.replace(regImg, '');
+//                this.$.body.innerHTML = body;
             }
         });
     </script>
