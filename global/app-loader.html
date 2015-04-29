@@ -35,7 +35,7 @@
         <div id="startLoad" layout vertical>
             <div flex></div>
             <div flex>
-                <span>Павшинская пoйма</span>
+                <span id="title">Павшинская пoйма</span>
                 <paper-progress class="default-primary-color" indeterminate></paper-progress>
             </div>
             <div flex></div>
@@ -55,6 +55,9 @@
                         r.hidden = true;
                     }
                 }, global.timeout.noInternet);
+            },
+            domReady: function(){
+                //$('paper-progress').width($('#title').width() + 'px');
             },
             handleResponse: function (e, detail, sender) {
                 var data = detail.response.data;
