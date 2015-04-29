@@ -1,4 +1,4 @@
-<polymer-element name="el-feedback" attributes="title text">
+<polymer-element name="el-feedback" attributes="pageTitle text">
     <template>
         
         <link rel="stylesheet" href="../css/main.css">
@@ -15,7 +15,7 @@
             on-core-error="{{handleResponseError}}"></app-ajax>
         
         <div class="wrapper">
-            <div class="title">Здесь вы всегда можете отправить свои пожелания по работе мобильного приложения.</div>
+            <div class="title">{{ text ? text : 'Здесь вы всегда можете отправить свои пожелания по работе мобильного приложения.' }}</div>
             <form>                   
                 <paper-input-decorator id="d_email" label="Укажите свой email (не обязательно)" error="Неправильный email" floatingLabel>
                     <input id="email" is="core-input" value="{{email}}" pattern="">
