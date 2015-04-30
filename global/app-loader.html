@@ -47,6 +47,15 @@
         Polymer('app-loader', {
             ready: function () { 
                 var r = this;
+                
+                //время суток записываем в глобальную переменную
+                var now = new Date();
+                var hour = now.getHours();
+                if (hour < 5) global.timeOfDay = TimeOfDay.night;
+                if (hour >= 5 && hour < 10) global.timeOfDay = TimeOfDay.morning;
+                if (hour >= 10 && hour < 17) global.timeOfDay = TimeOfDay.day;
+                if (hour >= 17) global.timeOfDay = TimeOfDay.evening;
+                
                 setTimeout(function () {
                     if (!r.hidden) {
                         var appLayout = document.createElement('app-layout');

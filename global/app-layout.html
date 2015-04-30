@@ -5,7 +5,7 @@
     [drawer] { background-color: #fff; border-right: solid 1px #eaeaea; z-index: 100; }
     [drawer] core-toolbar { background-image: url(../img/logo/pp_logo4.jpg); background-size: cover; background-position: 50% 0%; height: 150px; }
     
-    [drawer] core-toolbar div.up { width: 100%; background-color: rgba(0,0,0,0.4); position: absolute; left: -8px; top: 100px; height: 50px;  }
+    [drawer] core-toolbar div.up { width: 100%; background-color: rgba(0,0,0,0.4); position: absolute; left: -8px; top: 100px; height: 50px; cursor:pointer; }
     [drawer] core-toolbar div.up .app { color: #ddd; font-size: 18px; margin-left: 15px;   font-weight: normal; }
     [drawer] core-toolbar div.up .city { color: #hhh; font-size: 12px; margin-left: 15px; padding-top: 8px;  font-weight: normal; }
 
@@ -14,14 +14,12 @@
     [drawer] core-menu core-item.margin-down { margin-bottom: 8px; }
 
     [drawer] core-menu core-item { font-size: 80%; font-weight: bold; padding-left: 10px; height: 45px; }
+    [drawer] core-menu core-item:hover { background-color: #f9f9f9; }
     [drawer] core-menu core-item a { color: #000; text-decoration: none; }
     [drawer] core-menu core-item::shadow core-icon { color: grey; }
     [drawer] core-menu core-item[active] { background-color: #eaeaea; }
 
-    [main] { height: 100%; background-color: #fff; position: relative; } 
-    
-    
-
+    [main] { height: 100%; background-color: #fff; position: relative; }
   </style>
 
   
@@ -31,7 +29,7 @@
     <core-header-panel drawer mode="waterfall" id="drawer">
 
         <core-toolbar class="medium-tall">
-            <div class="up">
+            <div class="up" on-click="{{gotoHome}}">
                 <div class="city">{{appCity}}</div>
                 <div class="app">{{appName}}</div>
             </div>
@@ -87,6 +85,10 @@
         this.$.drawerPanel.togglePanel(); 
       }
     },
+    gotoHome: function() {
+        document.location.href = '#!/';
+        this.$.drawerPanel.togglePanel();
+    }
   });
 </script>
 </polymer-element>

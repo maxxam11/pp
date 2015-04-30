@@ -4,17 +4,29 @@
             #id {}
         </style>
         <link rel="stylesheet" href="../css/main.css"> 
+        <style>
+            #scroller { background: url(../img/bg_city.png) bottom no-repeat; background-size: contain; }
+            .wrapper { text-align: center; padding: 25px 15px; }
+            h1 { font-size: 25px; color: #aaaaaa; font-weight: normal; }
+            
+        </style>
         
-         <el-page pagetitle="Павшинская пойма">
+        <el-page pagetitle="Приветствие">
             <div id="toolbarMainIcon"><content></content></div>
             <div id="toolbarIcons">
                 
             </div>
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
-                <div id="wrapper" class="wrapper">
-                    Приветсвую вас жители нашего района.
-                    Приложение сделано для вас, следить за новостями,  чтобы под рукой были телефоны первой необходимости при экстренных случаях.
-                    Если вам  хотелось здесь видеть новые разделы или функционал, то пишите об этом в разделе обратная связь. По возможности я с удовольствием реализую это все тут.
+                <div id="wrapper" class="wrapper">                    
+                    <p>{{pageTitle}}, жители нашего района.
+                    <p>В этом приложение вы можете следить за <a href="#!/news">новостями</a> Павшинской поймы. 
+                       В разделе <a href="#!/info">экстренные службы</a> размещены телефоны первой необходимости.
+                    <p>Приложение находится в бета тестировании и многие разделы еще в разработке. 
+                        Я постараюсь сделать для вас качественный продукт и если у вас есть
+                       какие-либо пожелания, то вы всегда их можете отправить в разделе <a href="#!/feedback">обратная связь</a>.
+                       Я очень буду благодарен вам за них, т.к. одна голова хорошо, а несколько тысяч лучше.
+                       По возможности все предложения и пожелания будут реализованы. 
+                    <p>    
                 </div> 
             </div>
             
@@ -25,7 +37,12 @@
     </template>
     <script>
         Polymer('page-index', {
-            
+            ready: function(){
+                if (global.timeOfDay == TimeOfDay.night) this.pageTitle = 'Доброй ночи';
+                if (global.timeOfDay == TimeOfDay.morning) this.pageTitle = 'Доброе утро';
+                if (global.timeOfDay == TimeOfDay.day) this.pageTitle = 'Добрый день';
+                if (global.timeOfDay == TimeOfDay.evening) this.pageTitle = 'Добрый вечер';
+            }
         });
     </script>
 </polymer-element>

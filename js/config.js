@@ -1,3 +1,12 @@
+/** Время суток */
+var TimeOfDay = {
+    night: 0,
+    morning: 1,
+    day: 2,
+    evening: 3,
+};
+
+/** глобальный массив настроек и данных */
 var global = {
     app: {
         spaceId: 1,
@@ -22,8 +31,11 @@ var global = {
     info: {
         scrollTop: 0,
     },
+    timeOfDay: TimeOfDay.day, // время суток
     debug: false,
     debugIndex: 0,
 };
+
+
 
 
