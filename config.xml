@@ -17,7 +17,9 @@
     <author href="http://www.maxxam.ru" email="karachev.m@gmail.com">
         MaxxaM
     </author>
-
+    
+    <icon src="img/icon/pp12.png" />
+    
     <content src="index.html" />
     
     <!-- чтобы можно было номер набирать для звонка -->
