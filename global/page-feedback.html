@@ -7,7 +7,13 @@
             <div id="toolbarIcons">
                 <paper-icon-button alt="Отправить" on-click="{{send}}" icon="send"></paper-icon-button>
             </div>
-            <el-feedback id="feedback"></el-feedback>
+            
+            <div id="scroller" flex style="overflow: auto;">            
+                <div id="wrapper" class="wrapper">                    
+                    <el-feedback id="feedback"></el-feedback>
+                </div> 
+            </div>
+            
         </el-page>
 
     </template>
