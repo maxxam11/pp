@@ -5,9 +5,9 @@
         </style>
         <link rel="stylesheet" href="../css/main.css"> 
         <style>
-            #scroller { background: url(../img/bg_city.png) bottom no-repeat; background-size: contain; }
-            .wrapper { text-align: left; padding: 25px 15px; }
-            h1 { font-size: 25px; color: #aaaaaa; font-weight: normal; }
+            #scroller { background: url(../img/bg_city.png) bottom repeat-x;  }
+            .separator { text-align: left; padding: 25px 15px; }
+            .menu { font-weight: bold; cursor: pointer; }
             
         </style>
         
@@ -17,15 +17,23 @@
                 
             </div>
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
-                <div id="wrapper" class="wrapper">                    
-                    <p>{{pageTitle}}, жители нашего района.
-                    <p>В этом приложение вы можете следить за <a href="#!/news">новостями</a> Павшинской поймы. 
-                       В разделе <a href="#!/info">экстренные службы</a> размещены телефоны первой необходимости.
-                    <p>Приложение находится в бета тестировании и многие разделы еще в разработке. 
-                        Я постараюсь сделать для вас качественный продукт и если у вас есть
-                       какие-либо пожелания, то вы всегда их можете отправить в разделе <a href="#!/feedback">обратная связь</a>.
-                       Я очень буду благодарен вам за них, т.к. одна голова хорошо, а несколько тысяч лучше.
-                       По возможности все предложения и пожелания будут реализованы. 
+                <div id="wrapper" class="wrapper"> 
+                    
+                    <div class="separator">
+                        {{pageTitle}}, жители Павшинской поймы!
+                        
+                    </div>
+                    <div class="separator menu" onclick="document.location.href = '#!/news'">
+                        Посмотреть новости Пашинской поймы
+                    </div>
+                    <div class="separator menu" onclick="document.location.href = '#!/info'">
+                        Позвонить в экстренную службу
+                    </div>
+                    <div class="separator menu" onclick="document.location.href = '#!/feedback'">
+                        Написать разработчику
+                    </div>
+                    
+                    
                     <p>    
                 </div> 
             </div>
