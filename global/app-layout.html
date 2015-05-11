@@ -36,11 +36,11 @@
         </core-toolbar>
 
 
-        <core-menu on-core-select="{{menuItemSelected}}" selected="0">
+        <core-menu on-core-select="{{menuItemSelected}}">
           <core-selector>
               
             <div id="menuMain"></div> <!-- чтобы ничего не было выбрано при загрузке, selectedIndex = 0 -->
-            <core-item class="margin-up" icon="speaker-notes" label="Новости"><a href="#!/news"></a></core-item>
+            <core-item class="margin-up" icon="speaker-notes" label="Новости" active><a href="#!/news"></a></core-item>
             <core-item class="margin-down" icon="info-outline" label="Экстренные службы"><a href="#!/info"></a></core-item>
             
             <div class="separator" disabled></div>
