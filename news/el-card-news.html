@@ -18,7 +18,7 @@
         <div class="body" id="body"></div>
         <div class="date">
             опубликовано <span id="date"></span>,
-            источник <a id="link" href="{{news.sourceLink}}" onclick="window.open('{{news.sourceLink}}', '_system');return false;">{{news.sourceDomain}}</a>            
+            источник <a id="link" href="{{news.sourceLink}}" onclick="window.open('{{news.sourceLink}}', '_system');return false;">{{news.sourceName ? news.sourceName : news.sourceDomain}}</a>            
         </div>
         
     </template>
