@@ -7,10 +7,8 @@
   "author": "",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#latest",
-    "paper-elements": "Polymer/paper-elements#latest",
-    "font-roboto": "Polymer/font-roboto",
-    "angular": "~1.3.0",
-    "ng-polymer-elements": "#latest"
+    "polymer": "Polymer/polymer#^0.5",
+    "paper-elements": "Polymer/paper-elements#^0.5",
+    "font-roboto": "Polymer/font-roboto"
   }
 }
