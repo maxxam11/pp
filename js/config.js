@@ -26,7 +26,8 @@ var global = {
         scrollTop: 0,
         list: [],
         countNewsOnPage: null,
-        notLoadScroll: false, //когда новости закончились, больше не запрашивать при скролле
+        notLoadScroll: false,   // когда новости закончились, больше не запрашивать при скролле
+        dateLastLoad: null,     // дата и время последней загрузки новостей
     },
     info: {
         scrollTop: 0,
