@@ -3,7 +3,8 @@
         
         <link rel="stylesheet" href="../css/main.css">
         <style>
-            .img-base { width: 100%; height: 200px; background-size: cover; background-position: 50% 50%; margin:0 0 24px 0;}  
+            .img-base { width: 100%; height: 200px; background-size: cover; background-position: 50% 50%; margin:0 0 24px 0; background-repeat: no-repeat; } 
+            .img-base.open { background-size: contain; background-position: 50% 50%; position: absolute; z-index: 1000; top: 0; left: 0; background-color: white; }
             .img-line { width: 100%; margin: 0; padding: 0}
             
             .title, .body p, .date, .link { padding: 0 10px;  word-wrap: break-word; }            
@@ -12,7 +13,7 @@
             .date { color: grey; padding: 15px 10px; font-size: 13px; background-color: black;}
         </style>         
         
-        <div class="img-base" style="{{ news.imgUrl ? '' : 'height: 0;'}}background-image: url('{{news.imgUrl}}');"></div>
+        <div on-click="{{openImg}}" class="img-base" style="{{ news.imgUrl ? '' : 'height: 0;'}}background-image: url('{{news.imgUrl}}');"></div>
         
         <h1 id="title" class="title"></h1>
         <div class="body" id="body"></div>
@@ -23,7 +24,7 @@
         
     </template>
     <script>
-        Polymer('el-card-news', {
+        Polymer('el-card-news', {            
             attributeChanged: function(){                        
                 this.$.title.innerHTML = this.news.title;
                 document.title = this.$.title.innerText;
@@ -51,7 +52,14 @@
                 //this.$.link.innerHTML = link.toUpperCase(); 
                 
                 this.$.date.innerHTML = this.news.dateago;
-            },       
+            }, 
+            openImg: function(event, h, div){ console.log($(div).height());
+                if($(div).hasClass('open')) { 
+                    $(div).removeClass('open').height('200px').width('100%'); 
+                } else { 
+                    $(div).addClass('open').height($(document).height() + 'px').width($(document).width() + 'px');                 
+                }
+            }
         });
     </script>
 </polymer-element>
