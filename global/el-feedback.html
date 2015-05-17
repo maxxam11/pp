@@ -28,12 +28,21 @@
                 <paper-toast id="toast" text="Спасибо. Сообщение отправлено"></paper-toast>
                 <paper-toast id="toast_error" text="Извините. Произошла ошибка" style="color: red;"></paper-toast>
             </form>            
-        </div>   
+        </div> 
+        
+        <paper-action-dialog  backdrop autoCloseDisabled id="dialog" heading="Подтвердите отправку">
+            
+            <paper-button affirmative>Отмена</paper-button>
+            <paper-button class="primary-color" affirmative autofocus on-click="{{sended}}">Отправить</paper-button>
+        </paper-action-dialog>
         
     </template>
     <script>        
         Polymer('el-feedback',{
-            send: function(){  
+            send: function(){
+                this.$.dialog.toggle();
+            },
+            sended: function(){ 
                 this.$.d_msg.isInvalid = !this.$.msg.value.trim();
                 if (this.$.d_msg.isInvalid) return;
                 this.msg = this.msg.replace(/\s/g, ' ').replace(/"/g, "''");

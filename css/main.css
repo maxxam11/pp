@@ -26,7 +26,7 @@ html paper-input-decorator[focused] .floated-label .label-text,
 html /deep/ paper-input-decorator[focused] .floated-label .label-text,
 html paper-input-decorator[focused] /deep/ .floated-label .label-text,
 html /deep/ paper-input-decorator[focused] /deep/ .floated-label .label-text,
-a, .primary-color {
+a, .primary-color, html /deep/ .primary-color {
 /* floating label color when the input is focused */
   color: #00BCD4;
 }
