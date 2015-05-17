@@ -49,7 +49,7 @@
                     //@todo обрабатывать ссылки на картинку (по расширению), пример - http://app2top.ru/money/rentabel-nost-free-to-play-igr-padaet-53629.html
                     
                     p = p.replace(regImg, '</p><img class="img-line" src="$1"><p>');
-                    body += '<p>' + p + '</p>';
+                    if (p) body += '<p>' + p + '</p>';
                 }                
                 this.$.body.innerHTML = body;
                 
