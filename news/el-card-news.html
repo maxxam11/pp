@@ -34,8 +34,11 @@
                 var regLink = /\[a\s(.*?)\]([\s\S]*?)\[\/a\]/g;
                 var regImg = /\[img\s(.*?)\]/g;
                 for (var i = 0, l = this.news.body.length; i < l; i++) {
-                    p = this.news.body[i]; 
-                    p = p.replace(/\n/g, '<br>'); 
+                    p = this.news.body[i];
+                    p = p.replace(/\r\n\r\n/g, '\n');
+                    p = p.replace(/&nbsp;/g, ' ');
+                    p = p.trim();
+                    p = p.replace(/\n/g, '<br>');
                     //p = p.replace(/\x20\x20/g, '<br>'); 
                     //убираем картинку из тела, если она такая же как и главная
                     p = p.replace('[img ' + this.news.imgUrl + ']','');
