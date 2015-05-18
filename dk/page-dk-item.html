@@ -1,4 +1,5 @@
 <link rel="import" href="el-descr3.html">
+<link rel="import" href="el-descr7.html">
 
 <polymer-element name="page-dk-item" attributes="dkId">
     <template>
@@ -22,7 +23,7 @@
                     <div class="item separator">
                         {{subitem.title}}
                         <div class="detail">
-                            Сроки: <span class="primary-color">{{subitem.date}}</span><br>
+                            <template if="{{subitem.date}}">Сроки: <span class="primary-color">{{subitem.date}}</span><br></template>
                             Ответственные: {{subitem.responsible}}
                         </div>
                     </div>
@@ -32,6 +33,9 @@
                 <template if="{{item.id == 3}}">
                     <div class="description"><el-descr3></el-descr3></div>
                 </template>
+                <template if="{{item.id == 7}}">
+                    <div class="description"><el-descr7></el-descr7></div>
+                </template>
                 
             </div>
         </el-page>
@@ -39,12 +43,15 @@
     </template>
     <script>
         Polymer('page-dk-item', {            
-            ready: function () { 
-                var item = global.dk.list[this.dkId-1];
-                if (item)
-                    this.item = item;
-                else
-                   document.location.href = '#!/dk'; 
+            ready: function () {
+                if (global.dk.list) {
+                    var item = global.dk.list[this.dkId-1];
+                    if (item)
+                        this.item = item;
+                    else
+                       document.location.href = '#!/dk'; 
+                }
+                
             }, 
             back: function () {
                document.location.href = '#!/dk';
