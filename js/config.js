@@ -8,13 +8,14 @@ var TimeOfDay = {
 
 /** глобальный массив настроек и данных */
 var global = {
+    domain: '178.62.225.181',
     app: {
         spaceId: 1,
         version: '1.0',
     },    
     api: {
         //url: 'http://pp.maxxam.ru/api/',
-        url: 'http://178.62.225.181/api/', 
+        url: 'api', 
         version: 1,
         token: '34829a123b98d99c',
     },
@@ -28,6 +29,10 @@ var global = {
         countNewsOnPage: null,
         notLoadScroll: false,   // когда новости закончились, больше не запрашивать при скролле
         dateLastLoad: null,     // дата и время последней загрузки новостей
+    },
+    dk: {
+        scrollTop: 0,
+        list: null,
     },
     info: {
         scrollTop: 0,

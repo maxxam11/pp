@@ -1,0 +1,55 @@
+<link rel="import" href="el-descr3.html">
+
+<polymer-element name="page-dk-item" attributes="dkId">
+    <template>
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+            div.description { padding: 20px; }
+            div.detail { color: grey; padding-top: 10px; font-size: 80%; font-weight: normal; }
+            div.item { padding: 15px 20px;  color: black; }
+            h3 { margin: 0; }
+            h3 core-icon {   margin-top: -5px; margin-right: 10px; }
+        </style>
+
+        <el-page pagetitle="Дорожная карта">
+            <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
+            <div flex style="overflow: auto;">
+                <div class="description separator">
+                    <h3><core-icon icon="maps:map"></core-icon>{{item.title}}</h3>
+                </div>
+                <template repeat="{{subitem in item.items}}">
+                    
+                    <div class="item separator">
+                        {{subitem.title}}
+                        <div class="detail">
+                            Сроки: <span class="primary-color">{{subitem.date}}</span><br>
+                            Ответственные: {{subitem.responsible}}
+                        </div>
+                    </div>
+
+                </template>
+                
+                <template if="{{item.id == 3}}">
+                    <div class="description"><el-descr3></el-descr3></div>
+                </template>
+                
+            </div>
+        </el-page>
+
+    </template>
+    <script>
+        Polymer('page-dk-item', {            
+            ready: function () { 
+                var item = global.dk.list[this.dkId-1];
+                if (item)
+                    this.item = item;
+                else
+                   document.location.href = '#!/dk'; 
+            }, 
+            back: function () {
+               document.location.href = '#!/dk';
+            },
+        });
+        
+    </script>
+</polymer-element>
