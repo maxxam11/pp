@@ -15,6 +15,7 @@
             div.item { padding: 15px 20px;  color: black; }
             h3 { margin: 0; }
             h3 core-icon {   margin-top: -5px; margin-right: 10px; }
+            img { width: 100%; margin-top: 10px; display: none; }
         </style>
 
         <el-page pagetitle="Дорожная карта">
@@ -27,6 +28,7 @@
                     
                     <div class="item separator">
                         {{subitem.title}}
+                        <template if="{{subitem.img}}"><image on-load="{{imgLoad}}" src="http://{{domain}}/img/dk/{{subitem.img}}"></template>
                         <div class="detail">
                             <template if="{{subitem.date}}">Сроки: <span class="primary-color">{{subitem.date}}</span><br></template>
                             Ответственные: {{subitem.responsible}}
@@ -60,7 +62,11 @@
     </template>
     <script>
         Polymer('page-dk-item', {            
+            imgLoad: function(a,b,img){
+                $(img).show();
+            },
             ready: function () {
+                this.domain = global.domain;
                 if (global.dk.list) {
                     var item = global.dk.list[this.dkId-1];
                     if (item)
