@@ -12,7 +12,7 @@
     <!-- версияя для этого пакета 1 19 (версия андройд 19 (4.5 KitKat)) 00 (размер экрана) 100 (версия приложения 1.0.0)-->
     <preference name="android-versionCode" value="11900100" /> 
     <!-- версия для старых платформ - версия андройд 10 (2.2 Froyo) --> 
-    <!--<preference name="android-versionCode" value="11000100" />--> 
+    <!-- <preference name="android-versionCode" value="11000100" /> --> 
 
     <name>ПП</name>
 
