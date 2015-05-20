@@ -50,10 +50,9 @@
                 if (global.news.list.length) {
                     this.list = global.news.list; 
                     //если пакет не загружался час, то грузим его
-                    //var dateLastLoad = global.news.dateLastLoad;
-                    var dateLastLoad = localStorage.newsDateLastLoad;
+                    var dateLastLoad = global.news.dateLastLoad;
                     if (new Date() - dateLastLoad > 1000 * 60 * 60) {
-                        this.loadNews();
+                        this.refresh();
                     }
                 } else {
                     this.loadNews();
@@ -83,10 +82,10 @@
                             responseList[i].isNew = newsWatched.indexOf(responseList[i]._id) === -1 ? true : false;
                         }
                     }
-
-                    global.news.list = this.list.concat(responseList);
-                    //global.news.dateLastLoad = new Date();
-                    localStorage.newsDateLastLoad = new Date();
+                    //если нет нвоостей, т.е. грузим первый раз/все сначала, то запоминаем дату и время
+                    if (!global.news.list.length) global.news.dateLastLoad = new Date();
+                    
+                    global.news.list = this.list.concat(responseList);                    
                     this.list = global.news.list;
                     this.lastItemId = responseList.length ? this.list[this.list.length - 1].createDate : ''; 
                 } 
