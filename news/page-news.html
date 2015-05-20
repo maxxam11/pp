@@ -50,7 +50,9 @@
                 if (global.news.list.length) {
                     this.list = global.news.list; 
                     //если пакет не загружался час, то грузим его
-                    if (new Date() - global.news.dateLastLoad > 1000 * 60 * 60) {
+                    //var dateLastLoad = global.news.dateLastLoad;
+                    var dateLastLoad = localStorage.newsDateLastLoad;
+                    if (new Date() - dateLastLoad > 1000 * 60 * 60) {
                         this.loadNews();
                     }
                 } else {
@@ -83,7 +85,8 @@
                     }
 
                     global.news.list = this.list.concat(responseList);
-                    global.news.dateLastLoad = new Date();
+                    //global.news.dateLastLoad = new Date();
+                    localStorage.newsDateLastLoad = new Date();
                     this.list = global.news.list;
                     this.lastItemId = responseList.length ? this.list[this.list.length - 1].createDate : ''; 
                 } 
