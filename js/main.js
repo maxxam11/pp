@@ -45,3 +45,8 @@ function getToken() {
 function setToken(token) {
     localStorage.setItem('token', token);
 }
+
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    window.open = cordova.InAppBrowser.open;
+}
