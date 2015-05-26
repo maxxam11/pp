@@ -12,11 +12,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     
-    
+    <script src="js/cordova.js" type="text/javascript"></script>
+    <script src="js/device.js"></script>
     
     <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-    <script data-require="jquery@*" data-semver="2.0.3" src="js/jquery-2.0.3.min.js"></script>
-    <!--<script src="js/cordova.js" type="text/javascript"></script>-->
+    <script data-require="jquery@*" data-semver="2.0.3" src="js/jquery-2.0.3.min.js"></script>    
     <script src="js/config.js"></script>
     <script src="js/main.js"></script>
 
@@ -70,7 +70,7 @@
     
 </head>
 
-<body unresolved>
+<body unresolved onload="onLoad()">
     
     <app-loader></app-loader>
     
