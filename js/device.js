@@ -7,6 +7,7 @@ function onLoad() {
 //
 function onDeviceReady() {
     navigator.splashscreen.hide();
+    window.open = cordova.InAppBrowser.open;
 }
 
 
