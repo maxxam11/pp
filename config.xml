@@ -7,7 +7,7 @@
         version   = "0.0.1">
     
     <!-- версияя для этого пакета 1 19 (версия андройд 19 (4.4 KitKat)) 00 (размер экрана) 100 (версия приложения 1.0.0)-->
-    <preference name="android-versionCode" value="11900100" /> 
+    <!--<preference name="android-versionCode" value="11900100" />--> 
     <preference name="android-minSdkVersion" value="19" />
     <preference name="android-targetSdkVersion" value="21" /> 
     
@@ -25,9 +25,9 @@
     </description>
     
     <!-- цвет фона по умолчанию -->
-    <preference name="BackgroundColor" value="0xffffffff"/>
-    <!-- заставка -->
-    <preference name="SplashScreen" value="splash" />
+    <!--<preference name="BackgroundColor" value="0xffffffff"/>-->
+    
+    
 
     <author href="http://www.maxxam.ru" email="karachev.m@gmail.com">
         MaxxaM
@@ -42,6 +42,12 @@
     <!-- чтобы можно было письмо отправить -->
     <!--<access origin="mailto:*" launch-external="yes" />-->
     
-    
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
+    <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
+    
+    <!-- заставка -->
+    <preference name="SplashScreen" value="img/logo/splashscreen.png" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashMaintainAspectRatio" value="false" />
+    
 </widget>
