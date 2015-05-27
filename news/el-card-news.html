@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="../css/main.css">
         <style>
             .img-base { width: 100%; height: 200px; background-size: cover; background-position: 50% 50%; margin:0 0 24px 0; background-repeat: no-repeat; cursor: pointer; } 
-            .img-base.open { background-size: contain; background-position: 50% 50%; position: absolute; z-index: 1000; top: 0; left: 0; background-color: white; }
+            .img-base.open { background-size: contain; background-position: 50% 50%; position: absolute; z-index: 1000; top: 0; left: 0; background-color: white; width: 100%; height: 100%; }
             .img-line { width: 100%; margin: 0; padding: 0}
             
             .title, .body p, .date, .link { padding: 0 10px;  word-wrap: break-word; }            
@@ -59,11 +59,13 @@
                 this.$.date.innerHTML = this.news.dateago;
             }, 
             openImg: function(event, h, div){ 
+                
                 if($(div).hasClass('open')) { 
-                    $(div).removeClass('open').height('200px').width('100%'); 
+                    $(div).removeClass('open'); 
                 } else { 
-                    $(div).addClass('open').height($(document).height() + 'px').width($(document).width() + 'px');                 
+                    $(div).addClass('open');
                 }
+                
             }
         });
     </script>
