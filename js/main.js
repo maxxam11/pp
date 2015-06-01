@@ -50,7 +50,7 @@ function setToken(token) {
  * Определяет, на мобиле мы или нет
  * @returns {Boolean}
  */
-function detectmob() { 
+function deviceIsMobile() { 
     if( navigator.userAgent.match(/Android/i)
     || navigator.userAgent.match(/webOS/i)
     || navigator.userAgent.match(/iPhone/i)

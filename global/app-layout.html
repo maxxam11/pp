@@ -17,6 +17,7 @@
     [drawer] core-menu core-item:hover { background-color: #f9f9f9; }
     [drawer] core-menu core-item a { color: #000; text-decoration: none; }
     [drawer] core-menu core-item::shadow core-icon { color: grey; }
+    [drawer] core-menu core-item.android::shadow core-icon { color: #a4c639; }
     [drawer] core-menu core-item[active] { background-color: #eaeaea; }
 
     [main] { height: 100%; background-color: #fff; position: relative; }
@@ -46,6 +47,7 @@
             <div class="separator" disabled></div>
             
             <core-item class="margin-up" icon="mail" label="Написать разработчку"><a href="#!/feedback"></a></core-item>
+            <core-item id="menuAndroid" class="margin-up android" icon="android" label="Скачать мобильное приложение" hidden><a target="_blank" href="https://play.google.com/store/apps/details?id=ru.maxxam.pp"></a></core-item>
             
           </core-selector>
         </core-menu> 
@@ -80,6 +82,9 @@
     ready: function() { 
       document.title = this.appName;
       document.location.href = '#!/news';
+      if (!deviceIsMobile()) {
+          this.$.menuAndroid.hidden = false;
+      }
     },
     menuItemSelected: function(e, detail, sender) {
       if (detail.isSelected) { 
