@@ -17,7 +17,7 @@
             <div id="toolbarIcons">
                 <span>{{scrollPercent}}</span>
             </div>
-            <div flex style="overflow: auto;" on-scroll="{{scroll}}">
+            <div flex style="overflow: auto;" on-scroll="{{scroll}}" id="scroller">
                 <div id="wrapper" class="wrapper">
                     <el-spinner id="spinner" active></el-spinner>
                     <el-card-news id="item" hidden news="{{item}}"></el-card-news> 

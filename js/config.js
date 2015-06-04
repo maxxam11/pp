@@ -21,7 +21,7 @@ var global = {
     },
     timeout: {
         noInternet: 10000,
-        loadStart: 3000,
+        loadStart: 2000,
     },
     news: {
         scrollTop: 0,

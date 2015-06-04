@@ -7,6 +7,10 @@
 .container { padding: 15px; }
 
 core-toolbar { color: #fff; background: #00BCD4; }
+#scroller { background-color: #fff; }
+@media all and (min-width: 1100px) {
+    #scroller { max-width: 800px; margin: 30px auto;  }
+} 
 
 paper-button.colored { background-color: #00BCD4; }
 
