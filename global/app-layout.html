@@ -38,7 +38,7 @@
 
 
         <core-menu on-core-select="{{menuItemSelected}}">
-          <core-selector>
+          <core-selector id="selector">
             
             <core-item class="margin-up" icon="speaker-notes" label="Новости"><a href="#!/news"></a></core-item>
             <core-item icon="maps:map" label="Дорожная карта"><a href="#!/dk"></a></core-item>
@@ -77,11 +77,16 @@
       this.$.drawerPanel.togglePanel();
     },
     ready: function() { 
-      document.title = this.appName;
-      document.location.href = '#!/news';
-      if (!deviceIsMobile()) {
-          this.$.menuAndroid.hidden = false;
-      }
+        document.title = this.appName;
+        
+        //пока вместо стартовой страницы
+        document.location.href = '#!/news';
+        this.$.selector.selected = 0;
+        //--
+        
+        if (!deviceIsMobile()) {
+            this.$.menuAndroid.hidden = false;
+        }
     },
     menuItemSelected: function(e, detail, sender) {
       if (detail.isSelected) { 
