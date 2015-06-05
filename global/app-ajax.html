@@ -251,9 +251,9 @@ element.
       var response = this.evalResponse(xhr); 
       
         // @mine ovveride        
-        if (global.debug && response.debug) {
+        if (DEBUG.on && response.debug) {
             var debug = response.debug; 
-            global.debugIndex++;
+            DEBUG.traceIndex++;
             if (debug.trace && debug.trace.length) {
                 for (var i = 0, l = debug.trace.length; i < l; i++) {
                     debuger('trace', debug.trace[i]);

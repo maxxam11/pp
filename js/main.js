@@ -1,11 +1,8 @@
-// чтобы ссылки в браузере открывались
-//window.open = cordova.InAppBrowser.open;
-
 function debuger() {
     var txt;
     if (arguments[0] && arguments[0] == 'trace' && arguments[1]) {
         var trace = arguments[1];
-        txt = '%cDEBUG ' + global.debugIndex + ': ' 
+        txt = '%cDEBUG ' + DEBUG.traceIndex + ': ' 
             + trace.time + ' ' 
             + '%c' + trace.type + ' ' 
             + '%c' + trace.msg + ' '
@@ -15,7 +12,7 @@ function debuger() {
     }
     if (arguments[0] && arguments[0] == 'error' && arguments[1]) {
         var error = arguments[1];
-        txt = '%cERROR ' + global.debugIndex + ': ' + '%c' +  
+        txt = '%cERROR ' + DEBUG.traceIndex + ': ' + '%c' +  
             + error.code + ' ' 
             + error.msg + ' ';        
         console.log(txt, 'color:grey;', 'color:red;', error);

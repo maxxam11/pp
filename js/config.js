@@ -37,11 +37,10 @@ var global = {
     info: {
         scrollTop: 0,
     },
-    timeOfDay: TimeOfDay.day, // время суток
-    debug: false,
-    debugIndex: 0,
+    timeOfDay: TimeOfDay.day, // время суток    
 };
 
-
-
-
+var DEBUG = {
+    on: false,
+    itraceIdex: 0   
+};
