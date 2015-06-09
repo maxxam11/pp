@@ -1,5 +1,3 @@
-<link rel="import" href="el-card-list.html">
-
 <polymer-element name="page-news" attributes="pageTitle">
     <template>
         <link rel="stylesheet" href="../css/main.css"> 
@@ -50,8 +48,8 @@
                 if (global.news.list.length) {
                     this.list = global.news.list; 
                     //если пакет не загружался час, то грузим его
-                    var dateLastLoad = global.news.dateLastLoad;
-                    if (new Date() - dateLastLoad > 1000 * 60 * 60) {
+                    var dateLastLoad = LAST_LOAD['news_list'];
+                    if (new Date() - dateLastLoad > global.news.cashTime) {
                         this.refresh();
                     }
                 } else {
@@ -83,7 +81,7 @@
                         }
                     }
                     //если нет нвоостей, т.е. грузим первый раз/все сначала, то запоминаем дату и время
-                    if (!global.news.list.length) global.news.dateLastLoad = new Date();
+                    if (!global.news.list.length) LAST_LOAD['news_list'] = new Date();
                     
                     global.news.list = this.list.concat(responseList);                    
                     this.list = global.news.list;

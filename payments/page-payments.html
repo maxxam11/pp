@@ -1,0 +1,65 @@
+<polymer-element name="page-payments" attributes="pageTitle baseUrl">
+    <template>
+        <link rel="stylesheet" href="../css/main.css"> 
+        <style>
+           
+        </style>
+        
+        <app-ajax
+            id="ajaxInit"
+            op="payment/list"
+            params='{"lastItemId":"{{lastItemId}}"}'
+            on-core-response="{{handleResponseInit}}"></app-ajax>
+        
+        <div vertical layout fit>
+            <div>
+                <paper-shadow z="1">
+                    <core-toolbar>
+                        <div id="iconMainMenu"><content id="content"></content></div>
+                        <span flex>{{pageTitle}}</span>
+                        <paper-icon-button icon="add" on-click="{{addAccount}}"></paper-icon-button>
+                    </core-toolbar>
+                </paper-shadow>
+            </div>
+            <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
+                <div id="wrapper" class="wrapper"> 
+                    <div class="container" id="empty" hidden>
+                        <p>В данном разделе вы можете просматривать свои коммунальные платежи, платежи за интернет и передавать показатели воды.</p>
+                        <p>Вам нужно добавить аккаунты организаций, для этого нажмите на иконку "+" в правом вернхнем углу или кнопку ниже.</p>
+                        <center>
+                            <paper-button raised class="secondary-text-color" on-click="{{addAccount}}">
+                                <core-icon icon="add"></core-icon>добавить аккаунт
+                            </paper-button>
+                        </center>
+                    </div>
+                    <template repeat="{{item in data}}">
+
+                    </template>
+                </div>
+            </div>
+        </div>
+        
+        <paper-dialog id="dialog" backdrop heading="Выберите организацию" class="scrolling">
+            <account-list></account-list>
+        </paper-dialog>                        
+
+    </template>
+    <script>
+        Polymer('page-payments', {
+            ready: function() {
+                var dateLastLoad = LAST_LOAD['payment_account_list'];
+                if (dateLastLoad && new Date() - dateLastLoad > global.payments.cashTime) this.$.ajaxInit.go();
+            },
+           handleResponseInit: function(e, detail, sender) {
+               this.data = detail.response;
+               if (!this.data.length) {
+                   this.$.empty.hidden = false;
+                   
+               } LAST_LOAD['payment_account_list'] = new Date();
+           },
+           addAccount: function() {
+               this.$.dialog.toggle();
+           }
+        });
+    </script>
+</polymer-element>

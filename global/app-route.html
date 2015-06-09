@@ -8,6 +8,9 @@
             <template when-route="/news"><page-news><content></content></page-news></template>            
             <template when-route="/news-item/:id"><page-news-item newsId="{{params.id}}"></page-news-item></template>
             
+            <template when-route="/payments"><page-payments><content></content></page-payments></template>
+            <template when-route="/account-add/:id"><page-account-add accountId="{{params.id}}"></page-account-add></template>
+            
             <template when-route="/dk"><page-dk><content></content></page-dk></template>
             <template when-route="/dk-item/:id"><page-dk-item  dkId="{{params.id}}"><content></content></page-dk-item></template>
             
@@ -17,7 +20,7 @@
             
             <template when-route="/nointernet"><page-nointernet><content></content></page-nointernet></template>
 
-            <template else><page-index><content></content></page-index></template>
+            <template else><page-news><content></content></page-news></template>
 
         </more-route-switch>
 

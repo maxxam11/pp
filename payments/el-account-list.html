@@ -1,0 +1,31 @@
+<polymer-element name="el-account-list">
+    <template>
+        
+        <link rel="stylesheet" href="../css/main.css">        
+        
+        <app-ajax
+            id="ajax"
+            op="payment/account/list"
+            params='{}'
+            on-core-response="{{handleResponse}}"></app-ajax>
+        
+        <paper-dialog id="dialog" backdrop heading="Выберите организацию" class="scrolling">
+            <paper-spinner id="spinner" active="true"></paper-spinner>
+            <template repeat="{{account in accounts}}">
+                <paper-item style="border-top: solid 1px #eaeaea;" on-click="{{show}}">
+                    <a style="color: #000; text-decoration: none;" href="#!/account-add/{{account.id}}">{{account.name}}</a>
+                </paper-item>
+            </template>
+            <div style="border-top: solid 1px #eaeaea;padding-bottom: 15px;"></div>
+        </paper-dialog>                        
+        
+    </template>
+    <script>
+        Polymer('el-account-list',{
+            handleResponse: function (e, detail, sender) {
+                this.$.spinner.hidden = true;
+                this.accounts = detail.response.data;                
+            },
+        });
+    </script>
+</polymer-element>

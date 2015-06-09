@@ -28,7 +28,10 @@ var global = {
         list: [],
         countNewsOnPage: null,
         notLoadScroll: false,   // когда новости закончились, больше не запрашивать при скролле
-        dateLastLoad: null,     // дата и время последней загрузки новостей
+        cashTime: 1000 * 60 * 60,     // через сколько обновлять новости автоматом
+    },
+    payments: {
+        cashTime: 1000 * 60 * 60 * 24, // раз в сутки обновляем список
     },
     dk: {
         scrollTop: 0,
@@ -43,4 +46,8 @@ var global = {
 var DEBUG = {
     on: false,
     itraceIdex: 0   
+};
+
+var LAST_LOAD = {
+    
 };
