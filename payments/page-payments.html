@@ -6,7 +6,7 @@
         </style>
         
         <app-ajax
-            id="ajaxInit"
+            id="ajax"
             op="payment/list"
             params='{"lastItemId":"{{lastItemId}}"}'
             on-core-response="{{handleResponseInit}}"></app-ajax>
@@ -39,23 +39,30 @@
             </div>
         </div>
         
-        <paper-dialog id="dialog" backdrop heading="Выберите организацию" class="scrolling">
-            <account-list></account-list>
+        <paper-dialog id="dialog" backdrop heading="Выберите организацию" class="scrolling" on-click="{{addAccount}}">
+            <el-account-list></el-account-list>
         </paper-dialog>                        
 
     </template>
     <script>
         Polymer('page-payments', {
             ready: function() {
-                var dateLastLoad = LAST_LOAD['payment_account_list'];
-                if (dateLastLoad && new Date() - dateLastLoad > global.payments.cashTime) this.$.ajaxInit.go();
+                var dateLastLoad = LAST_LOAD['payment_account_list']; 
+                if (!dateLastLoad || new Date() - dateLastLoad > global.payments.cashTime) {
+                    this.$.ajax.go();
+                } else {
+                    this.data = global.payments.list;
+                }
+                if (!this.data || !this.data.length) this.$.empty.hidden = false;
+                
             },
            handleResponseInit: function(e, detail, sender) {
                this.data = detail.response;
+               global.payments.list = this.data;
                if (!this.data.length) {
                    this.$.empty.hidden = false;
-                   
-               } LAST_LOAD['payment_account_list'] = new Date();
+                   LAST_LOAD['payment_list'] = new Date();
+               } 
            },
            addAccount: function() {
                this.$.dialog.toggle();

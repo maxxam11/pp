@@ -7,7 +7,7 @@
         
         <app-ajax
             id="ajax"
-            op="account/add"
+            op="/payment/account/add"
             params='{"accountId":"{{accountId}}"}'
             on-core-response="{{handleResponse}}"></app-ajax>
         
@@ -20,9 +20,11 @@
                     </core-toolbar>
                 </paper-shadow>
             </div>
-            <div flex>  
-                <el-spinner id="spinner" active></el-spinner>
-                <el-account-add data="{{data}}" hidden id="account"></el-account-add>
+            <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
+                <div id="wrapper" class="wrapper">   
+                    <el-spinner id="spinner" active></el-spinner>
+                    <el-account-add data="{{data}}" hidden id="account"></el-account-add>
+                </div>
             </div>
         </div>
 
@@ -32,11 +34,11 @@
             back: function () {
                 history.back();
             },
-            attached: function() {
+            ready: function() {
                 this.$.ajax.go();
             },
             handleResponse: function (e, detail, sender) {
-                this.data = detail.response;
+                this.data = detail.response.data;
                 this.$.account.hidden = false;
                 this.$.spinner.hide();
             },

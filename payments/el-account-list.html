@@ -9,22 +9,32 @@
             params='{}'
             on-core-response="{{handleResponse}}"></app-ajax>
         
-        <paper-dialog id="dialog" backdrop heading="Выберите организацию" class="scrolling">
-            <paper-spinner id="spinner" active="true"></paper-spinner>
-            <template repeat="{{account in accounts}}">
-                <paper-item style="border-top: solid 1px #eaeaea;" on-click="{{show}}">
-                    <a style="color: #000; text-decoration: none;" href="#!/account-add/{{account.id}}">{{account.name}}</a>
-                </paper-item>
-            </template>
-            <div style="border-top: solid 1px #eaeaea;padding-bottom: 15px;"></div>
-        </paper-dialog>                        
+        
+        <paper-spinner id="spinner"></paper-spinner>
+        <template repeat="{{account in accounts}}">
+            <paper-item style="border-top: solid 1px #eaeaea;" on-click="{{show}}">
+                <a style="color: #000; text-decoration: none;" href="#!/account-add/{{account.id}}">{{account.name}}</a>
+            </paper-item>
+        </template>
+        <div style="border-top: solid 1px #eaeaea;padding-bottom: 15px;"></div>
+                                
         
     </template>
     <script>
         Polymer('el-account-list',{
+            ready: function() {
+                var dateLastLoad = LAST_LOAD['payment_account_list']; 
+                if (!dateLastLoad || new Date() - dateLastLoad > global.payments.cashTime) {
+                    this.$.ajax.go();
+                } else {
+                    this.accounts = global.payments.accountList;
+                }
+            },
             handleResponse: function (e, detail, sender) {
                 this.$.spinner.hidden = true;
-                this.accounts = detail.response.data;                
+                this.accounts = detail.response.data;
+                global.payments.accountList = this.accounts;
+                LAST_LOAD['payment_account_list'] = new Date();
             },
         });
     </script>
