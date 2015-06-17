@@ -72,7 +72,7 @@
                 var data = detail.response.data;
                 
                 if (data.token) { 
-                    setToken(data.token);
+                    initApp(data);
                 } else {
                     // @todo предусмотреть обработку этой ошибкит - сказать, что то не так на сервере.
                     //gotoError('token_empty');
