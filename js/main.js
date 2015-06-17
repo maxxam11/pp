@@ -39,8 +39,14 @@ function gotoErrorNoInternet() {
 function getToken() {
     return localStorage.token ? localStorage.token : global.api.token;
 }
-function setToken(token) {
-    localStorage.setItem('token', token);
+
+/**
+ * Инициализация приложения, переопределяет все глобальные и ключевые даннные
+ * @param {type} data
+ * @returns {undefined}
+ */
+function initApp(data) {
+    localStorage.setItem('token', data.token);
 }
 
 /**
