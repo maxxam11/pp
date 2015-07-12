@@ -8,6 +8,8 @@
     [drawer] core-toolbar div.up { width: 100%; background-color: rgba(0,0,0,0.4); position: absolute; left: -8px; top: 100px; height: 50px; cursor:pointer; }
     [drawer] core-toolbar div.up .app { color: #ddd; font-size: 18px; margin-left: 15px;   font-weight: normal; }
     [drawer] core-toolbar div.up .city { color: #hhh; font-size: 12px; margin-left: 15px; padding-top: 8px;  font-weight: normal; }
+    [drawer] core-toolbar div.up core-image { width:25px; height:25px; float: right; } 
+    [drawer] core-toolbar div.up .weather { float: right; font-size: 20px; padding: 13px 10px; color: #hhh; }
 
     [drawer] core-menu { margin: 0; }
     [drawer] core-menu core-item.margin-up { margin-top: 8px; }
@@ -31,8 +33,11 @@
 
         <core-toolbar class="medium-tall">
             <div class="up" on-click="{{gotoHome}}">
+                <!--<core-image sizing="contain" src="img/weather/{{weatherIcon}}.png"></core-image>-->
+                <div class="weather">{{weatherTemp}}°С</div>
                 <div class="city">{{appCity}}</div>
                 <div class="app">{{appName}}</div>
+                
             </div>
         </core-toolbar>
 
@@ -77,9 +82,11 @@
     toggleDrawer: function() {
       this.$.drawerPanel.togglePanel();
     },
-    ready: function() { 
+    ready: function() {         
         document.title = this.appName;
         
+        this.weatherIcon = global.weather.currently.icon;
+        this.weatherTemp = Math.round(global.weather.currently.temperature);
         //пока вместо стартовой страницы
         //document.location.href = '#!/news';
         //this.$.selector.selected = 0;
@@ -88,6 +95,7 @@
         if (!deviceIsMobile()) {
             this.$.menuAndroid.hidden = false;
         }
+        
     },
     menuItemSelected: function(e, detail, sender) {
       if (detail.isSelected) { 

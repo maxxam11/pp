@@ -42,6 +42,7 @@ var global = {
     info: {
         scrollTop: 0,
     },
+    weather: {},
     timeOfDay: TimeOfDay.day, // время суток    
 };
 

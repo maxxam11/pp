@@ -41,12 +41,22 @@ function getToken() {
 }
 
 /**
+ * Возвращает основной домен, с которым нужно работать
+ * @returns {String} домен
+ */
+function getDomain() {
+    return localStorage.domain ? localStorage.domain : global.domain; 
+}
+
+/**
  * Инициализация приложения, переопределяет все глобальные и ключевые даннные
- * @param {type} data
+ * @param {Object} data
  * @returns {undefined}
  */
 function initApp(data) {
     localStorage.setItem('token', data.token);
+    if (data.weather) global.weather = data.weather;
+    //@todo надо инициализацю выносить в отдельный JS функцию и вызывать от туда    
 }
 
 /**
