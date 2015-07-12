@@ -63,7 +63,7 @@
                         gotoErrorNoInternet();
                         r.hidden = true;
                     }
-                }, global.timeout.noInternet);
+                }, global.timeout.noInternet);                
             },
             domReady: function(){
                 //$('paper-progress').width($('#title').width() + 'px');
@@ -72,7 +72,7 @@
                 var data = detail.response.data;
                 
                 if (data.token) { 
-                    initApp(data);
+                    initApp(data);                    
                 } else {
                     // @todo предусмотреть обработку этой ошибкит - сказать, что то не так на сервере.
                     //gotoError('token_empty');
