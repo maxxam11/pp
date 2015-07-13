@@ -51,12 +51,14 @@ function getDomain() {
 /**
  * Инициализация приложения, переопределяет все глобальные и ключевые даннные
  * @param {Object} data
+ * @param {Function} initFunction
  * @returns {undefined}
  */
 function initApp(data) {
     localStorage.setItem('token', data.token);
     if (data.weather) global.weather = data.weather;
-    //@todo надо инициализацю выносить в отдельный JS функцию и вызывать от туда    
+    //@todo надо инициализацю выносить в отдельный JS функцию и вызывать от туда  
+    //setTimeout(initFunction, 5000);
 }
 
 /**
