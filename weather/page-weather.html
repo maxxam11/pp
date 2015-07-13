@@ -1,13 +1,19 @@
-<polymer-element name="page-weather">
+<polymer-element name="page-weather" attributes="pageTitle">
     <template>
         <link rel="stylesheet" href="../css/main.css">
         
-        <style>
+         <style>
             div.description { padding: 10px 20px; }
-            core-icon { margin-right: 10px; color: grey; }
-            paper-item a { text-decoration: none; color: black; }
-            
+            core-image { width: 100px; height: 100px; float: left; margin: 10px 20px 10px 0; }           
         </style>
+        
+        <app-ajax
+            id="ajax"
+            auto
+            op="weather/now"
+            params='{}'
+            on-core-response="{{handleResponse}}"
+            on-core-error="{{handleResponseError}}"></app-ajax>
         
         <el-page pagetitle="{{pageTitle}}">
             <div id="toolbarMainIcon"><content></content></div>
@@ -17,9 +23,13 @@
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
                 <div id="wrapper" class="wrapper">
                     
-                    <div class="description separator">
-                        <p>Здесь описан план мероприятий по улучшению состояния территории микрорайона Павшинская пойма и завершению строительства объектов жилищного, социального и коммунального назначения.</p>
-                        <!--<p>Оригинал документа можно скачать <a href="{{ urlDk }}">здесь</a>.</p>-->
+                    <div class="description">
+                        <core-image position="left" sizing="contain" src="img/weather/100/{{weather.currently.icon}}.png"></core-image>
+                        <p>Сейчас {{weather.currently.summary}} 
+                            {{ weather.currently.temperature }}°C<br>
+                            {{ weather.currently.windSpeed ? weather.currently.windSummary + ' ветер ' + weather.currently.windSpeed + ' м/с' : 'ветра нет' }}<br>
+                            Влажность {{ weather.currently.humidity }}%<br>
+                            Давление {{ weather.currently.pressure }} мм рт.ст.</p>
                     </div>
                     
                     <template repeat="{{item in list}}">
@@ -40,10 +50,15 @@
     </template>
     <script>
         Polymer('page-weather', {
-            pageTitle: 'Погода в Павшинской пойме',
             ready: function(){
-                document.title = this.pageTitle;
+                this.weather = global.weather;
             },
+            handleResponse: function(e, detail, sender) {
+                this.weather = global.weather = detail.response.data; 
+            },
+            handleResponseError: function() {
+                
+            }
         });
         
     </script>
