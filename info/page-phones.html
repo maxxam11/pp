@@ -1,4 +1,4 @@
-<polymer-element name="page-phones">
+<polymer-element name="page-phones" attributes="pageTitle">
     <template>        
         <link rel="stylesheet" href="../css/main.css">
         <style>
@@ -17,7 +17,7 @@
             on-core-response="{{handleResponseList}}"
             on-core-error=""></app-ajax>
         
-        <el-page pageTitle="Экстренные службы">
+        <el-page pageTitle="{{pageTitle}}">
             <div id="toolbarMainIcon"><content></content></div>
             <!--<div id="toolbarIcons"><paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button></div>-->
             

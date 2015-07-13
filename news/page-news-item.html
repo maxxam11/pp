@@ -1,4 +1,4 @@
-<polymer-element name="page-news-item" attributes="newsId">
+<polymer-element name="page-news-item" attributes="newsId,pageTitle">
     <template>
         <link rel="stylesheet" href="../css/main.css"> 
         
@@ -8,7 +8,7 @@
             params='{"newsId":"{{newsId}}"}'
             on-core-response="{{handleResponseItem}}"></app-ajax>
 
-        <el-page>
+        <el-page pagetitle="{{pageTitle}}">
             <div id="toolbarMainIcon">
                 <paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button>                
             </div>

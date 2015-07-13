@@ -14,7 +14,7 @@
             on-core-response="{{handleResponseList}}"
             on-core-error="{{handleResponseError}}"></app-ajax>
         
-        <el-page pagetitle="Новости">
+        <el-page pagetitle="{{pageTitle}}">
             <div id="toolbarMainIcon"><content></content></div>
             <div id="toolbarIcons">
                 <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>

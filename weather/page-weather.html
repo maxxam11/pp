@@ -1,6 +1,6 @@
-<polymer-element name="page-dk" attributes="pageTitle">
+<polymer-element name="page-weather">
     <template>
-        <link rel="stylesheet" href="../css/main.css"> 
+        <link rel="stylesheet" href="../css/main.css">
         
         <style>
             div.description { padding: 10px 20px; }
@@ -8,7 +8,7 @@
             paper-item a { text-decoration: none; color: black; }
             
         </style>
-               
+        
         <el-page pagetitle="{{pageTitle}}">
             <div id="toolbarMainIcon"><content></content></div>
             <div id="toolbarIcons">
@@ -36,23 +36,13 @@
             </div>
             
         </el-page>
-        
-        
 
     </template>
     <script>
-        Polymer('page-dk', {
-            baseUrl: 'dk',
-            ready: function () {                               
-                document.title = 'Дорожная карта';
-                this.list = global.dk.list;
-                this.urlDk = 'http://' + global.domain + '/download/dk_pp_2014.pdf';
-            }, 
-            domReady: function(){
-                this.$.scroller.scrollTop = global.dk.scrollTop; 
-            },
-            scroll: function(e, detail, sender) {              
-                global.dk.scrollTop = sender.scrollTop;
+        Polymer('page-weather', {
+            pageTitle: 'Погода в Павшинской пойме',
+            ready: function(){
+                document.title = this.pageTitle;
             },
         });
         

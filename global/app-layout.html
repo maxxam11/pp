@@ -33,7 +33,7 @@
 
         <core-toolbar class="medium-tall">
             <div class="up" on-click="{{gotoHome}}">
-                <!--<core-image sizing="contain" src="img/weather/{{weatherIcon}}.png"></core-image>-->
+                <!--<core-image sizing="contain" src="img/weather/100/{{weatherIcon}}.png"></core-image>-->
                 <!--<div class="weather">{{weatherTemp}}°С</div>-->
                 <div class="city">{{appCity}}</div>
                 <div class="app">{{appName}}</div>
@@ -47,7 +47,7 @@
             
             <core-item class="margin-up" icon="speaker-notes" label="Новости"><a href="#!/news"></a></core-item>
             <!--<core-item icon="payment" label="Коммунальные платежи"><a href="#!/payments"></a></core-item>-->
-            <core-item src="img/weather/100/{{weatherIcon}}.png" label="Погода"><a href="#!/weather"></a><core-image sizing="contain" src="img/weather/{{weatherIcon}}.png"></core-image></core-item>
+            <core-item src="img/weather/100/{{weatherIcon}}.png" label="Погода"><a href="#!/weather"></a></core-item>
             <core-item icon="maps:map" label="Благоустройство района"><a href="#!/dk"></a></core-item>
             <core-item class="margin-down" icon="communication:phone" label="Экстренные службы"><a href="#!/info"></a></core-item>
             
@@ -80,20 +80,21 @@
   Polymer('app-layout', {
     appName: "Павшинская пойма",
     appCity: "Красногорск",
+    weatherIcon: 'mostly_clear',
     toggleDrawer: function() {
       this.$.drawerPanel.togglePanel();
     },
     ready: function() {         
         document.title = this.appName;
         
-        this.weatherIcon = global.weather.currently.icon;
-        this.weatherTemp = Math.round(global.weather.currently.temperature);
+        //this.weatherIcon = global.weather.currently.icon;
+        //this.weatherTemp = Math.round(global.weather.currently.temperature);
         //пока вместо стартовой страницы
         //document.location.href = '#!/news';
         //this.$.selector.selected = 0;
         //--
         
-        if (FROM_SITE) {
+        if (typeof FROM_SITE != 'undefined' && FROM_SITE) {
             this.$.menuAndroid.hidden = false;
         }
         

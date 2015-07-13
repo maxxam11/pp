@@ -5,18 +5,20 @@
         
         <more-route-switch routeContext>
             
-            <template when-route="/news"><page-news><content></content></page-news></template>            
-            <template when-route="/news-item/:id"><page-news-item newsId="{{params.id}}"></page-news-item></template>
+            <template when-route="/news"><page-news pageTitle="Новости ПП"><content></content></page-news></template>            
+            <template when-route="/news-item/:id"><page-news-item newsId="{{params.id}}"  pageTitle="Новости ПП"></page-news-item></template>
+            
+            <template when-route="/weather"><page-weather pageTitle="Подгоа в ПП"><content></content></page-weather></template>
             
             <template when-route="/payments/account-add/:id"><page-account-add accountId="{{params.id}}"></page-account-add></template>
-            <template when-route="/payments"><page-payments><content></content></page-payments></template>
+            <template when-route="/payments"><page-payments pageTitle="Мои платежи"><content></content></page-payments></template>
             
-            <template when-route="/dk-item/:id"><page-dk-item  dkId="{{params.id}}"><content></content></page-dk-item></template>
-            <template when-route="/dk"><page-dk><content></content></page-dk></template>
+            <template when-route="/dk-item/:id"><page-dk-item  dkId="{{params.id}}" pageTitle="Благоустройство ПП"><content></content></page-dk-item></template>
+            <template when-route="/dk"><page-dk pageTitle="Благоустройство ПП"><content></content></page-dk></template>
             
-            <template when-route="/info"><page-phones><content></content></page-phones></template>
+            <template when-route="/info"><page-phones pageTitle="Экстренные телефоны"><content></content></page-phones></template>
             
-            <template when-route="/feedback"><page-feedback><content></content></page-feedback></template>
+            <template when-route="/feedback"><page-feedback pageTitle="Обратная связь"><content></content></page-feedback></template>
             
             <template when-route="/nointernet"><page-nointernet><content></content></page-nointernet></template>
 
