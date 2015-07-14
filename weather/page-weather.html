@@ -4,7 +4,13 @@
         
          <style>
             div.description { padding: 10px 20px; }
-            core-image { width: 100px; height: 100px; float: left; margin: 10px 20px 10px 0; }           
+            
+            .summary h3 { font-size: 20px; font-weight: normal; line-height: 24px; margin: 0;  }
+            .summary { color: grey; font-size: 14px; margin-bottom: 10px; }            
+            core-image { width: 60px; height: 60px; margin: 10px 20px 10px 0; float: left; } 
+            .temperature { font-size: 65px; display: inline; }
+            .temperature sup { font-size: 30px; }
+            .detail { color: grey; display: inline; font-size: 14px; }
         </style>
         
         <app-ajax
@@ -24,12 +30,17 @@
                 <div id="wrapper" class="wrapper">
                     
                     <div class="description">
-                        <core-image position="left" sizing="contain" src="img/weather/100/{{weather.currently.icon}}.png"></core-image>
-                        <p>Сейчас {{weather.currently.summary}} 
-                            {{ weather.currently.temperature }}°C<br>
-                            {{ weather.currently.windSpeed ? weather.currently.windSummary + ' ветер ' + weather.currently.windSpeed + ' м/с' : 'ветра нет' }}<br>
+                        <div class="summary">
+                            <h3>{{weather.currently.summary}}</h3>
+                            {{weather.now.dayOfWeekSummary}} {{weather.now.time}}
+                        </div>
+                        <core-image position="left" sizing="contain" src="/img/weather/100/{{weather.currently.icon}}.png"></core-image>
+                        <span class="temperature">{{ weather.currently.temperature }}<sup>°C</sup></span>
+                        <div class="detail">
+                            {{ weather.currently.windSpeed ? weather.currently.windSummary + ' ветер ' + weather.currently.windSpeed + ' м/с' : 'Ветра нет' }}<br>
                             Влажность {{ weather.currently.humidity }}%<br>
-                            Давление {{ weather.currently.pressure }} мм рт.ст.</p>
+                            Давление {{ weather.currently.pressure }} мм рт.ст.
+                        </div>
                     </div>
                     
                     <template repeat="{{item in list}}">
