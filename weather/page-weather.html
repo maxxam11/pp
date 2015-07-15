@@ -7,10 +7,17 @@
             
             .summary h3 { font-size: 20px; font-weight: normal; line-height: 24px; margin: 0;  }
             .summary { color: grey; font-size: 14px; margin-bottom: 10px; }            
-            core-image { width: 60px; height: 60px; margin: 10px 20px 10px 0; float: left; } 
-            .temperature { font-size: 65px; display: inline; }
+            core-image { width: 60px; height: 60px; margin: 10px 10px 10px 0; float: left; } 
+            .temperature { font-size: 65px; }
             .temperature sup { font-size: 30px; }
-            .detail { color: grey; display: inline; font-size: 14px; }
+            .detail { color: grey; font-size: 14px; }
+            
+            .line { overflow-x: auto; padding: 0 20px; }
+            .line .scroller { }
+            .block { display: inline-block; }
+            .block core-image { width: 30px; height: 30px; }
+            
+            
         </style>
         
         <app-ajax
@@ -31,28 +38,44 @@
                     
                     <div class="description">
                         <div class="summary">
-                            <h3>{{weather.currently.summary}}</h3>
-                            {{weather.now.dayOfWeekSummary}} {{weather.now.time}}
+                            {{weather.now.dayOfWeekSummary}} {{weather.now.timeFormat}}
+                            <h3>{{weather.hourly.summary}}</h3>
+                            
                         </div>
-                        <core-image position="left" sizing="contain" src="/img/weather/100/{{weather.currently.icon}}.png"></core-image>
-                        <span class="temperature">{{ weather.currently.temperature }}<sup>°C</sup></span>
-                        <div class="detail">
-                            {{ weather.currently.windSpeed ? weather.currently.windSummary + ' ветер ' + weather.currently.windSpeed + ' м/с' : 'Ветра нет' }}<br>
+                        
+                        <!--
+                        <div>
+                            <core-image position="left" sizing="contain" src="/img/weather/100/{{weather.currently.icon}}.png"></core-image>
+                            <span class="temperature">{{ weather.currently.temperature }}<sup>°C</sup></span>
+                        </div>
+                        <div class="detail"> 
+                            {{ weather.currently.wind.summary }} {{ weather.currently.wind.speed + ' м/с' }}<br>
                             Влажность {{ weather.currently.humidity }}%<br>
-                            Давление {{ weather.currently.pressure }} мм рт.ст.
+                            Вероятность осадков {{ weather.currently.precipProbability }}%<br>
+                            Атмосферное давление {{ weather.currently.pressure }} мм рт.ст.<br>
+                            Восход {{ weather.currently.sunriseTime }}<br>
+                            Закат {{ weather.currently.sunsetTime }}<br>
+                            Фаза луны {{ weather.currently.moonPhase }}<br>
                         </div>
+                        -->
+                                   
+                        
+                        
                     </div>
                     
-                    <template repeat="{{item in list}}">
-                        
-                        <paper-item class="separator">
-                            <core-icon icon="maps:map"></core-icon>
-                            <a href="#!/dk-item/{{ item.id }}">{{ item.title }}</a>
-                        </paper-item>
-                        
-                        
-                                                
-                    </template>
+                    <div class="line" touch-action="pan-x">
+                            <div class="scroller" style="width:{{lineWidthH}}px">
+                                <template repeat="{{hour in weather.hourly.data}}">
+                                    <div class="block">
+                                        <core-image position="left" sizing="contain" src="/img/weather/100/{{hour.icon}}.png"></core-image>                                    
+                                    </div>
+                                </template>
+                            </div>
+                        </div>           
+                    
+                    
+                    
+                    
                 </div> 
             </div>
             
@@ -62,10 +85,13 @@
     <script>
         Polymer('page-weather', {
             ready: function(){
-                this.weather = global.weather;
+                this.weather = global.weather; 
+                
             },
             handleResponse: function(e, detail, sender) {
                 this.weather = global.weather = detail.response.data; 
+                
+                this.lineWidthH = this.weather.hourly.data.length * 50;
             },
             handleResponseError: function() {
                 
