@@ -3,7 +3,7 @@
         <link rel="stylesheet" href="../css/main.css">
         
          <style>
-            div.description { padding: 10px 20px; }
+            div.description { padding: 20px 20px; }
             
             .summary h3 { font-size: 20px; font-weight: normal; line-height: 24px; margin: 0;  }
             .summary { color: grey; font-size: 14px; margin-bottom: 10px; }            
@@ -15,6 +15,7 @@
             .line { overflow-x: auto; padding: 0 20px; }
             .line .scroller { }
             .block { display: inline-block; }
+            .block span { font-size: 12px; color: grey; }
             .block core-image { width: 30px; height: 30px; }
             
             
@@ -31,7 +32,7 @@
         <el-page pagetitle="{{pageTitle}}">
             <div id="toolbarMainIcon"><content></content></div>
             <div id="toolbarIcons">
-                
+                <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>
             </div>
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
                 <div id="wrapper" class="wrapper">
@@ -64,14 +65,15 @@
                     </div>
                     
                     <div class="line" touch-action="pan-x">
-                            <div class="scroller" style="width:{{lineWidthH}}px">
-                                <template repeat="{{hour in weather.hourly.data}}">
-                                    <div class="block">
-                                        <core-image position="left" sizing="contain" src="/img/weather/100/{{hour.icon}}.png"></core-image>                                    
-                                    </div>
-                                </template>
-                            </div>
-                        </div>           
+                        <div class="scroller" style="width:{{lineWidthH}}px">
+                            <template repeat="{{hour in weather.hourly.data}}">
+                                <div class="block">
+                                    <span>{{hour.now.timeFormat}}</span><br>
+                                    <core-image position="left" sizing="contain" src="/img/weather/100/{{hour.icon}}.png"></core-image>                                    
+                                </div>
+                            </template>
+                        </div>
+                    </div>           
                     
                     
                     
@@ -95,6 +97,9 @@
             },
             handleResponseError: function() {
                 
+            },
+            refresh: function() {
+                this.$.ajax.go();
             }
         });
         
