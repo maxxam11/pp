@@ -73,9 +73,8 @@
                         <div class="scroller" style="width:{{lineWidthH}}px">
                             <template repeat="{{hour in weather.hourly.data}}">
                                 <div class="block">
-                                    <div class="time">{{hour.now.timeFormat}}</div>
-                                    <div class="time">{{hour.icon}}</div>
-                                    <core-image position="left" sizing="contain" src="/img/weather/100/{{hour.icon}}.png"></core-image><br> 
+                                    <div class="time">{{hour.now.timeFormat}}</div>                                    
+                                    <core-image position="left" sizing="contain" src="{{domain}}/img/weather/100/{{hour.iconN}}.png"></core-image><br> 
                                     <div class="temp">{{hour.temperature}}<sup>°C</sup></div>
                                     <div class="precip">{{hour.precipProbability}}%</div>
                                     <div class="wind">{{hour.wind.speed}}м/c</div>
@@ -96,7 +95,8 @@
     <script>
         Polymer('page-weather', {
             ready: function(){
-                this.weather = global.weather; 
+                this.weather = global.weather;
+                this.domain = 'http://' + global.domain;
                 
             },
             handleResponse: function(e, detail, sender) {
