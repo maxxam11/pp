@@ -14,9 +14,14 @@
             
             .line { overflow-x: auto; padding: 0 20px; }
             .line .scroller { }
-            .block { display: inline-block; }
-            .block span { font-size: 12px; color: grey; }
+            .block { display: inline-block; padding: 0 0 15px 0; }
+            .block div { margin-bottom: 5px; }
+            .block div.time { font-size: 12px; color: grey; }
             .block core-image { width: 30px; height: 30px; }
+            .block div.temp { font-size: 18px; color: black; } 
+            .block div.temp sup { font-size: 10px; }
+            .block div.precip { font-size: 18px; color: grey; }
+            .block div.wind { font-size: 12px; color: grey; }
             
             
         </style>
@@ -39,7 +44,7 @@
                     
                     <div class="description">
                         <div class="summary">
-                            {{weather.now.dayOfWeekSummary}} {{weather.now.timeFormat}}
+                            {{weather.currently.now.dayOfWeekSummary}} {{weather.currently.now.timeFormat}}
                             <h3>{{weather.hourly.summary}}</h3>
                             
                         </div>
@@ -68,8 +73,12 @@
                         <div class="scroller" style="width:{{lineWidthH}}px">
                             <template repeat="{{hour in weather.hourly.data}}">
                                 <div class="block">
-                                    <span>{{hour.now.timeFormat}}</span><br>
-                                    <core-image position="left" sizing="contain" src="/img/weather/100/{{hour.icon}}.png"></core-image>                                    
+                                    <div class="time">{{hour.now.timeFormat}}</div>
+                                    <div class="time">{{hour.icon}}</div>
+                                    <core-image position="left" sizing="contain" src="/img/weather/100/{{hour.icon}}.png"></core-image><br> 
+                                    <div class="temp">{{hour.temperature}}<sup>°C</sup></div>
+                                    <div class="precip">{{hour.precipProbability}}%</div>
+                                    <div class="wind">{{hour.wind.speed}}м/c</div>
                                 </div>
                             </template>
                         </div>
