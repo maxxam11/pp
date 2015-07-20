@@ -1,3 +1,5 @@
+
+
 <polymer-element name="page-weather" attributes="pageTitle">
     <template>
         <link rel="stylesheet" href="../css/main.css">
@@ -14,16 +16,6 @@
             
             .line { overflow-x: auto; padding: 0 20px; }
             .line .scroller { }
-            .block { display: inline-block; padding: 0 0 15px 0; }
-            .block > div { margin-bottom: 7px; }
-            .block div.time { font-size: 12px; color: grey; }
-            .block core-image { width: 30px; height: 30px; }
-            .block core-image.hidden { visibility: hidden; }
-            .block div.temp { font-size: 18px; color: black; } 
-            .block div.temp sup { font-size: 10px; }
-            .block div.precip { font-size: 18px; color: grey; }
-            .block div.wind { font-size: 12px; color: grey; }
-            
             
         </style>
         
@@ -48,82 +40,16 @@
                             {{weather.currently.now.dayOfWeekSummary}} {{weather.currently.now.timeFormat}}
                             <h3>{{weather.hourly.summary}}</h3>
                             
-                        </div>
-                        
-                        <!--
-                        <div>
-                            <core-image position="left" sizing="contain" src="/img/weather/100/{{weather.currently.icon}}.png"></core-image>
-                            <span class="temperature">{{ weather.currently.temperature }}<sup>°C</sup></span>
-                        </div>
-                        <div class="detail"> 
-                            {{ weather.currently.wind.summary }} {{ weather.currently.wind.speed + ' м/с' }}<br>
-                            Влажность {{ weather.currently.humidity }}%<br>
-                            Вероятность осадков {{ weather.currently.precipProbability }}%<br>
-                            Атмосферное давление {{ weather.currently.pressure }} мм рт.ст.<br>
-                            Восход {{ weather.currently.sunriseTime }}<br>
-                            Закат {{ weather.currently.sunsetTime }}<br>
-                            Фаза луны {{ weather.currently.moonPhase }}<br>
-                        </div>
-                        -->
-                                   
-                        
-                        
+                        </div>                        
                     </div>
                     
                     <div class="line" touch-action="pan-x">
                         <div class="scroller" style="width:{{lineWidthH}}px">
-                            <template repeat="{{hour in weather.hourly.data}}">
-                                <div class="block">
-                                    <div class="time">{{hour.now.timeFormat}}</div>                                    
-                                    <core-image position="center" sizing="contain" src="{{domain}}/img/weather/100/{{hour.iconN}}.png"></core-image><br> 
-                                    <div class="temp">{{hour.temperature}}<sup>°C</sup></div>
-                                    <div class="precip">
-                                        {{hour.precipProbability}}%
-                                        <div style="height: 3px; background: linear-gradient(to right, #00BCD4 {{hour.precipProbability}}%, #FFF 0%);"></div>
-                                    </div>
-                                    <div class="wind">
-                                        <svg 
-                                            version="1.1" 
-                                            id="svg{{hour.windBearing + '_' + (hour.wind.speed > 20 ? 20  : hour.wind.speed)}}" 
-                                            xmlns="http://www.w3.org/2000/svg" 
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                            x="0px" 
-                                            y="0px"
-                                            width="268.832px" 
-                                            height="268.832px" 
-                                            viewBox="0 0 268.832 268.832" 
-                                            style="enable-background:new 0 0 268.832 268.832;"
-                                            xml:space="preserve">
-                                            <style>
-                                                #svg{{hour.windBearing + '_' + (hour.wind.speed > 20 ? 20  : hour.wind.speed)}} {
-                                                    
-                                                    width:{{ 10 + (hour.wind.speed > 20 ? 20  : hour.wind.speed) }}px;
-                                                    height:{{ 10 + (hour.wind.speed > 20 ? 20  : hour.wind.speed) }}px;
-                                                    -moz-transform: rotate({{hour.windBearing}}deg);  /* FF3.5/3.6 */
-                                                    -o-transform: rotate({{hour.windBearing}}deg);  /* Opera 10.5 */
-                                                    -webkit-transform: rotate({{hour.windBearing}}deg);  /* Saf3.1+ */
-                                                    transform: rotate({{hour.windBearing}}deg);  /* Newer browsers (incl IE9) */
-                                                    fill: {{hour.wind.colorRGBPercent}};
-                                                    color: {{hour.wind.colorRGBPercent}};
-                                                    margin-top: 7px;
-                                                }
-                                            </style>
-                                            <g>
-                                                <path d="M223.255,167.493c-4.881-4.882-12.797-4.882-17.678,0l-58.661,58.661V12.5c0-6.903-5.598-12.5-12.5-12.5
-                                                    c-6.904,0-12.5,5.597-12.5,12.5v213.654l-58.661-58.659c-4.883-4.881-12.797-4.881-17.678,0c-4.883,4.882-4.883,12.796,0,17.678
-                                                    l80,79.998c2.439,2.44,5.64,3.661,8.839,3.661s6.397-1.221,8.839-3.661l80-80C228.137,180.289,228.137,172.375,223.255,167.493z"/>
-                                            </g>
-                                        </svg>
-                                        <br>
-                                        {{hour.wind.speed}}м/c
-                                    </div>
-                                </div>
-                            </template>
+                            <el-hourly data="{{weather.hourly.data}}"></el-hourly>
                         </div>
-                    </div>           
+                    </div>
                     
-                    
-                    
+                    <div><el-daily data="{{weather.daily.data}}"></el-daily></div>
                     
                 </div> 
             </div>
@@ -133,6 +59,7 @@
     </template>
     <script>
         Polymer('page-weather', {
+            page: 0,
             ready: function(){
                 this.weather = global.weather;
                 this.domain = 'http://' + global.domain;
