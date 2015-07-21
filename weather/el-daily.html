@@ -20,14 +20,15 @@
         
         
         <table>
+            <!--
             <tr>
                 <th>дата</th>
                 <th>иконка</th>
                 <th>темп-ра</th>
-                <!--<th>осадки</th>-->
+                <th>осадки</th>
                 <th>ветер</th>
             </tr>
-            
+            -->
             <template repeat="{{hour in data}}">
                 <tr>
                     <td class="time">{{hour.now.dayOfWeekSummary}}</td>                                    
@@ -55,8 +56,8 @@
                             <style>
                                 #svg{{hour.windBearing + '_' + (hour.wind.speed > 20 ? 20  : hour.wind.speed)}} {
 
-                                    width:{{ 10 + (hour.wind.speed > 20 ? 20  : hour.wind.speed) }}px;
-                                    height:{{ 10 + (hour.wind.speed > 20 ? 20  : hour.wind.speed) }}px;
+                                    width:{{ hour.wind.speed ? 10 + (hour.wind.speed > 10 ? 10  : hour.wind.speed) * 2 : 0 }}px;
+                                    height:{{ hour.wind.speed ? 10 + (hour.wind.speed > 10 ? 10  : hour.wind.speed) * 2 : 0 }}px;
                                     -moz-transform: rotate({{hour.windBearing}}deg);  /* FF3.5/3.6 */
                                     -o-transform: rotate({{hour.windBearing}}deg);  /* Opera 10.5 */
                                     -webkit-transform: rotate({{hour.windBearing}}deg);  /* Saf3.1+ */

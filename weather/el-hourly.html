@@ -16,13 +16,12 @@
             .block { display: inline-block; padding: 0 0 15px 0; }
             .block > div { margin-bottom: 7px; }
             .block div.time { font-size: 12px; color: grey; }
-            .block core-image { width: 30px; height: 30px; }
-            .block core-image.hidden { visibility: hidden; }
+            .block div.icon core-image { width: 30px; height: 30px; }
             .block div.temp { font-size: 18px; color: black; } 
             .block div.temp sup { font-size: 10px; }
-            .block div.precip { font-size: 18px; color: grey; }
-            .block div.wind { font-size: 12px; color: grey; }
-            
+            .block div.precip { font-size: 12px; color: grey; }
+            .block div.wind { height: 30px; display: table-cell; vertical-align: bottom; }
+            .block div.speed { font-size: 12px; color: grey; }
             
         </style>
         
@@ -32,11 +31,12 @@
         <template repeat="{{hour in data}}">
             <div class="block">
                 <div class="time">{{hour.now.timeFormat}}</div>                                    
-                <core-image position="center" sizing="contain" src="{{domain}}/img/weather/100/{{hour.iconN}}.png"></core-image><br> 
+                <div class="icon"><core-image position="center" sizing="contain" src="{{domain}}/img/weather/100/{{hour.iconN}}.png"></core-image></div> 
                 <div class="temp">{{hour.temperature}}<sup>°C</sup></div>
-                <div class="precip">
+                <div style="height: 30px; background: linear-gradient(to top, #00BCD4 {{hour.precipProbability}}%, #FFF 0%);"></div>
+                <div class="precip">                    
+                    <!--<div style="width: 3px; height: 30px; display: inline-block; background: linear-gradient(to top, #00BCD4 {{hour.precipProbability}}%, #FFF 0%);"></div>-->
                     {{hour.precipProbability}}%
-                    <div style="height: 3px; background: linear-gradient(to right, #00BCD4 {{hour.precipProbability}}%, #FFF 0%);"></div>
                 </div>
                 <div class="wind">
                     <svg 
@@ -54,15 +54,15 @@
                         <style>
                             #svg{{hour.windBearing + '_' + (hour.wind.speed > 20 ? 20  : hour.wind.speed)}} {
 
-                                width:{{ 10 + (hour.wind.speed > 20 ? 20  : hour.wind.speed) }}px;
-                                height:{{ 10 + (hour.wind.speed > 20 ? 20  : hour.wind.speed) }}px;
+                                width:{{ hour.wind.speed ? 10 + (hour.wind.speed > 10 ? 10  : hour.wind.speed) * 2 : 0 }}px;
+                                height:{{ hour.wind.speed ? 10 + (hour.wind.speed > 10 ? 10  : hour.wind.speed) * 2 : 0 }}px;
                                 -moz-transform: rotate({{hour.windBearing}}deg);  /* FF3.5/3.6 */
                                 -o-transform: rotate({{hour.windBearing}}deg);  /* Opera 10.5 */
                                 -webkit-transform: rotate({{hour.windBearing}}deg);  /* Saf3.1+ */
                                 transform: rotate({{hour.windBearing}}deg);  /* Newer browsers (incl IE9) */
                                 fill: {{hour.wind.colorRGBPercent}};
                                 color: {{hour.wind.colorRGBPercent}};
-                                margin-top: 7px;
+                                
                             }
                         </style>
                         <g>
@@ -70,10 +70,9 @@
                                 c-6.904,0-12.5,5.597-12.5,12.5v213.654l-58.661-58.659c-4.883-4.881-12.797-4.881-17.678,0c-4.883,4.882-4.883,12.796,0,17.678
                                 l80,79.998c2.439,2.44,5.64,3.661,8.839,3.661s6.397-1.221,8.839-3.661l80-80C228.137,180.289,228.137,172.375,223.255,167.493z"/>
                         </g>
-                    </svg>
-                    <br>
-                    {{hour.wind.speed}}м/c
+                    </svg> 
                 </div>
+                <div class="speed">{{hour.wind.speed}}м/c</div>
             </div>
         </template>
 

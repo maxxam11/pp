@@ -68,7 +68,7 @@
             handleResponse: function(e, detail, sender) {
                 this.weather = global.weather = detail.response.data; 
                 
-                this.lineWidthH = this.weather.hourly.data.length * 50;
+                this.lineWidthH = this.weather.hourly.data.length * 45;
             },
             handleResponseError: function() {
                 
