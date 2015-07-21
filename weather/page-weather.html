@@ -14,7 +14,7 @@
             .temperature sup { font-size: 30px; }
             .detail { color: grey; font-size: 14px; }
             
-            .line { overflow-x: auto; padding: 0 20px; }
+            .line { overflow-x: auto; padding: 0 20px; border-top: solid 1px grey; border-bottom: solid 1px grey; }
             .line .scroller { }
             
         </style>
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     
-                    <div><el-daily data="{{weather.daily.data}}"></el-daily></div>
+                    <div class="description"><el-daily data="{{weather.daily.data}}"></el-daily></div>
                     
                 </div> 
             </div>
