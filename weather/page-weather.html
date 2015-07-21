@@ -5,16 +5,16 @@
         <link rel="stylesheet" href="../css/main.css">
         
          <style>
-            div.description { padding: 20px 20px; }
+            div.description { padding: 20px 20px 10px 20px; }
             
             .summary h3 { font-size: 20px; font-weight: normal; line-height: 24px; margin: 0;  }
             .summary { color: grey; font-size: 14px; margin-bottom: 10px; }            
-            core-image { width: 60px; height: 60px; margin: 10px 10px 10px 0; float: left; } 
-            .temperature { font-size: 65px; }
-            .temperature sup { font-size: 30px; }
+            core-image { width: 60px; height: 60px; margin-right: 10px; float: left; } 
+            .temp { font-size: 40px; float: left; }
+            .temp sup { font-size: 15px; }
             .detail { color: grey; font-size: 14px; }
             
-            .line { overflow-x: auto; padding: 0 20px; border-top: solid 1px grey; border-bottom: solid 1px grey; }
+            .line { overflow-x: auto; padding: 0 20px; background-color: #f1f1f1; }
             .line .scroller { }
             
         </style>
@@ -35,15 +35,20 @@
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
                 <div id="wrapper" class="wrapper">
                     
-                    <div class="description">
+                    <div class="description"> 
+                        <core-image position="center" sizing="contain" src="{{domain}}/img/weather/100/{{weather.currently.iconN}}.png"></core-image>
                         <div class="summary">
                             {{weather.currently.now.dayOfWeekSummary}} {{weather.currently.now.timeFormat}}
-                            <h3>{{weather.hourly.summary}}</h3>
-                            
-                        </div>                        
+                            <h3>{{weather.currently.summary}}</h3>  
+                            <span>температура {{weather.currently.temperature}}°,<!-- влажность {{weather.currently.humidity}}%,--> ветер {{weather.currently.wind.speed}}м/с</span>
+                        </div>  
+                        
+                        
                     </div>
                     
-                    <div class="line" touch-action="pan-x">
+                    
+                    
+                    <div class="line" touch-action="pan-x pan-y">
                         <div class="scroller" style="width:{{lineWidthH}}px">
                             <el-hourly data="{{weather.hourly.data}}"></el-hourly>
                         </div>

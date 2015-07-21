@@ -32,8 +32,8 @@
             <div class="block">
                 <div class="time">{{hour.now.timeFormat}}</div>                                    
                 <div class="icon"><core-image position="center" sizing="contain" src="{{domain}}/img/weather/100/{{hour.iconN}}.png"></core-image></div> 
-                <div class="temp">{{hour.temperature}}<sup>°C</sup></div>
-                <div style="height: 30px; background: linear-gradient(to top, #00BCD4 {{hour.precipProbability}}%, #FFF 0%);"></div>
+                <div class="temp">{{hour.temperature}}°</div>
+                <div style="height: 30px; background: linear-gradient(to top, #00BCD4 {{hour.precipProbability}}%, rgba(255,255,255,0) 0%);"></div>
                 <div class="precip">                    
                     <!--<div style="width: 3px; height: 30px; display: inline-block; background: linear-gradient(to top, #00BCD4 {{hour.precipProbability}}%, #FFF 0%);"></div>-->
                     {{hour.precipProbability}}%
