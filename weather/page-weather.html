@@ -32,7 +32,7 @@
                 <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>
             </div>
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
-                <div id="wrapper" class="wrapper">
+                <div id="wrapper" class="wrapper" hidden>
                     
                     <div class="description"> 
                         
@@ -44,8 +44,8 @@
                         </div>  
                         <core-image position="center" sizing="contain" src="{{domain}}/img/weather/100/{{weather.currently.iconN}}.png"></core-image>
                         <span class="temp">{{weather.currently.temperature}}°</span>
-                        <span class="detail" {{ weather.currently.temperature ? '' : 'hidden' }}>
-                            <nobr>вероятность осадков {{weather.hourly.data[0].precipProbability}}%</nobr><br>
+                        <span class="detail">
+                            <nobr>вероятность осадков {{weather.currently.precipProbability}}%</nobr><br>
                             <nobr>ветер {{weather.currently.wind.speed}} м/с</nobr><br>
                         </span>
                     </div>
@@ -78,6 +78,7 @@
                 this.weather = global.weather = detail.response.data; 
                 
                 this.lineWidthH = this.weather.hourly.data.length * 45;
+                this.$.wrapper.hidden = false;
             },
             handleResponseError: function() {
                 
