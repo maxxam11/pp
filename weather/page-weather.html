@@ -16,6 +16,7 @@
             .line { overflow-x: scroll; padding: 0 20px; background-color: #f1f1f1; }
             .line .scroller { }
             
+            #spinner { margin: 20px 45%; }
         </style>
         
         <app-ajax
@@ -32,6 +33,7 @@
                 <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>
             </div>
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
+                <paper-spinner id="spinner" active="true"></paper-spinner>
                 <div id="wrapper" class="wrapper" hidden>
                     
                     <div class="description"> 
@@ -79,6 +81,7 @@
                 
                 this.lineWidthH = this.weather.hourly.data.length * 45;
                 this.$.wrapper.hidden = false;
+                this.$.spinner.hidden = true;
             },
             handleResponseError: function() {
                 
