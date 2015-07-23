@@ -6,7 +6,7 @@
 <link rel="import" href="el-descr7.html">
 <link rel="import" href="el-descr8.html">
 
-<polymer-element name="page-dk-item" attributes="dkId">
+<polymer-element name="page-dk-item" attributes="dkId,pagetitle">
     <template>
         <link rel="stylesheet" href="../../css/main.css">
         <style>
@@ -18,7 +18,7 @@
             img { width: 100%; margin-top: 10px; display: none; }
         </style>
 
-        <el-page pagetitle="Дорожная карта ПП">
+        <el-page pagetitle="{{pagetitle}}">
             <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
             <div flex style="overflow: auto;" id="scroller">
                 <div class="description separator">

@@ -5,8 +5,7 @@
         <link rel="stylesheet" href="../css/main.css"> 
         
         <style>
-            
-            
+            .wrapper img { width: 100%; }            
         </style>
                
         <el-page pagetitle="{{pageTitle}}">
@@ -17,7 +16,9 @@
             <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
                 <div id="wrapper" class="wrapper">                    
                         
-                    концепт
+                    <template repeat="{{i in data}}">
+                        <img src="http://{{domain}}/img/beautification/concept/{{i}}.jpg"><br>
+                    </template>
                     
                 </div> 
             </div>
@@ -29,6 +30,13 @@
     </template>   
     <script>
         Polymer('page-concept', {
+            ready: function() {
+                this.data = [];
+                for (var i = 9; i <= 35; i++) {
+                    this.data.push(i);
+                }
+                this.domain = global.domain;
+            },
             back: function () {
                document.location.href = '#!/beautification';
             },
