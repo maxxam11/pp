@@ -1,6 +1,8 @@
+<link rel="import" href="page-dk-item.html">
+
 <polymer-element name="page-dk" attributes="pageTitle">
     <template>
-        <link rel="stylesheet" href="../css/main.css"> 
+        <link rel="stylesheet" href="../../css/main.css"> 
         
         <style>
             div.description { padding: 10px 20px; }
@@ -10,7 +12,7 @@
         </style>
                
         <el-page pagetitle="{{pageTitle}}">
-            <div id="toolbarMainIcon"><content></content></div>
+            <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
             <div id="toolbarIcons">
                 
             </div>
@@ -18,7 +20,7 @@
                 <div id="wrapper" class="wrapper">
                     
                     <div class="description separator">
-                        <p>Здесь описан план мероприятий по улучшению состояния территории микрорайона Павшинская пойма и завершению строительства объектов жилищного, социального и коммунального назначения.</p>
+                        <p>В дорожной карте описан план мероприятий по улучшению состояния территории микрорайона Павшинская пойма и завершению строительства объектов жилищного, социального и коммунального назначения.</p>
                         <!--<p>Оригинал документа можно скачать <a href="{{ urlDk }}">здесь</a>.</p>-->
                     </div>
                     
@@ -26,7 +28,7 @@
                         
                         <paper-item class="separator">
                             <core-icon icon="maps:map"></core-icon>
-                            <a href="#!/dk-item/{{ item.id }}">{{ item.title }}</a>
+                            <a href="#!/beautification/dk-item/{{ item.id }}">{{ item.title }}</a>
                         </paper-item>
                         
                         
@@ -53,6 +55,9 @@
             },
             scroll: function(e, detail, sender) {              
                 global.dk.scrollTop = sender.scrollTop;
+            },
+            back: function () {
+               document.location.href = '#!/beautification';
             },
         });
         

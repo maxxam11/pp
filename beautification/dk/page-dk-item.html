@@ -8,7 +8,7 @@
 
 <polymer-element name="page-dk-item" attributes="dkId">
     <template>
-        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../../css/main.css">
         <style>
             div.description { padding: 20px; }
             div.detail { color: grey; padding-top: 10px; font-size: 80%; font-weight: normal; }
@@ -18,7 +18,7 @@
             img { width: 100%; margin-top: 10px; display: none; }
         </style>
 
-        <el-page pagetitle="Дорожная карта">
+        <el-page pagetitle="Дорожная карта ПП">
             <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
             <div flex style="overflow: auto;" id="scroller">
                 <div class="description separator">
@@ -77,7 +77,7 @@
                 
             }, 
             back: function () {
-               document.location.href = '#!/dk';
+               document.location.href = '#!/beautification/dk';
             },
         });
         

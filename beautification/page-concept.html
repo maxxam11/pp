@@ -1,0 +1,38 @@
+<link rel="import" href="dk/page-dk.html">
+
+<polymer-element name="page-concept" attributes="pageTitle">
+    <template>
+        <link rel="stylesheet" href="../css/main.css"> 
+        
+        <style>
+            
+            
+        </style>
+               
+        <el-page pagetitle="{{pageTitle}}">
+            <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
+            <div id="toolbarIcons">
+                
+            </div>
+            <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
+                <div id="wrapper" class="wrapper">                    
+                        
+                    концепт
+                    
+                </div> 
+            </div>
+            
+        </el-page>
+        
+        
+
+    </template>   
+    <script>
+        Polymer('page-concept', {
+            back: function () {
+               document.location.href = '#!/beautification';
+            },
+        });
+        
+    </script>
+</polymer-element>
