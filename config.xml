@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "ru.maxxam.pp"
-        version   = "0.2.1">
+        version   = "0.2.2">
     
     <!-- версияя для этого пакета 1 19 (версия андройд 19 (4.4 KitKat)) 00 (размер экрана) 100 (версия приложения 1.0.0)-->
     <!--<preference name="android-versionCode" value="11900100" />--> 

@@ -9,9 +9,10 @@ var TimeOfDay = {
 /** глобальный массив настроек и данных */
 var global = {
     domain: '178.62.225.181',
+    spaceName: 'Павшинская пойма',
     app: {
         spaceId: 1,
-        version: '1.0',
+        version: '0.2.2',
     },    
     api: {
         //url: 'http://pp.maxxam.ru/api/',
