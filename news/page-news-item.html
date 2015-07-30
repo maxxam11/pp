@@ -41,6 +41,7 @@
                     this.$.spinner.show();                
                     this.$.ajaxItem.go();                    
                 } 
+                ga_storage._trackPageview('/page-news-item.html?id=' + this.newsId);
             },            
             handleResponseItem: function (e, detail, sender) {                
                 this.showNews(detail.response.data.news);                

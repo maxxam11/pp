@@ -49,6 +49,7 @@
                 document.title = 'Дорожная карта';
                 this.list = global.dk.list;
                 this.urlDk = 'http://' + global.domain + '/download/dk_pp_2014.pdf';
+                ga_storage._trackPageview('/page-dk.html');
             }, 
             domReady: function(){
                 this.$.scroller.scrollTop = global.dk.scrollTop; 

@@ -46,10 +46,13 @@
     <script>
         Polymer('page-index', {
             ready: function(){
+                /*
                 if (global.timeOfDay == TimeOfDay.night) this.pageTitle = 'Доброй ночи';
                 if (global.timeOfDay == TimeOfDay.morning) this.pageTitle = 'Доброе утро';
                 if (global.timeOfDay == TimeOfDay.day) this.pageTitle = 'Добрый день';
                 if (global.timeOfDay == TimeOfDay.evening) this.pageTitle = 'Добрый вечер';
+                */
+                ga_storage._trackPageview('/page-index.html');
             }
         });
     </script>

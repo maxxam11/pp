@@ -19,7 +19,7 @@
         <div class="body" id="body"></div>
         <div class="date">
             опубликовано <span id="date"></span>,
-            источник <a id="link" href="{{news.sourceLink}}" onclick="window.open('{{news.sourceLink}}', '_system');return false;">{{news.sourceName ? news.sourceName : news.sourceDomain}}</a>            
+            источник <a id="link" href="{{news.sourceLink}}" on-click="{{linkClick}}" onclick="return false;">{{news.sourceName ? news.sourceName : news.sourceDomain}}</a>            
         </div>
         
     </template>
@@ -59,14 +59,21 @@
                 this.$.date.innerHTML = this.news.dateago;
             }, 
             openImg: function(event, h, div){   
-                
+                var img = this.news.imgUrl;
+                img = img.substr(0, img.indexOf('?')); 
                 if($(div).hasClass('open')) {                     
-                    $(div).removeClass('open'); 
+                    $(div).removeClass('open');
+                    ga_storage._trackEvent('news', 'closeImg', img);
                 } else {                    
                     $(div).addClass('open');
+                    ga_storage._trackEvent('news', 'openImg', img);
                 }
                 
-            }
+            },
+            linkClick: function() {
+                window.open(this.news.sourceLink, '_system'); 
+                ga_storage._trackEvent('news', 'openLink', this.news.sourceLink);
+            },
         });
     </script>
 </polymer-element>

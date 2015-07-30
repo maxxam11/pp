@@ -9,7 +9,13 @@ var TimeOfDay = {
 /** глобальный массив настроек и данных */
 var global = {
     domain: '178.62.225.181',
-    spaceName: 'Павшинская пойма',
+    GA: {
+        id: 'UA-2026763-18',
+    },
+    space: {
+        name: 'Павшинская пойма',
+        shortName: 'ПП',
+    },
     app: {
         spaceId: 1,
         version: '0.2.2',
@@ -43,8 +49,7 @@ var global = {
     info: {
         scrollTop: 0,
     },
-    weather: {},
-    timeOfDay: TimeOfDay.day, // время суток    
+    weather: {}   
 };
 
 var DEBUG = {

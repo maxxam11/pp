@@ -2,7 +2,7 @@
 <link rel="import" href="page-concept.html">
 <link rel="import" href="page-embankment.html">
 
-<polymer-element name="page-beautification" attributes="pageTitle" noscript>
+<polymer-element name="page-beautification" attributes="pageTitle">
     <template>
         <link rel="stylesheet" href="../css/main.css"> 
         
@@ -44,5 +44,13 @@
         
         
 
-    </template>    
+    </template>  
+    
+    <script>
+        Polymer('page-beautification', {
+            ready: function () {  
+                ga_storage._trackPageview('/page-beautification.html');
+            },
+        });        
+    </script>
 </polymer-element>

@@ -20,7 +20,10 @@
     <script>
         Polymer('page-feedback',{
             send: function(event, detail, sender){               
-                this.$.feedback.send();
+                this.$.feedback.send();                
+            },
+            ready: function() {
+                ga_storage._trackPageview('/page-feedback.html');
             }
         });
     </script>

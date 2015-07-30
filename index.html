@@ -87,6 +87,11 @@
     
     <link rel="import" href="info/page-phones.html">
     
+    <script type="text/javascript" src="js/GALocalStorage.js"></script>
+    <script>
+        ga_storage._setAccount(global.GA.id); 
+        ga_storage._trackPageview('/index.html');
+    </script>
 </head>
 
 <body unresolved onload="onLoad()">
