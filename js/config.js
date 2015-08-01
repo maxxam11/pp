@@ -15,6 +15,7 @@ var global = {
     space: {
         name: 'Павшинская пойма',
         shortName: 'ПП',
+        isTown: false,
     },
     app: {
         spaceId: 1,
