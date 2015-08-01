@@ -20,7 +20,7 @@
             <template when-route="/beautification"><page-beautification pageTitle="Благоустройство района"><content></content></page-beautification></template>
             
             <template when-route="/info"><page-phones pageTitle="Экстренные телефоны"><content></content></page-phones></template>
-            <template when-route="/wiki"><page-wiki pageTitle="О районе..."><content></content></page-wiki></template>
+            <template when-route="/wiki"><page-wiki pageTitle="{{ global.city.isTown ? 'О городе' : 'О районе' }}"><content></content></page-wiki></template>
             
             <template when-route="/feedback"><page-feedback pageTitle="Обратная связь"><content></content></page-feedback></template>
             
