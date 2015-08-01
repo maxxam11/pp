@@ -1,0 +1,48 @@
+<polymer-element name="page-wiki" attributes="pageTitle">
+    <template>        
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+            
+        </style>
+        
+         <app-ajax
+            auto
+            id="ajax"
+            op="wiki/space"
+            params='{}'
+            on-core-response="{{handleResponse}}"
+            on-core-error="{{handleResponseError}}"></app-ajax>
+        
+        <el-page pageTitle="{{pageTitle}}">
+            <div id="toolbarMainIcon"><content></content></div>
+            <!--<div id="toolbarIcons"><paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button></div>-->
+            
+            <div id="scroller" flex style="overflow: auto; padding-top: 10px; "> 
+                <div id="wrapper" class="wrapper">
+                    
+                </div> 
+            </div>
+        </el-page>
+        
+    </template>
+    
+    
+    
+    <script>
+        Polymer('page-wiki', {
+        pageTitle: 'О районе',    
+        ready: function(){
+                document.title = this.pageTitle;
+                ga_storage._trackPageview('/page-wiki.html');
+            },
+            handleResponse: function (e, detail, sender) { 
+                this.$.wrapper.innerHTML = detail.response.data.html; 
+            },
+            handleResponseError: function(){
+                //this.$.spinner.hide();
+                //@todo здесь нужно показать кнопку о том что нет подключения и попробовать еще раз
+            }
+            
+        });
+    </script>
+</polymer-element>
