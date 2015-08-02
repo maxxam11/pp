@@ -1,3 +1,11 @@
+/** Время суток */
+var TimeOfDay = {
+    night: 0,
+    morning: 1,
+    day: 2,
+    evening: 3,
+};
+
 function debuger() {
     var txt;
     if (arguments[0] && arguments[0] == 'trace' && arguments[1]) {

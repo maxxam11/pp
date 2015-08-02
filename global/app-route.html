@@ -1,9 +1,9 @@
-<polymer-element name="app-route" noscript>
+<polymer-element name="app-route">
     <template>
 
         <more-routing driver="hash"></more-routing>
         
-        <more-route-switch routeContext>
+        <more-route-switch routeContext id="routes">
             
             <template when-route="/news"><page-news pageTitle="Новости"><content></content></page-news></template>            
             <template when-route="/news-item/:id"><page-news-item newsId="{{params.id}}"  pageTitle="Новости"></page-news-item></template>
@@ -19,8 +19,7 @@
             <template when-route="/beautification/embankment"><page-embankment pageTitle="Эскизный проект набережной"><content></content></page-embankment></template>
             <template when-route="/beautification"><page-beautification pageTitle="Благоустройство района"><content></content></page-beautification></template>
             
-            <template when-route="/info"><page-phones pageTitle="Экстренные телефоны"><content></content></page-phones></template>
-            <template when-route="/wiki"><page-wiki pageTitle="{{ global.city.isTown ? 'О городе' : 'О районе' }}"><content></content></page-wiki></template>
+            <template when-route="/info"><page-phones pageTitle="Экстренные телефоны"><content></content></page-phones></template>            
             
             <template when-route="/feedback"><page-feedback pageTitle="Обратная связь"><content></content></page-feedback></template>
             
@@ -31,6 +30,17 @@
         </more-route-switch>
 
     </template>
+    <script>        
+        Polymer('app-route', {
+            ready: function(){
+                for(var i = 0, l = global.routes.length; i < l; i++) { 
+                    var route = global.routes[i];
+                    $(this.$.routes).prepend('<template when-route="/' + route.route + '"><page-' + route.route + ' pageTitle="' + route.pageTitle + '"><content></content></page-' + route.route + '></template>');
+                } 
+            },
+        });
+        
+    </script>
 </polymer-element>
 
 

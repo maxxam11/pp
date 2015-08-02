@@ -1,11 +1,3 @@
-/** Время суток */
-var TimeOfDay = {
-    night: 0,
-    morning: 1,
-    day: 2,
-    evening: 3,
-};
-
 /** глобальный массив настроек и данных */
 var global = {
     domain: '178.62.225.181',
@@ -27,6 +19,9 @@ var global = {
         version: 1,
         token: '34829a123b98d99c',
     },
+    routes: [
+        { route: 'wiki', pageTitle: 'О районе' },
+    ],
     timeout: {
         noInternet: 10000,
         loadStart: 500,
