@@ -19,7 +19,8 @@
             <template when-route="/beautification/embankment"><page-embankment pageTitle="Эскизный проект набережной"><content></content></page-embankment></template>
             <template when-route="/beautification"><page-beautification pageTitle="Благоустройство района"><content></content></page-beautification></template>
             
-            <template when-route="/info"><page-phones pageTitle="Экстренные телефоны"><content></content></page-phones></template>            
+            <template when-route="/info/wiki"><page-wiki pageTitle="{{ global.space.isTown ? 'О городе' : 'О районе' }}"><content></content></page-wiki></template>
+            <template when-route="/info"><page-phones pageTitle="Экстренные телефоны"><content></content></page-phones></template> 
             
             <template when-route="/feedback"><page-feedback pageTitle="Обратная связь"><content></content></page-feedback></template>
             
@@ -35,7 +36,7 @@
             ready: function(){
                 for(var i = 0, l = global.routes.length; i < l; i++) { 
                     var route = global.routes[i];
-                    $(this.$.routes).prepend('<template when-route="/' + route.route + '"><page-' + route.route + ' pageTitle="' + route.pageTitle + '"><content></content></page-' + route.route + '></template>');
+                    $(this.$.routes).prepend('<template when-route="/_space' + route.route + '"><page-' + route.page + ' pageTitle="' + route.pageTitle + '"><content></content></page-' + route.page + '></template>');
                 } 
             },
         });

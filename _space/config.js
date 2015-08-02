@@ -20,7 +20,9 @@ var global = {
         token: '34829a123b98d99c',
     },
     routes: [
-        { route: 'wiki', pageTitle: 'О районе' },
+        { route: '/beautification/dk', page: 'dk', pageTitle: 'Дорожная карта' },
+        { route: '/beautification/concept', page: 'concept', pageTitle: 'Концепция благоустройства' },
+        { route: '/beautification/embankment', page: 'embankment', pageTitle: 'Эскизный проект набережной' },
     ],
     timeout: {
         noInternet: 10000,
