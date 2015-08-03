@@ -5,7 +5,7 @@
         <style>
             .contact { padding: 10px 20px; cursor: pointer; }  
             .contact:hover {  }
-            .title { }
+            .contact core-icon { height: 38px; float: left; margin-right: 20px; color: #aaa; }
             .descr { font-size: 80%; color: grey; padding: 5px 0;  }
             .wrapper { padding-top: 7px; }
         </style>              
@@ -19,11 +19,13 @@
                 <div id="wrapper" class="wrapper">
                     
                     <div class="contact separator" onclick="document.location.href = '#!/info/wiki';">                                        
+                        <!--<core-icon icon="info-outline"></core-icon>-->
                         <div class='title primary-text-color'>{{ global.space.isTown ? 'О городе' : 'О районе' }}</div>  
                         <div class="descr secondary-text-color">Подробная информация из Википедии</div>
                     </div>
 
-                    <div class="contact separator" onclick="document.location.href = '#!/info/phones';">                                        
+                    <div class="contact separator" onclick="document.location.href = '#!/info/phones';">  
+                        <!--<core-icon icon="communication:phone"></core-icon>-->
                         <div class='title primary-text-color'>Экстренные телефоны</div>  
                         <div class="descr secondary-text-color">Номера телефонов первой необходимости и экстренных служб</div>
                     </div>
