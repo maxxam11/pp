@@ -39,7 +39,7 @@
             on-core-error="{{handleResponseError}}"></app-ajax>
         
         <el-page pageTitle="{{pageTitle}}">
-            <div id="toolbarMainIcon"><content></content></div>
+            <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
             <!--<div id="toolbarIcons"><paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button></div>-->
             
             <div id="scroller" flex style="overflow: auto; padding-top: 10px; "> 
@@ -71,7 +71,10 @@
             handleResponseError: function(){
                 //this.$.spinner.hide();
                 //@todo здесь нужно показать кнопку о том что нет подключения и попробовать еще раз
-            }
+            },
+            back: function () {
+               document.location.href = '#!/info';
+            },
             
         });
     </script>

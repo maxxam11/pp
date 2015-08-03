@@ -8,7 +8,7 @@
 
 <polymer-element name="page-dk-item" attributes="dkId,pagetitle">
     <template>
-        <link rel="stylesheet" href="../../css/main.css">
+        <link rel="stylesheet" href="../../../css/main.css">
         <style>
             div.description { padding: 20px; }
             div.detail { color: grey; padding-top: 10px; font-size: 80%; font-weight: normal; }
@@ -65,19 +65,19 @@
             imgLoad: function(a,b,img){
                 $(img).show();
             },
-            ready: function () {
+            ready: function () { console.log(this.dkId);
                 this.domain = global.domain;
                 if (global.dk.list) {
                     var item = global.dk.list[this.dkId-1];
                     if (item)
                         this.item = item;
                     else
-                       document.location.href = '#!/dk'; 
+                       document.location.href = '#!/_space/beautification/dk'; 
                 }
                 ga_storage._trackPageview('/page-dk-item.html?id=' + this.dkId);
             }, 
             back: function () {
-               document.location.href = '#!/beautification/dk';
+               document.location.href = '#!/_space/beautification/dk';
             },
         });
         

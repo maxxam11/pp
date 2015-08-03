@@ -20,6 +20,7 @@ var global = {
         token: '34829a123b98d99c',
     },
     routes: [
+        { route: '/beautification/dk-item/:id', page: 'dk-item', param: 'dkId', pageTitle: 'Дорожная карта' },
         { route: '/beautification/dk', page: 'dk', pageTitle: 'Дорожная карта' },
         { route: '/beautification/concept', page: 'concept', pageTitle: 'Концепция благоустройства' },
         { route: '/beautification/embankment', page: 'embankment', pageTitle: 'Эскизный проект набережной' },

@@ -18,7 +18,7 @@
             on-core-error=""></app-ajax>
         
         <el-page pageTitle="{{pageTitle}}">
-            <div id="toolbarMainIcon"><content></content></div>
+            <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
             <!--<div id="toolbarIcons"><paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button></div>-->
             
             <div id="scroller" flex style="overflow: auto; padding-top: 10px; ">                               
@@ -95,7 +95,10 @@
                 //@todo давать возможность предлагать добавлять телефон
                 // открываем модальное окно и в нем размещаем компонент обратной связи с заголовокм и текстом:
                 // "Новый телефон в экстренные службы", "Предлагаю добвать телефон экстренной службы: "
-            }
+            },
+            back: function () {
+               document.location.href = '#!/info';
+            },
             
         });
     </script>
