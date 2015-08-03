@@ -11,7 +11,7 @@ var global = {
     },
     app: {
         spaceId: 1,
-        version: '0.2.2',
+        version: '0.3.0',
     },    
     api: {
         //url: 'http://pp.maxxam.ru/api/',
