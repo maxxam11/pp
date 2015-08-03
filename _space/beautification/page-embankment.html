@@ -17,7 +17,7 @@
                 <div id="wrapper" class="wrapper">                    
                         
                     <template repeat="{{i in data}}">
-                        <img src="http://{{domain}}/img/beautification/embankment/{{i}}.jpg"><br>
+                        <img src="http://{{domain}}/img/_space.{{spaceId}}/beautification/embankment/{{i}}.jpg"><br>
                     </template>
                     
                 </div> 
@@ -32,6 +32,7 @@
     <script>
         Polymer('page-embankment', {
             ready: function() {
+                this.spaceId = global.app.spaceId;
                 this.data = [];
                 for (var i = 1; i <= 9; i++) {
                     this.data.push(i);
@@ -40,7 +41,7 @@
                 ga_storage._trackPageview('/page-embankment.html');
             },
             back: function () {
-               document.location.href = '#!/beautification';
+               document.location.href = '#!/info';
             },
         });
         

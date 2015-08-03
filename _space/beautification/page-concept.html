@@ -17,7 +17,7 @@
                 <div id="wrapper" class="wrapper">                    
                         
                     <template repeat="{{i in data}}">
-                        <img src="http://{{domain}}/img/beautification/concept/{{i}}.jpg"><br>
+                        <img src="http://{{domain}}/img/_space.{{spaceId}}/beautification/concept/{{i}}.jpg"><br>
                     </template>
                     
                 </div> 
@@ -29,8 +29,9 @@
 
     </template>   
     <script>
-        Polymer('page-concept', {
+        Polymer('page-concept', {            
             ready: function() {
+                this.spaceId = global.app.spaceId;
                 this.data = [];
                 for (var i = 9; i <= 35; i++) {
                     this.data.push(i);
@@ -39,7 +40,7 @@
                 ga_storage._trackPageview('/page-concept.html');
             },
             back: function () {
-               document.location.href = '#!/beautification';
+               document.location.href = '#!/info';
             },
         });
         

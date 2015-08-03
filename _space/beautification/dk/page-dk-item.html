@@ -28,7 +28,7 @@
                     
                     <div class="item separator">
                         {{subitem.title}}
-                        <template if="{{subitem.img}}"><image on-load="{{imgLoad}}" src="http://{{domain}}/img/dk/{{subitem.img}}"></template>
+                        <template if="{{subitem.img}}"><image on-load="{{imgLoad}}" src="http://{{domain}}/img/_space.{{spaceId}}/beautification/dk/{{subitem.img}}"></template>
                         <div class="detail">
                             <template if="{{subitem.date}}">Сроки: <span class="primary-color">{{subitem.date}}</span><br></template>
                             Ответственные: {{subitem.responsible}}
@@ -66,6 +66,7 @@
                 $(img).show();
             },
             ready: function () { console.log(this.dkId);
+                this.spaceId = global.app.spaceId;
                 this.domain = global.domain;
                 if (global.dk.list) {
                     var item = global.dk.list[this.dkId-1];
