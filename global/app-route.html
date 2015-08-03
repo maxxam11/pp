@@ -13,7 +13,7 @@
             <template when-route="/payments/account-add/:id"><page-account-add accountId="{{params.id}}"></page-account-add></template>
             <template when-route="/payments"><page-payments pageTitle="Мои платежи"><content></content></page-payments></template>
             
-            <template when-route="/info/wiki"><page-wiki pageTitle="{{ global.space.isTown ? 'О городе' : 'О районе' }}"><content></content></page-wiki></template>
+            <template when-route="/info/wiki"><page-wiki pageTitle="{{ isTown ? 'О городе' : 'О районе' }}"><content></content></page-wiki></template>
             <template when-route="/info/phones"><page-phones pageTitle="Телефоны"><content></content></page-phones></template> 
             <template when-route="/info"><page-info pageTitle="Полезная информация"><content></content></page-info></template>
             
@@ -29,6 +29,7 @@
     <script>        
         Polymer('app-route', {
             ready: function(){
+                this.isTown = global.space.isTown;
                 for(var i = 0, l = global.routes.length; i < l; i++) { 
                     var route = global.routes[i];
                     $(this.$.routes).prepend(

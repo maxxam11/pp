@@ -20,7 +20,7 @@
                     
                     <div class="contact separator" onclick="document.location.href = '#!/info/wiki';">                                        
                         <!--<core-icon icon="info-outline"></core-icon>-->
-                        <div class='title primary-text-color'>{{ global.space.isTown ? 'О городе' : 'О районе' }}</div>  
+                        <div class='title primary-text-color'>{{ isTown ? 'О городе' : 'О районе' }}</div>  
                         <div class="descr secondary-text-color">Подробная информация из Википедии</div>
                     </div>
 
@@ -45,6 +45,7 @@
     <script>
         Polymer('page-info', {
             ready: function(){
+                this.isTown = global.space.isTown;
                 document.title = this.pageTitle;
                 ga_storage._trackPageview('/page-info.html');
             }
