@@ -28,7 +28,7 @@
     </template>
     <script>        
         Polymer('app-route', {
-            ready: function(){
+            ready: function(){ 
                 this.isTown = CONFIG.space.isTown;
                 for(var i = 0, l = CONFIG.routes.length; i < l; i++) { 
                     var route = CONFIG.routes[i];

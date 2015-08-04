@@ -52,14 +52,13 @@
                 var r = this;
                 
                 //время суток записываем в глобальную переменную
-                /*
                 var now = new Date();
                 var hour = now.getHours();
                 if (hour < 5) GLOBAL.timeOfDay = TimeOfDay.night;
                 if (hour >= 5 && hour < 11) GLOBAL.timeOfDay = TimeOfDay.morning;
                 if (hour >= 11 && hour < 19) GLOBAL.timeOfDay = TimeOfDay.day;
                 if (hour >= 19) GLOBAL.timeOfDay = TimeOfDay.evening;
-                */
+                
                 setTimeout(function () {
                     if (!r.hidden) {
                         var appLayout = document.createElement('app-layout');
@@ -68,6 +67,9 @@
                         r.hidden = true;
                     }
                 }, GLOBAL.timeout.noInternet);                
+            },
+            domReady: function(){
+                //$('paper-progress').width($('#title').width() + 'px');
             },
             handleResponse: function (e, detail, sender) {
                 var data = detail.response.data;
@@ -82,7 +84,7 @@
 
             },
             handleError: function (e, detail, sender) {
-                this.startApp();
+                
             },
             handleComplete: function (e, detail, sender) {
                 this.startApp();

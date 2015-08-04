@@ -19,6 +19,7 @@
     [drawer] core-menu core-item:hover { background-color: #f9f9f9; }
     [drawer] core-menu core-item a { color: #000; text-decoration: none; }
     [drawer] core-menu core-item::shadow core-icon { color: grey; }
+    [drawer] core-menu core-item.weather::shadow #icon { margin-top: -4px; }
     [drawer] core-menu core-item.android::shadow core-icon { color: #a4c639; }
     [drawer] core-menu core-item[active] { background-color: #eaeaea; }
 
@@ -33,11 +34,8 @@
 
         <core-toolbar class="medium-tall">
             <div class="up" on-click="{{gotoHome}}">
-                <!--<core-image sizing="contain" src="img/weather/100/{{weatherIcon}}.png"></core-image>-->
-                <!--<div class="weather">{{weatherTemp}}°С</div>-->
                 <div class="city">{{appCity}}</div>
-                <div class="app">{{appName}}</div>
-                
+                <div class="app">{{appName}}</div>                
             </div>
         </core-toolbar>
 
@@ -47,7 +45,7 @@
             
             <core-item class="margin-up" icon="subject" label="Новости"><a href="#!/news"></a></core-item>
             <!--<core-item icon="payment" label="Коммунальные платежи"><a href="#!/payments"></a></core-item>-->
-            <core-item src="../img/weather/cloudy.svg" label="Погода"><a href="#!/weather"></a></core-item>
+            <core-item class="weather" src="../img/weather/cloudy.svg" label="Погода"><a href="#!/weather"></a></core-item>
             <core-item icon="info-outline" label="Полезная информация"><a href="#!/info"></a></core-item>
             
             <div class="separator" disabled></div>
@@ -79,19 +77,11 @@
   Polymer('app-layout', {
     appName: "Павшинская пойма",
     appCity: "Красногорск",
-    weatherIcon: 'partly-cloudy-night',
     toggleDrawer: function() {
       this.$.drawerPanel.togglePanel();
     },
     ready: function() {         
         document.title = this.appName;
-        
-        //this.weatherIcon = GLOBAL.weather.currently.icon;
-        //this.weatherTemp = Math.round(GLOBAL.weather.currently.temperature);
-        //пока вместо стартовой страницы
-        //document.location.href = '#!/news';
-        //this.$.selector.selected = 0;
-        //--
         
         if (typeof FROM_SITE != 'undefined' && FROM_SITE) {
             this.$.menuAndroid.hidden = false;
