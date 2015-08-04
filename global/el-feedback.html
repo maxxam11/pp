@@ -48,7 +48,7 @@
                 this.msg = this.msg.replace(/\s/g, ' ').replace(/"/g, "''");
                 if (this.email) this.email = this.email.replace(/\s/g, ' ').replace(/"/g, "''");
                 this.$.ajax.go();
-                ga_storage._trackEvent('feedback', 'send');
+                if (!DEBUG.on) ga_storage._trackEvent('feedback', 'send');
             },
             handleResponse: function(e, detail, sender){
                 if (!detail.response.ret) {

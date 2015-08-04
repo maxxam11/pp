@@ -60,7 +60,7 @@
         Polymer('page-wiki', {  
         ready: function(){
                 document.title = this.pageTitle;
-                ga_storage._trackPageview('/page-wiki.html');
+                if (!DEBUG.on) ga_storage._trackPageview('/page-wiki.html');
             },
             handleResponse: function (e, detail, sender) { 
                 this.$.content.innerHTML = detail.response.data.html;

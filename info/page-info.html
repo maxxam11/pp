@@ -47,7 +47,7 @@
             ready: function(){
                 this.isTown = CONFIG.space.isTown;
                 document.title = this.pageTitle;
-                ga_storage._trackPageview('/page-info.html');
+                if (!DEBUG.on) ga_storage._trackPageview('/page-info.html');
             }
         });
         

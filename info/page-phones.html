@@ -83,13 +83,13 @@
             pageTitle: 'Экстренные службы',
             ready: function(){
                 document.title = this.pageTitle;
-                ga_storage._trackPageview('/page-phones.html');
+                if (!DEBUG.on) ga_storage._trackPageview('/page-phones.html');
             },
             buttonClick: function(event, detail, sender) { 
                 var tel = sender.innerText;
                 document.location.href = 'tel:' + tel;
                 //@todo для iphone надо плагин подключть http://rickluna.com/wp/2012/02/making-a-phone-call-from-within-phonegap-in-android-and-ios/                
-                ga_storage._trackEvent('phone', 'click', tel);
+                if (!DEBUG.on) ga_storage._trackEvent('phone', 'click', tel);
             },
             addPhone: function(event, detail, sender) { 
                 //@todo давать возможность предлагать добавлять телефон

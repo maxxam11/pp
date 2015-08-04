@@ -75,7 +75,7 @@
                 this.weather = GLOBAL.weather;
                 this.domain = 'http://' + CONFIG.domain;
                 this.spaceName = CONFIG.space.shortName;
-                ga_storage._trackPageview('/page-weather.html');
+                if (!DEBUG.on) ga_storage._trackPageview('/page-weather.html');
             },
             handleResponse: function(e, detail, sender) {
                 this.weather = GLOBAL.weather = detail.response.data; 
@@ -89,7 +89,7 @@
             },
             refresh: function() {
                 this.$.ajax.go();
-                ga_storage._trackEvent('weather', 'refresh');
+                if (!DEBUG.on) ga_storage._trackEvent('weather', 'refresh');
             }
         });
         

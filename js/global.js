@@ -36,7 +36,7 @@ var GLOBAL = {
 /** для отладки */
 var DEBUG = {
     on: false,
-    itraceIdex: 0   
+    traceIdex: 0   
 };
 
 /** для псевдо-кеширования */

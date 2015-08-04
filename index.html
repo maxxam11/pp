@@ -14,13 +14,15 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     
+    <script src="_space/config.js"></script>
+    <script src="js/global.js"></script>
+    
     <script src="cordova.js" type="text/javascript"></script>
     <script src="js/device.js"></script>
     
     <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-    <script data-require="jquery@*" data-semver="2.0.3" src="js/jquery-2.0.3.min.js"></script>    
-    <script src="_space/config.js"></script>
-    <script src="js/global.js"></script>
+    <script data-require="jquery@*" data-semver="2.0.3" src="js/jquery-2.0.3.min.js"></script>   
+    
     <script src="js/main.js"></script>
 
     <link rel="stylesheet" href="css/main.css"> 
@@ -92,8 +94,8 @@
     
     <script type="text/javascript" src="js/GALocalStorage.js"></script>
     <script>
-        ga_storage._setAccount(CONFIG.GA.id); 
-        ga_storage._trackPageview('/index.html');
+        if (!DEBUG.on) ga_storage._setAccount(CONFIG.GA.id); 
+        if (!DEBUG.on) ga_storage._trackPageview('/index.html');
     </script>
 </head>
 

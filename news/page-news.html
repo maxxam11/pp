@@ -55,7 +55,7 @@
                 } else {
                     this.loadNews();
                 }
-                ga_storage._trackPageview('/page-news.html');
+                if (!DEBUG.on) ga_storage._trackPageview('/page-news.html');
             }, 
             domReady: function(){
                 this.$.scroller.scrollTop = GLOBAL.news.scrollTop; 
@@ -106,7 +106,7 @@
                 var delta = wrapperHeight - scrollTop;               
                 if (delta < 1000 && !this.loadingItems) {  //пока грузятся данные, не грузить еще
                     this.loadNews();
-                    //ga_storage._trackEvent('news', 'loadMoreNews');
+                    //if (!DEBUG.on) ga_storage._trackEvent('news', 'loadMoreNews');
                 } 
             },
             refresh: function () {
@@ -115,7 +115,7 @@
                 this.list = [];
                 this.lastItemId = '';
                 this.loadNews();
-                ga_storage._trackEvent('news-list', 'refresh');
+                if (!DEBUG.on) ga_storage._trackEvent('news-list', 'refresh');
             },
             loadNews: function() { 
                 if(!GLOBAL.news.notLoadScroll) {

@@ -63,16 +63,16 @@
                 img = img.substr(0, img.indexOf('?')); 
                 if($(div).hasClass('open')) {                     
                     $(div).removeClass('open');
-                    ga_storage._trackEvent('news', 'closeImg', img);
+                    if (!DEBUG.on) ga_storage._trackEvent('news', 'closeImg', img);
                 } else {                    
                     $(div).addClass('open');
-                    ga_storage._trackEvent('news', 'openImg', img);
+                    if (!DEBUG.on) ga_storage._trackEvent('news', 'openImg', img);
                 }
                 
             },
             linkClick: function() {
                 window.open(this.news.sourceLink, '_system'); 
-                ga_storage._trackEvent('news', 'openLink', this.news.sourceLink);
+                if (!DEBUG.on) ga_storage._trackEvent('news', 'openLink', this.news.sourceLink);
             },
         });
     </script>

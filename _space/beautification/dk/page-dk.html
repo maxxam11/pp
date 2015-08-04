@@ -49,7 +49,7 @@
                 document.title = 'Дорожная карта';
                 this.list = SPACE.dk.list;
                 this.urlDk = 'http://' + CONFIG.domain + '/download/dk_pp_2014.pdf';
-                ga_storage._trackPageview('/page-dk.html');
+                if (!DEBUG.on) ga_storage._trackPageview('/page-dk.html');
             }, 
             domReady: function(){
                 this.$.scroller.scrollTop = SPACE.dk.scrollTop; 

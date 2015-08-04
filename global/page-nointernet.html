@@ -21,7 +21,7 @@
     <script>
         Polymer('page-nointernet',{
             ready: function(){
-                ga_storage._trackPageview('/page-nointernet.html');
+                if (!DEBUG.on) ga_storage._trackPageview('/page-nointernet.html');
             }
         });
     </script>

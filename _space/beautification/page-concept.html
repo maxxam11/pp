@@ -37,7 +37,7 @@
                     this.data.push(i);
                 }
                 this.domain = CONFIG.domain;
-                ga_storage._trackPageview('/page-concept.html');
+                if (!DEBUG.on) ga_storage._trackPageview('/page-concept.html');
             },
             back: function () {
                document.location.href = '#!/info';
