@@ -16,7 +16,7 @@
             .wrapper { padding-top: 7px; }
         </style>              
  
-        <div class='head primary-color'>Благоустройство {{ global.space.isTown ? 'города' : 'района' }}</div>
+        <div class='head primary-color'>Благоустройство {{ isTown ? 'города' : 'района' }}</div>
         
         <div class="contact separator" onclick="document.location.href = '#!/_space/beautification/dk';">                                        
             <div class='title primary-text-color'>Дорожная карта 2014</div>  
@@ -38,6 +38,7 @@
     <script>
         Polymer('list-beautification', {
             ready: function () {  
+                this.isTown = CONFIG.space.isTown;
                 //ga_storage._trackPageview('/page-beautification.html');
             },
         });        

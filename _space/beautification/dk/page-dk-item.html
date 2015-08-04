@@ -65,11 +65,11 @@
             imgLoad: function(a,b,img){
                 $(img).show();
             },
-            ready: function () { console.log(this.dkId);
-                this.spaceId = global.app.spaceId;
-                this.domain = global.domain;
-                if (global.dk.list) {
-                    var item = global.dk.list[this.dkId-1];
+            ready: function () { 
+                this.spaceId = CONFIG.app.spaceId;
+                this.domain = CONFIG.domain;
+                if (SPACE.dk.list) {
+                    var item = SPACE.dk.list[this.dkId-1];
                     if (item)
                         this.item = item;
                     else

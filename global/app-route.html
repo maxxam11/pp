@@ -29,9 +29,9 @@
     <script>        
         Polymer('app-route', {
             ready: function(){
-                this.isTown = global.space.isTown;
-                for(var i = 0, l = global.routes.length; i < l; i++) { 
-                    var route = global.routes[i];
+                this.isTown = CONFIG.space.isTown;
+                for(var i = 0, l = CONFIG.routes.length; i < l; i++) { 
+                    var route = CONFIG.routes[i];
                     $(this.$.routes).prepend(
                       '<template when-route="/_space' + route.route + '">' 
                       + '<page-' + route.page + (route.param ? ' ' + route.param + '="{{params.id}}"' : '') + ' pageTitle="' + route.pageTitle + '">'

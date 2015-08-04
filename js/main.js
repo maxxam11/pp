@@ -45,7 +45,7 @@ function gotoErrorNoInternet() {
     document.location.href = '#!/nointernet';
 }
 function getToken() {
-    return localStorage.token ? localStorage.token : global.api.token;
+    return localStorage.token ? localStorage.token : GLOBAL.api.token;
 }
 
 /**
@@ -53,7 +53,7 @@ function getToken() {
  * @returns {String} домен
  */
 function getDomain() {
-    return localStorage.domain ? localStorage.domain : global.domain; 
+    return localStorage.domain ? localStorage.domain : CONFIG.domain; 
 }
 
 /**
@@ -64,7 +64,7 @@ function getDomain() {
  */
 function initApp(data) {
     localStorage.setItem('token', data.token);
-    if (data.weather) global.weather = data.weather;
+    if (data.weather) GLOBAL.weather = data.weather;
     //@todo надо инициализацю выносить в отдельный JS функцию и вызывать от туда  
     //setTimeout(initFunction, 5000);
 }

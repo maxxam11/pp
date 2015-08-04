@@ -30,9 +30,9 @@
             ready: function () { 
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс
                 
-                for (var i = 0, l = global.news.list.length; i < l; i++) {
-                    if (global.news.list[i]._id == this.newsId) {
-                        this.showNews(global.news.list[i]);                        
+                for (var i = 0, l = GLOBAL.news.list.length; i < l; i++) {
+                    if (GLOBAL.news.list[i]._id == this.newsId) {
+                        this.showNews(GLOBAL.news.list[i]);                        
                         break;
                     }                    
                 }                

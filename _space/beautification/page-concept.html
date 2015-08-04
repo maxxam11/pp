@@ -31,12 +31,12 @@
     <script>
         Polymer('page-concept', {            
             ready: function() {
-                this.spaceId = global.app.spaceId;
+                this.spaceId = CONFIG.app.spaceId;
                 this.data = [];
                 for (var i = 9; i <= 35; i++) {
                     this.data.push(i);
                 }
-                this.domain = global.domain;
+                this.domain = CONFIG.domain;
                 ga_storage._trackPageview('/page-concept.html');
             },
             back: function () {

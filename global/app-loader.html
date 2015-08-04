@@ -51,10 +51,10 @@
                 //время суток записываем в глобальную переменную
                 var now = new Date();
                 var hour = now.getHours();
-                if (hour < 5) global.timeOfDay = TimeOfDay.night;
-                if (hour >= 5 && hour < 11) global.timeOfDay = TimeOfDay.morning;
-                if (hour >= 11 && hour < 19) global.timeOfDay = TimeOfDay.day;
-                if (hour >= 19) global.timeOfDay = TimeOfDay.evening;
+                if (hour < 5) GLOBAL.timeOfDay = TimeOfDay.night;
+                if (hour >= 5 && hour < 11) GLOBAL.timeOfDay = TimeOfDay.morning;
+                if (hour >= 11 && hour < 19) GLOBAL.timeOfDay = TimeOfDay.day;
+                if (hour >= 19) GLOBAL.timeOfDay = TimeOfDay.evening;
                 
                 setTimeout(function () {
                     if (!r.hidden) {
@@ -63,7 +63,7 @@
                         gotoErrorNoInternet();
                         r.hidden = true;
                     }
-                }, global.timeout.noInternet);                
+                }, GLOBAL.timeout.noInternet);                
             },
             domReady: function(){
                 //$('paper-progress').width($('#title').width() + 'px');
@@ -90,7 +90,7 @@
                 var appLayout = document.createElement('app-layout');
                 document.body.appendChild(appLayout);
                 var r = this;
-                setTimeout(function () { r.hidden = true; }, global.timeout.loadStart);
+                setTimeout(function () { r.hidden = true; }, GLOBAL.timeout.loadStart);
             }
         });
     </script>

@@ -24,16 +24,16 @@
         Polymer('el-account-list',{
             ready: function() {
                 var dateLastLoad = LAST_LOAD['payment_account_list']; 
-                if (!dateLastLoad || new Date() - dateLastLoad > global.payments.cashTime) {
+                if (!dateLastLoad || new Date() - dateLastLoad > GLOBAL.payments.cashTime) {
                     this.$.ajax.go();
                 } else {
-                    this.accounts = global.payments.accountList;
+                    this.accounts = GLOBAL.payments.accountList;
                 }
             },
             handleResponse: function (e, detail, sender) {
                 this.$.spinner.hidden = true;
                 this.accounts = detail.response.data;
-                global.payments.accountList = this.accounts;
+                GLOBAL.payments.accountList = this.accounts;
                 LAST_LOAD['payment_account_list'] = new Date();
             },
         });

@@ -225,11 +225,11 @@ element.
       this.xhr = document.createElement('core-xhr');
         
         // @mine ovveride
-        this.url = 'http://' + getDomain() + '/' + global.api.url + '/' + this.op;
+        this.url = 'http://' + getDomain() + '/' + GLOBAL.api.url + '/' + this.op;
         this.handleAs = "json"; 
         this.method = 'POST';
         this.headers = {
-            "Accept": "application/vnd.pp.v" + global.api.version + "+json"
+            "Accept": "application/vnd.pp.v" + GLOBAL.api.version + "+json"
         };
     },
 
@@ -389,7 +389,7 @@ element.
       }
       
         // @mine ovveride
-        params.app = JSON.stringify(global.app);
+        params.app = JSON.stringify(CONFIG.app);
         params.token = getToken();
         params.date = Date.now();      
       

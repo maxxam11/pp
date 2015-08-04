@@ -47,15 +47,15 @@
             baseUrl: 'dk',
             ready: function () {                               
                 document.title = 'Дорожная карта';
-                this.list = global.dk.list;
-                this.urlDk = 'http://' + global.domain + '/download/dk_pp_2014.pdf';
+                this.list = SPACE.dk.list;
+                this.urlDk = 'http://' + CONFIG.domain + '/download/dk_pp_2014.pdf';
                 ga_storage._trackPageview('/page-dk.html');
             }, 
             domReady: function(){
-                this.$.scroller.scrollTop = global.dk.scrollTop; 
+                this.$.scroller.scrollTop = SPACE.dk.scrollTop; 
             },
             scroll: function(e, detail, sender) {              
-                global.dk.scrollTop = sender.scrollTop;
+                SPACE.dk.scrollTop = sender.scrollTop;
             },
             back: function () {
                document.location.href = '#!/info';

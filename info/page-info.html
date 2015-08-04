@@ -45,7 +45,7 @@
     <script>
         Polymer('page-info', {
             ready: function(){
-                this.isTown = global.space.isTown;
+                this.isTown = CONFIG.space.isTown;
                 document.title = this.pageTitle;
                 ga_storage._trackPageview('/page-info.html');
             }

@@ -80,8 +80,8 @@
     <script>
         Polymer('el-hourly', {
             ready: function(){
-                this.weather = global.weather;
-                this.domain = 'http://' + global.domain;
+                this.weather = GLOBAL.weather;
+                this.domain = 'http://' + CONFIG.domain;
                 
             }
         });

@@ -72,13 +72,13 @@
         Polymer('page-weather', {
             page: 0,
             ready: function(){
-                this.weather = global.weather;
-                this.domain = 'http://' + global.domain;
-                this.spaceName = global.space.shortName;
+                this.weather = GLOBAL.weather;
+                this.domain = 'http://' + CONFIG.domain;
+                this.spaceName = CONFIG.space.shortName;
                 ga_storage._trackPageview('/page-weather.html');
             },
             handleResponse: function(e, detail, sender) {
-                this.weather = global.weather = detail.response.data; 
+                this.weather = GLOBAL.weather = detail.response.data; 
                 
                 this.lineWidthH = this.weather.hourly.data.length * 45;
                 this.$.wrapper.hidden = false;

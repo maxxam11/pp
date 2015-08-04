@@ -48,17 +48,17 @@
         Polymer('page-payments', {
             ready: function() {
                 var dateLastLoad = LAST_LOAD['payment_account_list']; 
-                if (!dateLastLoad || new Date() - dateLastLoad > global.payments.cashTime) {
+                if (!dateLastLoad || new Date() - dateLastLoad > GLOBAL.payments.cashTime) {
                     this.$.ajax.go();
                 } else {
-                    this.data = global.payments.list;
+                    this.data = GLOBAL.payments.list;
                 }
                 if (!this.data || !this.data.length) this.$.empty.hidden = false;
                 
             },
            handleResponseInit: function(e, detail, sender) {
                this.data = detail.response;
-               global.payments.list = this.data;
+               GLOBAL.payments.list = this.data;
                if (!this.data.length) {
                    this.$.empty.hidden = false;
                    LAST_LOAD['payment_list'] = new Date();

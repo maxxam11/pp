@@ -32,12 +32,12 @@
     <script>
         Polymer('page-embankment', {
             ready: function() {
-                this.spaceId = global.app.spaceId;
+                this.spaceId = CONFIG.app.spaceId;
                 this.data = [];
                 for (var i = 1; i <= 9; i++) {
                     this.data.push(i);
                 }
-                this.domain = global.domain;
+                this.domain = CONFIG.domain;
                 ga_storage._trackPageview('/page-embankment.html');
             },
             back: function () {

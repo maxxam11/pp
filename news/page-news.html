@@ -45,11 +45,11 @@
             wrapper: null,
             ready: function () {                               
                 //запускаем в ручную, т.к. если меняется lastItemId, то автоматом идет второй запрос аякс                
-                if (global.news.list.length) {
-                    this.list = global.news.list; 
+                if (GLOBAL.news.list.length) {
+                    this.list = GLOBAL.news.list; 
                     //если пакет не загружался час, то грузим его
                     var dateLastLoad = LAST_LOAD['news_list'];
-                    if (new Date() - dateLastLoad > global.news.cashTime) {
+                    if (new Date() - dateLastLoad > GLOBAL.news.cashTime) {
                         this.refresh();
                     }
                 } else {
@@ -58,14 +58,14 @@
                 ga_storage._trackPageview('/page-news.html');
             }, 
             domReady: function(){
-                this.$.scroller.scrollTop = global.news.scrollTop; 
+                this.$.scroller.scrollTop = GLOBAL.news.scrollTop; 
             },
             handleResponseList: function (e, detail, sender) { 
                                
                 var responseList = detail.response.data.list; 
                 
-                if (global.news.countNewsOnPage === null)
-                    global.news.countNewsOnPage = responseList.length;
+                if (GLOBAL.news.countNewsOnPage === null)
+                    GLOBAL.news.countNewsOnPage = responseList.length;
                 
                 if (responseList.length) {
                     
@@ -82,15 +82,15 @@
                         }
                     }
                     //если нет нвоостей, т.е. грузим первый раз/все сначала, то запоминаем дату и время
-                    if (!global.news.list.length) LAST_LOAD['news_list'] = new Date();
+                    if (!GLOBAL.news.list.length) LAST_LOAD['news_list'] = new Date();
                     
-                    global.news.list = this.list.concat(responseList);                    
-                    this.list = global.news.list;
+                    GLOBAL.news.list = this.list.concat(responseList);                    
+                    this.list = GLOBAL.news.list;
                     this.lastItemId = responseList.length ? this.list[this.list.length - 1].createDate : ''; 
                 } 
                 
-                if (responseList.length < global.news.countNewsOnPage) {
-                    global.news.notLoadScroll = true;                    
+                if (responseList.length < GLOBAL.news.countNewsOnPage) {
+                    GLOBAL.news.notLoadScroll = true;                    
                 }                
                 
                 this.loadingItems = false;
@@ -102,7 +102,7 @@
                 
                 var wrapperHeight = $(this.$.wrapper).height();
                 var scrollTop = sender.scrollTop;                
-                global.news.scrollTop = scrollTop;
+                GLOBAL.news.scrollTop = scrollTop;
                 var delta = wrapperHeight - scrollTop;               
                 if (delta < 1000 && !this.loadingItems) {  //пока грузятся данные, не грузить еще
                     this.loadNews();
@@ -111,14 +111,14 @@
             },
             refresh: function () {
                 this.$.ajaxList.abort();
-                global.news.notLoadScroll = false;
+                GLOBAL.news.notLoadScroll = false;
                 this.list = [];
                 this.lastItemId = '';
                 this.loadNews();
                 ga_storage._trackEvent('news-list', 'refresh');
             },
             loadNews: function() { 
-                if(!global.news.notLoadScroll) {
+                if(!GLOBAL.news.notLoadScroll) {
                     this.loadingItems = true;
                     this.loading = 'block'; 
                     this.$.ajaxList.go();
