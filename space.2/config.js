@@ -6,7 +6,7 @@ var CONFIG = {
     },
     space: {
         name: 'Город Московский',        
-        shortName: 'ПП',
+        shortName: 'Московский',
         cityName: 'Москва',
         isTown: true,
     },
