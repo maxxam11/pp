@@ -1,0 +1,48 @@
+<link rel="import" href="dk/page-dk.html">
+
+<polymer-element name="page-concept" attributes="pageTitle">
+    <template>
+        <link rel="stylesheet" href="../../css/main.css"> 
+        
+        <style>
+            .wrapper img { width: 100%; }            
+        </style>
+               
+        <el-page pagetitle="{{pageTitle}}">
+            <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
+            <div id="toolbarIcons">
+                
+            </div>
+            <div id="scroller" flex style="overflow: auto;" on-scroll="{{scroll}}">            
+                <div id="wrapper" class="wrapper">                    
+                        
+                    <template repeat="{{i in data}}">
+                        <img src="http://{{domain}}/img/_space.{{spaceId}}/beautification/concept/{{i}}.jpg"><br>
+                    </template>
+                    
+                </div> 
+            </div>
+            
+        </el-page>
+        
+        
+
+    </template>   
+    <script>
+        Polymer('page-concept', {            
+            ready: function() {
+                this.spaceId = CONFIG.app.spaceId;
+                this.data = [];
+                for (var i = 9; i <= 35; i++) {
+                    this.data.push(i);
+                }
+                this.domain = CONFIG.domain;
+                if (!DEBUG.on) ga_storage._trackPageview('/page-concept.html');
+            },
+            back: function () {
+               document.location.href = '#!/info';
+            },
+        });
+        
+    </script>
+</polymer-element>

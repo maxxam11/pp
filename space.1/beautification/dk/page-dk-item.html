@@ -1,0 +1,86 @@
+<link rel="import" href="el-descr2.html">
+<link rel="import" href="el-descr3.html">
+<link rel="import" href="el-descr4.html">
+<link rel="import" href="el-descr5.html">
+<link rel="import" href="el-descr6.html">
+<link rel="import" href="el-descr7.html">
+<link rel="import" href="el-descr8.html">
+
+<polymer-element name="page-dk-item" attributes="dkId,pagetitle">
+    <template>
+        <link rel="stylesheet" href="../../../css/main.css">
+        <style>
+            div.description { padding: 20px; }
+            div.detail { color: grey; padding-top: 10px; font-size: 80%; font-weight: normal; }
+            div.item { padding: 15px 20px;  color: black; }
+            h3 { margin: 0; }
+            h3 core-icon {   margin-top: -5px; margin-right: 10px; }
+            img { width: 100%; margin-top: 10px; display: none; }
+        </style>
+
+        <el-page pagetitle="{{pagetitle}}">
+            <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
+            <div flex style="overflow: auto;" id="scroller">
+                <div class="description separator">
+                    <h3><core-icon icon="maps:map"></core-icon>{{item.title}}</h3>
+                </div>
+                <template repeat="{{subitem in item.items}}">
+                    
+                    <div class="item separator">
+                        {{subitem.title}}
+                        <template if="{{subitem.img}}"><image on-load="{{imgLoad}}" src="http://{{domain}}/img/_space.{{spaceId}}/beautification/dk/{{subitem.img}}"></template>
+                        <div class="detail">
+                            <template if="{{subitem.date}}">Сроки: <span class="primary-color">{{subitem.date}}</span><br></template>
+                            Ответственные: {{subitem.responsible}}
+                            <template if="{{subitem.more}}"><br><span class="primary-color">{{subitem.more}}</span></template>
+                        </div>
+                    </div>
+
+                </template>
+                
+                <template if="{{item.id == 3}}">
+                    <div class="description"><el-descr2></el-descr2></div>
+                </template>
+                <template if="{{item.id == 7}}">
+                    <div class="description"><el-descr3></el-descr3></div>
+                </template>
+                <template if="{{item.id == 8}}">
+                    <div class="description"><el-descr4></el-descr4></div>
+                    <div class="description"><el-descr5></el-descr5></div>
+                </template>
+                <template if="{{item.id == 11}}">
+                    <div class="description"><el-descr6></el-descr6></div>
+                    <div class="description"><el-descr7></el-descr7></div>
+                </template>
+                <template if="{{item.id == 12}}">
+                    <div class="description"><el-descr8></el-descr8></div>
+                </template>
+                
+            </div>
+        </el-page>
+
+    </template>
+    <script>
+        Polymer('page-dk-item', {            
+            imgLoad: function(a,b,img){
+                $(img).show();
+            },
+            ready: function () { 
+                this.spaceId = CONFIG.app.spaceId;
+                this.domain = CONFIG.domain;
+                if (SPACE.dk.list) {
+                    var item = SPACE.dk.list[this.dkId-1];
+                    if (item)
+                        this.item = item;
+                    else
+                       document.location.href = '#!/_space/beautification/dk'; 
+                }
+                if (!DEBUG.on) ga_storage._trackPageview('/page-dk-item.html?id=' + this.dkId);
+            }, 
+            back: function () {
+               document.location.href = '#!/_space/beautification/dk';
+            },
+        });
+        
+    </script>
+</polymer-element>
