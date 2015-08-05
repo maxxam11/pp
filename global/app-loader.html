@@ -35,7 +35,7 @@
         <div id="startLoad" layout vertical>
             <div flex></div>
             <div flex>
-                <span id="title">Павшинская пoйма</span>
+                <span id="title">{{appName}}</span>
                 <paper-progress class="default-primary-color" indeterminate></paper-progress>
             </div>
             <div flex></div>
@@ -49,7 +49,8 @@
          */
         Polymer('app-loader', {
             ready: function () { 
-                var r = this;
+                this.appName = CONFIG.space.name;                
+                var r = this;   
                 
                 //время суток записываем в глобальную переменную
                 var now = new Date();
