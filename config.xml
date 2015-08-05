@@ -82,7 +82,7 @@
     
     <!-- заставка -->
     <!--
-    <preference name="SplashScreen" value="img/logo/splashscreen.png" />
+    <preference name="SplashScreen" value="space/img/splashscreen.png" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="SplashMaintainAspectRatio" value="false" />
     -->
