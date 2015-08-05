@@ -81,8 +81,10 @@
       this.$.drawerPanel.togglePanel();
     },
     ready: function() {         
-        document.title = this.appName;
         
+        this.appName = CONFIG.space.name;
+        this.appCity = CONFIG.space.cityName;
+        document.title = this.appName;
         if (typeof FROM_SITE != 'undefined' && FROM_SITE) {
             this.$.menuAndroid.hidden = false;
         }
