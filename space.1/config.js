@@ -15,7 +15,7 @@ var CONFIG = {
     },
     app: {
         spaceId: 1,
-        version: '0.3.0',
+        version: '0.3.1',
     },
     routes: [
         { route: '/beautification/dk-item/:id', page: 'dk-item', param: 'dkId', pageTitle: 'Дорожная карта' },
