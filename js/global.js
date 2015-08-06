@@ -30,7 +30,7 @@ var GLOBAL = {
     info: {
         scrollTop: 0,
     },
-    weather: {}   
+    weather: {},   
 };
 
 /** для отладки */
