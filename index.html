@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>Павшинская пойма</title>
+    <title></title>
     <meta name="description" content="Будьте в курсе событий о районе Павшинская пойма">
     <meta name="keywords" content="Павшинская пойма павшино красногорск снежком">
 
@@ -93,6 +93,7 @@
     
     <script type="text/javascript" src="js/GALocalStorage.js"></script>
     <script>
+        document.title = CONFIG.space.name;
         if (!DEBUG.on) ga_storage._setAccount(CONFIG.GA.id); 
         if (!DEBUG.on) ga_storage._trackPageview('/index.html');
     </script>
