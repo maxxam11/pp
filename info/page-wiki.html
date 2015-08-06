@@ -31,7 +31,6 @@
         </style>
         
          <app-ajax
-            auto
             id="ajax"
             op="wiki/space"
             params='{}'
@@ -60,12 +59,18 @@
         Polymer('page-wiki', {  
         ready: function(){
                 document.title = this.pageTitle;
+                var wikiData = sessionStorage.getItem('wikiData');
+                if (wikiData) {
+                    this.showWiki(wikiData);
+                } else {
+                    this.getWiki();
+                }
                 if (!DEBUG.on) ga_storage._trackPageview('/page-wiki.html');
             },
             handleResponse: function (e, detail, sender) { 
-                this.$.content.innerHTML = detail.response.data.html;
-                this.$.wrapper.hidden = false;
-                this.$.spinner.hidden = true;
+                var wikiData = detail.response.data.html;
+                this.showWiki(wikiData);
+                sessionStorage.setItem('wikiData', wikiData);
             },
             handleResponseError: function(){
                 //this.$.spinner.hide();
@@ -74,6 +79,16 @@
             back: function () {
                document.location.href = '#!/info';
             },
+            getWiki: function() {
+                this.$.wrapper.hidden = true;
+                this.$.spinner.hidden = false;
+                this.$.ajax.go();
+            },
+            showWiki: function(wikiData) {
+                this.$.content.innerHTML = wikiData;                
+                this.$.wrapper.hidden = false;
+                this.$.spinner.hidden = true;
+            }
             
         });
     </script>
