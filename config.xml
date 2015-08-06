@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "ru.maxxam.pp"
+        version   = "0.3.1">
+    
+    <!-- версияя для этого пакета 1 19 (версия андройд 19 (4.4 KitKat)) 00 (размер экрана) 100 (версия приложения 1.0.0)-->
+    <!--<preference name="android-versionCode" value="11900100" />--> 
+    <preference name="android-minSdkVersion" value="19" />
+    <preference name="android-targetSdkVersion" value="21" /> 
+    
+    <!-- версия для старых платформ - версия андройд 10 (2.2 Froyo) --> 
+    <!-- 
+    <preference name="android-versionCode" value="11300100" /> 
+    <preference name="android-minSdkVersion" value="13" />
+    <preference name="android-maxSdkVersion" value="18" />
+     -->
+
+    <name>Московский</name>
+
+    <description>
+        Город Москвоский
+    </description>
+    
+    <!-- цвет фона по умолчанию -->
+    <!--<preference name="BackgroundColor" value="0xffffffff"/>-->
+    
+    
+
+    <author href="http://www.maxxam.ru" email="karachev.m@gmail.com">
+        MaxxaM
+    </author>
+    
+    <!-- Убирает все разрешения кроме доступа в интернет -->
+    <preference name="permissions"                value="none"/>
+    
+    <!-- включает разрешения по отдельности     
+    <feature name="http://api.phonegap.com/1.0/battery"/>
+    <feature name="http://api.phonegap.com/1.0/camera"/>
+    <feature name="http://api.phonegap.com/1.0/contacts"/>
+    <feature name="http://api.phonegap.com/1.0/file"/>
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+    <feature name="http://api.phonegap.com/1.0/media"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
+    <feature name="http://api.phonegap.com/1.0/notification"/>
+    -->
+    
+    <!-- Иконки перечисляем для разных устройств -->
+    <icon src="img/icon/pp12_512.png" />
+    <icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:qualifier="ldpi" />
+    <icon src="res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:qualifier="mdpi" />
+    <icon src="res/icon/android/icon-72-hdpi.png"   gap:platform="android"    gap:qualifier="hdpi" />
+    <icon src="res/icon/android/icon-96-xhdpi.png"  gap:platform="android"    gap:qualifier="xhdpi" />
+    <icon src="res/icon/ios/icon-57.png"            gap:platform="ios"        width="57" height="57" />
+    <icon src="res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
+    <icon src="res/icon/ios/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
+    <icon src="res/icon/ios/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
+    <icon src="res/icon/windows-phone/icon-48.png"  gap:platform="winphone" />
+    <icon src="res/icon/windows-phone/icon-173.png" gap:platform="winphone"   gap:role="background" />
+    
+    <!-- перечисляем заставки при загрузке -->
+    <gap:splash src="res/screen/android/screen-ldpi-portrait.png"       gap:platform="android" gap:qualifier="port-ldpi" />
+    <gap:splash src="res/screen/android/screen-mdpi-portrait.png"       gap:platform="android" gap:qualifier="port-mdpi" />
+    <gap:splash src="res/screen/android/screen-hdpi-portrait.png"       gap:platform="android" gap:qualifier="port-hdpi" />
+    <gap:splash src="res/screen/android/screen-xhdpi-portrait.png"      gap:platform="android" gap:qualifier="port-xhdpi" />
+    <gap:splash src="res/screen/android/screen-ldpi-landscape.png"       gap:platform="android" gap:qualifier="land-ldpi" />
+    <gap:splash src="res/screen/android/screen-mdpi-landscape.png"       gap:platform="android" gap:qualifier="land-mdpi" />
+    <gap:splash src="res/screen/android/screen-hdpi-landscape.png"       gap:platform="android" gap:qualifier="land-hdpi" />
+    <gap:splash src="res/screen/android/screen-xhdpi-landscape.png"      gap:platform="android" gap:qualifier="land-xhdpi" />
+    
+    <content src="index.html" />
+    
+    <!-- чтобы можно было номер набирать для звонка -->
+    <!--<access origin="tel:*" launch-external="yes" />-->    
+    <!-- чтобы можно было письмо отправить -->
+    <!--<access origin="mailto:*" launch-external="yes" />-->
+    
+    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
+    <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
+    
+    <!-- заставка -->
+    <!--
+    <preference name="SplashScreen" value="space/img/splashscreen.png" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashMaintainAspectRatio" value="false" />
+    -->
+</widget>

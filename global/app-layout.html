@@ -51,7 +51,7 @@
             <div class="separator" disabled></div>
             
             <core-item class="margin-up" icon="mail" label="Написать разработчку"><a href="#!/feedback"></a></core-item>
-            <core-item id="menuAndroid" class="margin-up android" icon="android" label="Скачать мобильное приложение" hidden><a target="_blank" href="https://play.google.com/store/apps/details?id=ru.maxxam.pp"></a></core-item>
+            <core-item id="menuAndroid" class="margin-up android" icon="android" label="Скачать мобильное приложение" hidden><a target="_blank" href="https://play.google.com/store/apps/details?id={{playDomain}}"></a></core-item>
             
           </core-selector>
         </core-menu> 
@@ -75,8 +75,6 @@
 <script> 
   
   Polymer('app-layout', {
-    appName: "Павшинская пойма",
-    appCity: "Красногорск",
     toggleDrawer: function() {
       this.$.drawerPanel.togglePanel();
     },
@@ -84,6 +82,7 @@
         
         this.appName = CONFIG.space.name;
         this.appCity = CONFIG.space.cityName;
+        this.playDomain = CONFIG.playMarket.alias;
         document.title = this.appName;
         if (typeof FROM_SITE != 'undefined' && FROM_SITE) {
             this.$.menuAndroid.hidden = false;

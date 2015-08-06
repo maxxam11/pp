@@ -4,6 +4,9 @@ var CONFIG = {
     GA: {
         id: 'UA-2026763-18',
     },
+    playMarket: {
+        alias: 'ru.maxxam.pp'
+    },
     space: {
         name: 'Павшинская пойма',        
         shortName: 'ПП',

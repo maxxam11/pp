@@ -4,6 +4,9 @@ var CONFIG = {
     GA: {
         id: 'UA-2026763-20',
     },
+    playMarket: {
+        alias: 'ru.maxxam.msk'
+    },
     space: {
         name: 'Город Московский',        
         shortName: 'Московский',
