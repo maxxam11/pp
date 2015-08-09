@@ -1,6 +1,6 @@
 
 
-<polymer-element name="page-weather" attributes="pageTitle">
+<polymer-element name="page-weather">
     <template>
         <link rel="stylesheet" href="../css/main.css">
         
@@ -27,7 +27,7 @@
             on-core-response="{{handleResponse}}"
             on-core-error="{{handleResponseError}}"></app-ajax>
         
-        <el-page pagetitle="{{pageTitle}}">
+        <el-page pagetitle="Погода">
             <div id="toolbarMainIcon"><content></content></div>
             <div id="toolbarIcons">
                 <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>

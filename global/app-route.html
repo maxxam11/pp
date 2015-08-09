@@ -5,23 +5,23 @@
         
         <more-route-switch routeContext id="routes">
             
-            <template when-route="/news"><page-news pageTitle="Новости"><content></content></page-news></template>            
-            <template when-route="/news-item/:id"><page-news-item newsId="{{params.id}}"  pageTitle="Новости"></page-news-item></template>
+            <template when-route="/news"><page-news><content></content></page-news></template>            
+            <template when-route="/news-item/:id"><page-news-item newsId="{{params.id}}"></page-news-item></template>
             
-            <template when-route="/weather"><page-weather pageTitle="Погода"><content></content></page-weather></template>
+            <template when-route="/weather"><page-weather><content></content></page-weather></template>
             
             <template when-route="/payments/account-add/:id"><page-account-add accountId="{{params.id}}"></page-account-add></template>
-            <template when-route="/payments"><page-payments pageTitle="Мои платежи"><content></content></page-payments></template>
+            <template when-route="/payments"><page-payments><content></content></page-payments></template>
             
-            <template when-route="/info/wiki"><page-wiki pageTitle="{{ isTown ? 'О городе' : 'О районе' }}"><content></content></page-wiki></template>
-            <template when-route="/info/phones"><page-phones pageTitle="Телефоны"><content></content></page-phones></template> 
-            <template when-route="/info"><page-info pageTitle="Полезная информация"><content></content></page-info></template>
+            <template when-route="/info/wiki"><page-wiki><content></content></page-wiki></template>
+            <template when-route="/info/phones"><page-phones><content></content></page-phones></template> 
+            <template when-route="/info"><page-info><content></content></page-info></template>            
             
-            <template when-route="/feedback"><page-feedback pageTitle="Обратная связь"><content></content></page-feedback></template>
-            
+            <template when-route="/registration"><page-registration><content></content></page-registration></template>
+            <template when-route="/feedback"><page-feedback><content></content></page-feedback></template>            
             <template when-route="/nointernet"><page-nointernet><content></content></page-nointernet></template>
 
-            <template else><page-news pageTitle="Новости"><content></content></page-news></template>
+            <template else><page-news><content></content></page-news></template>
 
         </more-route-switch>
 

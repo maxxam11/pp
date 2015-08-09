@@ -1,4 +1,4 @@
-<polymer-element name="page-info" attributes="pageTitle">
+<polymer-element name="page-info">
     <template>
         
         <link rel="stylesheet" href="../css/main.css">         
@@ -10,7 +10,7 @@
             .wrapper { padding-top: 7px; }
         </style>              
  
-        <el-page pagetitle="{{pageTitle}}">
+        <el-page pagetitle="Полезная информация">
             <div id="toolbarMainIcon"><content></content></div>
             <div id="toolbarIcons">
                 
@@ -46,7 +46,6 @@
         Polymer('page-info', {
             ready: function(){
                 this.isTown = CONFIG.space.isTown;
-                document.title = this.pageTitle;
                 if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             }
         });

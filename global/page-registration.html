@@ -1,0 +1,25 @@
+<polymer-element name="page-registration">
+    <template>
+        <link rel="stylesheet" href="../css/main.css">
+        
+        <el-page pageTitle="Регистрация">
+            <div id="toolbarMainIcon"><content></content></div>
+            <div id="toolbarIcons"></div>
+            
+            <div id="scroller" flex style="overflow: auto;">            
+                <div id="wrapper" class="wrapper">                    
+                    
+                </div> 
+            </div>
+            
+        </el-page>
+
+    </template>
+    <script>
+        Polymer('page-registration',{
+            ready: function() {
+                if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
+            },
+        });
+    </script>
+</polymer-element>

@@ -1,4 +1,4 @@
-<polymer-element name="page-wiki" attributes="pageTitle">
+<polymer-element name="page-wiki">
     <template>        
         <link rel="stylesheet" href="../css/main.css">
         <style>
@@ -37,7 +37,7 @@
             on-core-response="{{handleResponse}}"
             on-core-error="{{handleResponseError}}"></app-ajax>
         
-        <el-page pageTitle="{{pageTitle}}">
+        <el-page pageTitle="{{ isTown ? 'О городе' : 'О районе' }}">
             <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
             <!--<div id="toolbarIcons"><paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button></div>-->
             
@@ -58,7 +58,6 @@
     <script>
         Polymer('page-wiki', {  
         ready: function(){
-                document.title = this.pageTitle;
                 var wikiData = sessionStorage.getItem('wikiData');
                 if (wikiData) {
                     this.showWiki(wikiData);

@@ -17,7 +17,7 @@
             on-core-response="{{handleResponseList}}"
             on-core-error=""></app-ajax>
         
-        <el-page pageTitle="{{pageTitle}}">
+        <el-page pageTitle="Телефоны">
             <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
             <!--<div id="toolbarIcons"><paper-icon-button icon="add" on-click="{{addPhone}}"></paper-icon-button></div>-->
             
@@ -46,7 +46,6 @@
     <script>
         Polymer('page-phones', {
             ready: function(){
-                document.title = this.pageTitle;
                 this.contacts = SPACE.phones;
                 if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             },

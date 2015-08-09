@@ -1,4 +1,4 @@
-<polymer-element name="page-news" attributes="pageTitle">
+<polymer-element name="page-news">
     <template>
         <link rel="stylesheet" href="../css/main.css"> 
         
@@ -14,7 +14,7 @@
             on-core-response="{{handleResponseList}}"
             on-core-error="{{handleResponseError}}"></app-ajax>
         
-        <el-page pagetitle="{{pageTitle}}">
+        <el-page pagetitle="Новости">
             <div id="toolbarMainIcon"><content></content></div>
             <div id="toolbarIcons">
                 <paper-icon-button id="iconRefresh" icon="refresh" on-click="{{refresh}}"></paper-icon-button>
