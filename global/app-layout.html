@@ -51,7 +51,7 @@
             <div class="separator" disabled></div>
             
             <core-item class="margin-up" icon="mail" label="Написать разработчку"><a href="#!/feedback"></a></core-item>
-            <core-item id="menuAndroid" class="margin-up android" icon="android" label="Скачать мобильное приложение" hidden><a target="_blank" href="https://play.google.com/store/apps/details?id={{playDomain}}"></a></core-item>
+            <core-item id="menuAndroid" class="margin-up android" icon="android" label="Скачать мобильное приложение" hidden><a on-click="{{clickGA}}" target="_blank" href="https://play.google.com/store/apps/details?id={{playDomain}}"></a></core-item>
             
           </core-selector>
         </core-menu> 
@@ -97,6 +97,9 @@
     gotoHome: function() {
         //document.location.href = '#!/';
         //this.$.drawerPanel.togglePanel();   
+    },
+    clickGA: function() {
+        if (!DEBUG.on) ga_storage._trackEvent('app_play_market', 'click');
     }
   });
 </script>
