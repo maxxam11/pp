@@ -6,7 +6,7 @@
 <link rel="import" href="el-descr7.html">
 <link rel="import" href="el-descr8.html">
 
-<polymer-element name="page-dk-item" attributes="dkId,pagetitle">
+<polymer-element name="page-dk-item" attributes="dkId">
     <template>
         <link rel="stylesheet" href="../../../css/main.css">
         <style>
@@ -18,7 +18,7 @@
             img { width: 100%; margin-top: 10px; display: none; }
         </style>
 
-        <el-page pagetitle="{{pagetitle}}">
+        <el-page pagetitle="Дорожная карта">
             <div id="toolbarMainIcon"><paper-icon-button icon="arrow-back" on-click="{{back}}"></paper-icon-button></div>
             <div flex style="overflow: auto;" id="scroller">
                 <div class="description separator">
@@ -73,12 +73,13 @@
                     if (item)
                         this.item = item;
                     else
-                       document.location.href = '#!/_space/beautification/dk'; 
+                       document.location.href = '#!/space/beautification/dk'; 
                 }
+                document.title = 'Дорожная карта - ' + this.item.title;
                 if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             }, 
             back: function () {
-               document.location.href = '#!/_space/beautification/dk';
+               document.location.href = '#!/space/beautification/dk';
             },
         });
         
