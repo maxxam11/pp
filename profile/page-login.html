@@ -1,0 +1,28 @@
+<polymer-element name="page-login">
+    <template>
+        <link rel="stylesheet" href="../css/main.css">
+        
+        <el-page pageTitle="Атворизация">
+            <div id="toolbarMainIcon"><content></content></div>
+            <div id="toolbarIcons"></div>
+            
+            <div id="scroller" flex style="overflow: auto;">            
+                <div id="wrapper" class="wrapper">                    
+                    
+                </div> 
+            </div>
+            
+        </el-page>
+
+    </template>
+    <script>
+        Polymer('page-login',{
+            created: function() {
+                if (GLOBAL.user) document.location.href = '#!/profile';
+            },
+            ready: function() {                  
+                if (!GLOBAL.user && !DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
+            },
+        });
+    </script>
+</polymer-element>

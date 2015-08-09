@@ -17,8 +17,11 @@
     </template>
     <script>
         Polymer('page-registration',{
+            created: function() {
+                if (GLOBAL.user) document.location.href = '#!/profile';
+            },
             ready: function() {
-                if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
+                if (!GLOBAL.user && !DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             },
         });
     </script>

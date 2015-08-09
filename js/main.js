@@ -75,6 +75,7 @@ function getUri() {
 function initApp(data) {
     localStorage.setItem('token', data.token);
     if (data.weather) GLOBAL.weather = data.weather;
+    if (data.user) GLOBAL.user = data.user;
     //@todo надо инициализацю выносить в отдельный JS функцию и вызывать от туда  
     //setTimeout(initFunction, 5000);
 }

@@ -31,9 +31,7 @@ var GLOBAL = {
         scrollTop: 0,
     },
     weather: {}, 
-    user: {
-        auth: false,
-    },
+    user: null,
 };
 
 /** для отладки */
