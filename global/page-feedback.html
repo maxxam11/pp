@@ -23,7 +23,7 @@
                 this.$.feedback.send();                
             },
             ready: function() {
-                if (!DEBUG.on) ga_storage._trackPageview('/page-feedback.html');
+                if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             }
         });
     </script>

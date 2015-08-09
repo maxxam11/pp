@@ -57,6 +57,16 @@ function getDomain() {
 }
 
 /**
+ * Возвращает строку, содержащую все что после основного домена
+ * @returns {String} домен
+ */
+function getUri() {
+    var href = document.location.href;
+    var index = href.indexOf('#');
+    return index == -1 ? '/' : href.substring(index); 
+}
+
+/**
  * Инициализация приложения, переопределяет все глобальные и ключевые даннные
  * @param {Object} data
  * @param {Function} initFunction

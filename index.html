@@ -95,7 +95,7 @@
     <script>
         document.title = CONFIG.space.name;
         if (!DEBUG.on) ga_storage._setAccount(CONFIG.GA.id); 
-        if (!DEBUG.on) ga_storage._trackPageview('/index.html');
+        if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
     </script>
 </head>
 

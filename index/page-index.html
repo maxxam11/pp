@@ -52,7 +52,7 @@
                 if (GLOBAL.timeOfDay == TimeOfDay.day) this.pageTitle = 'Добрый день';
                 if (GLOBAL.timeOfDay == TimeOfDay.evening) this.pageTitle = 'Добрый вечер';
                 */
-                if (!DEBUG.on) ga_storage._trackPageview('/page-index.html');
+                if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             }
         });
     </script>

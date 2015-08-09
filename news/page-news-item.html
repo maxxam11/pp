@@ -41,7 +41,7 @@
                     this.$.spinner.show();                
                     this.$.ajaxItem.go();                    
                 } 
-                if (!DEBUG.on) ga_storage._trackPageview('/page-news-item.html?id=' + this.newsId);
+                if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             },            
             handleResponseItem: function (e, detail, sender) {                
                 this.showNews(detail.response.data.news);                

@@ -65,7 +65,7 @@
                 } else {
                     this.getWiki();
                 }
-                if (!DEBUG.on) ga_storage._trackPageview('/page-wiki.html');
+                if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             },
             handleResponse: function (e, detail, sender) { 
                 var wikiData = detail.response.data.html;

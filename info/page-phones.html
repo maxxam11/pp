@@ -48,7 +48,7 @@
             ready: function(){
                 document.title = this.pageTitle;
                 this.contacts = SPACE.phones;
-                if (!DEBUG.on) ga_storage._trackPageview('/page-phones.html');
+                if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             },
             buttonClick: function(event, detail, sender) { 
                 var tel = sender.innerText;

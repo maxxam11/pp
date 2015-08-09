@@ -39,7 +39,7 @@
         Polymer('list-beautification', {
             ready: function () {  
                 this.isTown = CONFIG.space.isTown;
-                //if (!DEBUG.on) ga_storage._trackPageview('/page-beautification.html');
+                //if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             },
         });        
     </script>

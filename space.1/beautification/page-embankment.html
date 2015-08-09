@@ -38,7 +38,7 @@
                     this.data.push(i);
                 }
                 this.domain = CONFIG.domain;
-                if (!DEBUG.on) ga_storage._trackPageview('/page-embankment.html');
+                if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             },
             back: function () {
                document.location.href = '#!/info';

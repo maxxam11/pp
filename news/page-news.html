@@ -55,7 +55,7 @@
                 } else {
                     this.loadNews();
                 }
-                if (!DEBUG.on) ga_storage._trackPageview('/page-news.html');
+                if (!DEBUG.on) ga_storage._trackPageview(getUri(), document.title);
             }, 
             domReady: function(){
                 this.$.scroller.scrollTop = GLOBAL.news.scrollTop; 
