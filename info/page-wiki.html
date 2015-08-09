@@ -58,6 +58,7 @@
     <script>
         Polymer('page-wiki', {  
         ready: function(){
+                this.isTown = CONFIG.space.isTown;
                 var wikiData = sessionStorage.getItem('wikiData');
                 if (wikiData) {
                     this.showWiki(wikiData);
