@@ -3,11 +3,12 @@
         
         <link rel="stylesheet" href="../css/main.css">
         <style>
-           .wrapper { padding: 50px 10px 0 10px; max-width: 300px; margin: 0 auto; }
+           .wrapper { padding: 50px 50px 0 50px; max-width: 300px; margin: 0 auto; }
            paper-input-decorator { width: 100%; }
-           paper-button { margin-top: 15px; }
+           paper-button { margin: 15px 0 0 0; width: 100%; }
            .login { text-align: right; }
            .title { font-size: 120%; }
+           .forget { padding: 20px 0; }
         </style>      
         
         <app-ajax
@@ -17,8 +18,7 @@
             on-core-response="{{handleResponse}}"
             on-core-error="{{handleResponseError}}"></app-ajax>
         
-        <div class="wrapper">
-            <div class="title">Авторизация</div>
+        <div class="wrapper">            
             <form>                   
                 <paper-input-decorator id="d_login" label="Укажите свой email" error="Неправильный email" floatingLabel>
                     <input type="email" id="login" is="core-input" value="{{login}}" pattern="">
@@ -28,12 +28,16 @@
                 </paper-input-decorator>                
                 
                 <div class="login">
-                    <paper-button class="primary-color">Войти</paper-button>
+                    <paper-button class="default-primary-color text-primary-color" raised>Войти</paper-button>
                 </div>                
                 
                 <paper-toast id="toast_error" text="{{error}}" style="color: red;"></paper-toast>
                 
-            </form>    
+            </form> 
+            
+            <div class="forget"><a href="">Я забыл пароль</a></div>
+            
+            <div class="forget"><a href="">Зарегистрироваться</a></div>
             
         </div>       
         
