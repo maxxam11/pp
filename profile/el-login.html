@@ -1,0 +1,69 @@
+<polymer-element name="el-login" attributes="back">
+    <template>
+        
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+           .wrapper { padding: 50px 10px 0 10px; max-width: 300px; margin: 0 auto; }
+           paper-input-decorator { width: 100%; }
+           paper-button { margin-top: 15px; }
+           .login { text-align: right; }
+           .title { font-size: 120%; }
+        </style>      
+        
+        <app-ajax
+            id="ajax"
+            op="login/auth"
+            params='{"login":"{{login}}","password":"{{password}}"}'
+            on-core-response="{{handleResponse}}"
+            on-core-error="{{handleResponseError}}"></app-ajax>
+        
+        <div class="wrapper">
+            <div class="title">Авторизация</div>
+            <form>                   
+                <paper-input-decorator id="d_login" label="Укажите свой email" error="Неправильный email" floatingLabel>
+                    <input type="email" id="login" is="core-input" value="{{login}}" pattern="">
+                </paper-input-decorator>
+                <paper-input-decorator id="d_password" label="Введите пароль" error="Пароль не может быть пустым" floatingLabel>
+                    <input type="password" id="password" is="core-input" value="{{password}}" pattern="">
+                </paper-input-decorator>                
+                
+                <div class="login">
+                    <paper-button class="primary-color">Войти</paper-button>
+                </div>                
+                
+                <paper-toast id="toast_error" text="{{error}}" style="color: red;"></paper-toast>
+                
+            </form>    
+            
+        </div>       
+        
+        
+    </template>
+    <script>        
+        Polymer('el-login',{
+            send: function(){
+                this.$.d_login.isInvalid = !this.$.login.value.trim();
+                if (this.$.d_msg.isInvalid) return;
+                this.$.d_password.isInvalid = !this.$.password.value.trim();
+                if (this.$.d_password.isInvalid) return;
+                this.$.ajax.go();
+                if (!DEBUG.on) ga_storage._trackEvent('login', 'send');
+            },
+            handleResponse: function(e, detail, sender){
+                if (!detail.response.ret) {
+                    this.error = detail.response.ret.error.msg;
+                    this.$.toast_error.show();
+                }
+                this.$.login.value = ''; 
+                this.$.d_login.isInvalid = false;
+                this.$.password.value = '';
+                this.$.d_password.isInvalid = false;
+                document.location.href = this.back ? this.back : '#!/profile';
+            },
+            handleResponseError: function(){
+                this.error = 'Извините. Произошла ошибка.';
+                this.$.toast_error.show();
+            }
+        });        
+    </script>
+</polymer-element>
