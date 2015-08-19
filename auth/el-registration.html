@@ -1,0 +1,82 @@
+<polymer-element name="el-registration" attributes="back">
+    <template>
+        
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+           .wrapper { padding: 25px; max-width: 300px; margin: 0 auto; }
+           paper-input-decorator { width: 100%; }
+           paper-button { margin: 15px 0 0 0; width: 100%; }
+           .login { text-align: right; }
+           .title { font-size: 120%; }
+           .forget { padding: 20px 0 0 0; text-align: left; }
+           .regist { padding: 20px 0 0 0; text-align: left; } 
+           .regist a { color: red; }
+        </style>      
+        
+        <app-ajax
+            id="ajax"
+            op="auth/registration"
+            params='{"login":"{{login}}","password":"{{password}}"}'
+            on-core-response="{{handleResponse}}"
+            on-core-error="{{handleResponseError}}"></app-ajax>
+        
+        <div class="wrapper">            
+            <form>    
+                <div>
+                    Регистрация дает вам больше возможностей, т.к. это гарант того, что вы реальный пользователь, а не робот.   
+                </div>
+                <paper-input-decorator id="d_login" label="Укажите свой email" error="Неправильный email" floatingLabel>
+                    <input type="email" id="login" is="core-input" value="{{login}}" pattern=".+@.+\..+">
+                </paper-input-decorator>
+                <paper-input-decorator id="d_password" label="Введите пароль" error="Пароль не может быть менее 6 символов" floatingLabel>
+                    <input type="password" id="password" is="core-input" value="{{password}}" pattern="">
+                </paper-input-decorator>
+                <paper-input-decorator id="d_password2" label="Повторите пароль" error="Пароль не совпадает" floatingLabel>
+                    <input type="password" id="password2" is="core-input" value="{{password2}}" pattern="">
+                </paper-input-decorator>
+                
+                <div class="login">
+                    <paper-button class="default-primary-color text-primary-color" on-click="{{send}}" raised>Зарегистрироваться</paper-button>
+                </div>                
+                
+                <paper-toast id="toast_error" text="{{error}}" style="color: red;"></paper-toast>
+                
+            </form>
+            <div class="forget"><a href="#!/login">Я уже зарегестрирован</a></div>
+        </div>       
+        
+        
+    </template>
+    <script>        
+        Polymer('el-registration',{
+            send: function(){
+                this.$.d_login.isInvalid = !this.$.login.value.trim() || !this.$.login.validity.valid;
+                if (this.$.d_login.isInvalid) return;
+                this.$.d_password.isInvalid = this.$.password.value.length < 6;
+                if (this.$.d_password.isInvalid) return;
+                this.$.d_password2.isInvalid = this.$.password2.value.trim() != this.$.password.value.trim();
+                if (this.$.d_password2.isInvalid) return;
+                this.$.ajax.go();
+                if (!DEBUG.on) ga_storage._trackEvent('registration', 'send');
+            },
+            handleResponse: function(e, detail, sender){
+                if (!detail.response.ret) {
+                    this.error = detail.response.ret.error.msg;
+                    this.$.toast_error.show();
+                    return;
+                }
+                this.$.login.value = ''; 
+                this.$.d_login.isInvalid = false;
+                this.$.password.value = '';
+                this.$.d_password.isInvalid = false;
+                this.$.password2.value = '';
+                this.$.d_password2.isInvalid = false;
+                document.location.href = this.back ? this.back : '#!/profile';
+            },
+            handleResponseError: function(){
+                this.error = 'Извините. Произошла ошибка.';
+                this.$.toast_error.show();
+            }
+        });        
+    </script>
+</polymer-element>

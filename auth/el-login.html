@@ -3,17 +3,19 @@
         
         <link rel="stylesheet" href="../css/main.css">
         <style>
-           .wrapper { padding: 50px 50px 0 50px; max-width: 300px; margin: 0 auto; }
+           .wrapper { padding: 25px; max-width: 300px; margin: 0 auto; }
            paper-input-decorator { width: 100%; }
            paper-button { margin: 15px 0 0 0; width: 100%; }
            .login { text-align: right; }
            .title { font-size: 120%; }
-           .forget { padding: 20px 0; }
+           .forget { padding: 20px 0 0 0; text-align: left; }
+           .regist { padding: 20px 0 0 0; text-align: left; } 
+           .regist a { color: red; }
         </style>      
         
         <app-ajax
             id="ajax"
-            op="login/auth"
+            op="auth/login"
             params='{"login":"{{login}}","password":"{{password}}"}'
             on-core-response="{{handleResponse}}"
             on-core-error="{{handleResponseError}}"></app-ajax>
@@ -35,9 +37,8 @@
                 
             </form> 
             
-            <div class="forget"><a href="">Я забыл пароль</a></div>
-            
-            <div class="forget"><a href="">Зарегистрироваться</a></div>
+            <div class="forget"><a href="#!/forget">Забыли пароль?</a></div>            
+            <div class="regist"><a href="#!/registration">Зарегистрироваться</a></div>
             
         </div>       
         
@@ -47,7 +48,7 @@
         Polymer('el-login',{
             send: function(){
                 this.$.d_login.isInvalid = !this.$.login.value.trim();
-                if (this.$.d_msg.isInvalid) return;
+                if (this.$.d_login.isInvalid) return;
                 this.$.d_password.isInvalid = !this.$.password.value.trim();
                 if (this.$.d_password.isInvalid) return;
                 this.$.ajax.go();
