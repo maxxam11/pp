@@ -13,6 +13,7 @@ core-toolbar { color: #fff; background: #00BCD4; }
 } 
 
 paper-button.colored { background-color: #00BCD4; }
+paper-toast.error { color: #FFEB3B; }
 
 /* @todo кастыл с высотой, надо автоматм чтобы выравнивалось. */
 #iconMainMenu { height: 40px; }

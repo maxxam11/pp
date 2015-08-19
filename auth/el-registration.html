@@ -23,9 +23,9 @@
         <div class="wrapper">            
             <form>    
                 <div>
-                    Регистрация дает вам больше возможностей, т.к. это гарант того, что вы реальный пользователь, а не робот.   
+                    Пройди регистрацию и получи больше возможностей.   
                 </div>
-                <paper-input-decorator id="d_login" label="Укажите свой email" error="Неправильный email" floatingLabel>
+                <paper-input-decorator id="d_login" label="Введите email" error="Неправильный email" floatingLabel>
                     <input type="email" id="login" is="core-input" value="{{login}}" pattern=".+@.+\..+">
                 </paper-input-decorator>
                 <paper-input-decorator id="d_password" label="Введите пароль" error="Пароль не может быть менее 6 символов" floatingLabel>
@@ -39,7 +39,7 @@
                     <paper-button class="default-primary-color text-primary-color" on-click="{{send}}" raised>Зарегистрироваться</paper-button>
                 </div>                
                 
-                <paper-toast id="toast_error" text="{{error}}" style="color: red;"></paper-toast>
+                <paper-toast id="toast_error" text="{{error}}" class="error"></paper-toast>
                 
             </form>
             <div class="forget"><a href="#!/login">Я уже зарегестрирован</a></div>
@@ -49,6 +49,10 @@
     </template>
     <script>        
         Polymer('el-registration',{
+            created: function() {
+                if (GLOBAL.user) document.location.href = '#!/profile';
+                return;
+            },
             send: function(){
                 this.$.d_login.isInvalid = !this.$.login.value.trim() || !this.$.login.validity.valid;
                 if (this.$.d_login.isInvalid) return;
@@ -60,9 +64,10 @@
                 if (!DEBUG.on) ga_storage._trackEvent('registration', 'send');
             },
             handleResponse: function(e, detail, sender){
-                if (!detail.response.ret) {
-                    this.error = detail.response.ret.error.msg;
+                if (!detail.response.ret) { 
+                    this.error = detail.response.msg;
                     this.$.toast_error.show();
+                    if (detail.response.data && detail.response.data.redirect) document.location.href = detail.response.data.redirect;
                     return;
                 }
                 this.$.login.value = ''; 
