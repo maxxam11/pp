@@ -67,7 +67,9 @@
                 if (!detail.response.ret) { 
                     this.error = detail.response.msg;
                     this.$.toast_error.show();
-                    if (detail.response.data && detail.response.data.redirect) document.location.href = detail.response.data.redirect;
+                }
+                if (detail.response.data && detail.response.data.redirect) {
+                    document.location.href = detail.response.data.redirect;
                     return;
                 }
                 this.$.login.value = ''; 
