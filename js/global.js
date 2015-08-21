@@ -45,3 +45,13 @@ var LAST_LOAD = {
     
 };
 
+//подгружаем глобальные настройки
+/*
+(function() {
+
+    document.write('<script src="space.1/config.js"></script>');
+    document.write('<link rel="import" href="space.1/index.html">');
+
+})();
+*/
+
